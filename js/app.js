@@ -32,7 +32,7 @@
   const svg = (name, size) => (window.icon ? window.icon(name, size) : '');
 
   // Couleur de pastille par catégorie
-  const CAT_COLORS = { prieres: '#5b3a8c', maroc: '#7c1d3f', babasale: '#b07a1e', ashkenaz: '#1e5a7b', habad: '#2f5fb0' };
+  const CAT_COLORS = { prieres: '#5b3a8c', chabbat: '#1e7b5a', maroc: '#7c1d3f', babasale: '#b07a1e', ashkenaz: '#1e5a7b', hassidique: '#c2410c', habad: '#2f5fb0' };
   const uid = () => 'b' + Math.floor(performance.now() * 1000) + Math.floor(Math.random() * 1e6);
 
   // ============================================================ Persistance =

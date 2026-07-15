@@ -11,11 +11,13 @@
 // ============================================================================
 
 const CATEGORIES = [
-  { key: 'prieres',  label: 'Prières',                 icon: '🕎' },
-  { key: 'maroc',    label: 'Chansons marocaines',     icon: '🇲🇦' },
-  { key: 'babasale', label: 'Baba Salé (Abir Yaacov)', icon: '🕯️' },
-  { key: 'ashkenaz', label: 'Chansons ashkénazes',     icon: '🎻' },
-  { key: 'habad',    label: 'Chansons Habad',          icon: '🔵' },
+  { key: 'prieres',    label: 'Prières',                 icon: '🕎' },
+  { key: 'chabbat',    label: 'Zemirot de Chabbat',      icon: '🕯️' },
+  { key: 'maroc',      label: 'Chansons marocaines',     icon: '🇲🇦' },
+  { key: 'babasale',   label: 'Baba Salé (Abir Yaacov)', icon: '✡️' },
+  { key: 'ashkenaz',   label: 'Chansons ashkénazes',     icon: '🎻' },
+  { key: 'hassidique', label: 'Hassidique & populaire',  icon: '🎶' },
+  { key: 'habad',      label: 'Chansons Habad',          icon: '🔵' },
 ];
 
 const SONGS = [
@@ -233,6 +235,162 @@ const SONGS = [
       { he: 'וְנִבְרְכוּ בְךָ כָּל מִשְׁפְּחֹת הָאֲדָמָה וּבְזַרְעֶךָ', tr: 'Ve-nivrekhu vekha kol mishpeḥot ha-adama u-vezar‘ekha', fr: 'Et toutes les familles de la terre seront bénies par toi et par ta descendance' },
     ],
     audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=ufaratzta+chabad' },
+  },
+
+  // ========================= ZEMIROT DE CHABBAT ============================
+  {
+    id: 'yedid-nefesh', category: 'chabbat', title: 'Yédid Néfesh', hebrew: 'יְדִיד נֶפֶשׁ',
+    author: 'Rabbi Eléazar Azikri', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yedid+nefesh' },
+    lines: [
+      { he: 'יְדִיד נֶפֶשׁ אָב הָרַחֲמָן · מְשֹׁךְ עַבְדְּךָ אֶל רְצוֹנֶךָ', tr: 'Yedid nefesh av ha-raḥaman · meshokh avdekha el retsonekha', fr: 'Ami de l’âme, Père miséricordieux, attire Ton serviteur vers Ta volonté' },
+      { he: 'יָרוּץ עַבְדְּךָ כְּמוֹ אַיָּל · יִשְׁתַּחֲוֶה אֶל מוּל הֲדָרֶךָ', tr: 'Yaruts avdekha kemo ayal · yishtaḥave el mul hadarekha', fr: 'Ton serviteur courra comme une biche pour se prosterner devant Ta splendeur' },
+    ],
+  },
+  {
+    id: 'tzur-mishelo', category: 'chabbat', title: 'Tzour Michélo', hebrew: 'צוּר מִשֶּׁלּוֹ',
+    author: 'Zemer de Chabbat', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=tzur+mishelo' },
+    lines: [
+      { he: 'צוּר מִשֶּׁלּוֹ אָכַלְנוּ בָּרְכוּ אֱמוּנַי · שָׂבַעְנוּ וְהוֹתַרְנוּ כִּדְבַר ה׳', tr: 'Tsur mi-shelo akhalnu barkhu emunai · sava‘nu ve-hotarnu ki-dvar Adonai', fr: 'Le Rocher dont nous avons mangé — bénissez, mes fidèles ! Nous fûmes rassasiés selon la parole de Dieu' },
+    ],
+  },
+  {
+    id: 'yah-ribon', category: 'chabbat', title: 'Yah Ribon', hebrew: 'יָהּ רִבּוֹן',
+    author: 'Rabbi Israël Najara', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yah+ribon+alam' },
+    lines: [
+      { he: 'יָהּ רִבּוֹן עָלַם וְעָלְמַיָּא · אַנְתְּ הוּא מַלְכָּא מֶלֶךְ מַלְכַיָּא', tr: 'Yah ribon alam ve-almaya · ant hu malka melekh malkhaya', fr: 'Dieu, Maître de l’univers et des mondes, Tu es le Roi, le Roi des rois' },
+      { he: 'עוֹבַד גְּבוּרְתֵּךְ וְתִמְהַיָּא · שְׁפַר קֳדָמָךְ לְהַחֲוָיָא', tr: 'Ovad gevurtekh ve-timhaya · shefar kodamakh le-haḥavaya', fr: 'Il est beau de proclamer devant Toi Tes hauts faits et Tes merveilles' },
+    ],
+  },
+  {
+    id: 'menucha-vesimcha', category: 'chabbat', title: 'Menoucha VeSimcha', hebrew: 'מְנוּחָה וְשִׂמְחָה',
+    author: 'Zemer de Chabbat', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=menucha+vesimcha' },
+    lines: [
+      { he: 'מְנוּחָה וְשִׂמְחָה אוֹר לַיְּהוּדִים · יוֹם שַׁבָּתוֹן יוֹם מַחֲמַדִּים', tr: 'Menuḥa ve-simḥa or la-yehudim · yom shabbaton yom maḥamadim', fr: 'Repos et joie, lumière pour les Juifs : jour du Chabbat, jour de délices' },
+    ],
+  },
+  {
+    id: 'yom-shabbaton', category: 'chabbat', title: 'Yom Chabbaton', hebrew: 'יוֹם שַׁבָּתוֹן',
+    author: 'Rabbi Yehouda Halévi', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yom+shabbaton' },
+    lines: [
+      { he: 'יוֹם שַׁבָּתוֹן אֵין לִשְׁכֹּחַ · זִכְרוֹ כְּרֵיחַ הַנִּיחֹחַ', tr: 'Yom shabbaton ein lishko’aḥ · zikhro ke-rei’aḥ ha-niḥo’aḥ', fr: 'Le jour du Chabbat ne s’oublie pas ; son souvenir est comme un doux parfum' },
+      { he: 'יוֹנָה מָצְאָה בוֹ מָנוֹחַ · וְשָׁם יָנוּחוּ יְגִיעֵי כֹחַ', tr: 'Yona matse’a vo mano’aḥ · ve-sham yanuḥu yegi‘ei kho’aḥ', fr: 'La colombe y trouva le repos, et là se reposent ceux qui sont épuisés' },
+    ],
+  },
+  {
+    id: 'lecha-dodi', category: 'chabbat', title: 'Lécha Dodi', hebrew: 'לְכָה דוֹדִי',
+    author: 'Rabbi Chlomo Alkabetz', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=lecha+dodi' },
+    lines: [
+      { he: 'לְכָה דוֹדִי לִקְרַאת כַּלָּה · פְּנֵי שַׁבָּת נְקַבְּלָה', tr: 'Lekha dodi likrat kala · penei Shabbat nekabela', fr: 'Viens, mon bien-aimé, au-devant de la fiancée : accueillons la face du Chabbat' },
+      { he: 'שָׁמוֹר וְזָכוֹר בְּדִבּוּר אֶחָד · הִשְׁמִיעָנוּ אֵל הַמְיֻחָד', tr: 'Shamor ve-zakhor be-dibur eḥad · hishmi‘anu El ha-meyuḥad', fr: '« Garde » et « Souviens-toi » en une seule parole : le Dieu unique nous les fit entendre' },
+    ],
+  },
+  {
+    id: 'eshet-chayil', category: 'chabbat', title: 'Éshet Chayil', hebrew: 'אֵשֶׁת חַיִל',
+    author: 'Proverbes 31 (avant le repas)', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=eshet+chayil' },
+    lines: [
+      { he: 'אֵשֶׁת חַיִל מִי יִמְצָא · וְרָחֹק מִפְּנִינִים מִכְרָהּ', tr: 'Eshet ḥayil mi yimtsa · ve-raḥok mi-peninim mikhrah', fr: 'Une femme de valeur, qui la trouvera ? Son prix dépasse celui des perles' },
+      { he: 'בָּטַח בָּהּ לֵב בַּעְלָהּ · וְשָׁלָל לֹא יֶחְסָר', tr: 'Bataḥ bah lev ba‘lah · ve-shalal lo yeḥsar', fr: 'Le cœur de son mari se fie à elle, et le profit ne lui manquera pas' },
+    ],
+  },
+  {
+    id: 'yom-ze-mechubad', category: 'chabbat', title: 'Yom Zé Méchoubad', hebrew: 'יוֹם זֶה מְכֻבָּד',
+    author: 'Zemer de Chabbat', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yom+ze+mechubad' },
+    lines: [
+      { he: 'יוֹם זֶה מְכֻבָּד מִכָּל יָמִים · כִּי בוֹ שָׁבַת צוּר עוֹלָמִים', tr: 'Yom ze mekhubad mi-kol yamim · ki vo shavat tsur olamim', fr: 'Ce jour est honoré entre tous, car en lui s’est reposé le Rocher des mondes' },
+    ],
+  },
+
+  // ===================== MAROCAINES / SÉFARADES (ajouts) ===================
+  {
+    id: 'aoufa-eshkona', category: 'maroc', title: "A'oufa Eshkona", hebrew: 'אָעוּפָה וְאֶשְׁכֹּנָה',
+    author: 'D’après Psaumes 55', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=aufa+eshkona+piyout' },
+    lines: [
+      { he: 'מִי יִתֶּן לִי אֵבֶר כַּיּוֹנָה · אָעוּפָה וְאֶשְׁכֹּנָה', tr: 'Mi yiten li ever ka-yona · a‘ufa ve-eshkona', fr: 'Qui me donnera des ailes comme la colombe ? Je m’envolerais et je trouverais le repos' },
+    ],
+  },
+  {
+    id: 'yafa-vetama', category: 'maroc', title: 'Yafa VeTama', hebrew: 'יָפָה וְתַמָּה',
+    author: 'Piyout séfarade — paroles à compléter/relire', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yafa+vetama+piyout' },
+    lines: [
+      { he: 'יָפָה וְתַמָּה', tr: 'Yafa ve-tama', fr: 'Belle et parfaite (piyout — texte complet à ajouter, voir l’enregistrement)' },
+    ],
+  },
+  {
+    id: 'shachar-avakeshcha', category: 'maroc', title: 'Chah’ar Avakéch’kha', hebrew: 'שַׁחַר אֲבַקֶּשְׁךָ',
+    author: 'Rabbi Chlomo Ibn Gabirol', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=shachar+avakeshcha' },
+    lines: [
+      { he: 'שַׁחַר אֲבַקֶּשְׁךָ צוּרִי וּמִשְׂגַּבִּי · אֶעֱרֹךְ לְפָנֶיךָ שַׁחְרִי וְגַם עַרְבִּי', tr: 'Shaḥar avakeshkha tsuri u-misgabi · e‘erokh lefanekha shaḥri ve-gam arbi', fr: 'Dès l’aube je Te cherche, mon Rocher et ma forteresse ; je dispose devant Toi ma prière du matin et du soir' },
+    ],
+  },
+  {
+    id: 'el-nora-alila', category: 'maroc', title: 'El Nora Alila', hebrew: 'אֵל נוֹרָא עֲלִילָה',
+    author: 'Rabbi Avraham Ibn Ezra (Néïla)', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=el+nora+alila' },
+    lines: [
+      { he: 'אֵל נוֹרָא עֲלִילָה · הַמְצִיא לָנוּ מְחִילָה · בִּשְׁעַת הַנְּעִילָה', tr: 'El nora alila · hamtsi lanu meḥila · bi-she‘at ha-ne‘ila', fr: 'Dieu redoutable dans Ses œuvres, accorde-nous le pardon à l’heure de la Néïla' },
+    ],
+  },
+
+  // ============================= ASHKÉNAZES (ajouts) =======================
+  {
+    id: 'yigdal', category: 'ashkenaz', title: 'Yigdal', hebrew: 'יִגְדַּל',
+    author: 'D’après les 13 principes de foi', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yigdal' },
+    lines: [
+      { he: 'יִגְדַּל אֱלֹהִים חַי וְיִשְׁתַּבַּח · נִמְצָא וְאֵין עֵת אֶל מְצִיאוּתוֹ', tr: 'Yigdal Elohim ḥai ve-yishtabaḥ · nimtsa ve-ein et el metsi’uto', fr: 'Que grandisse et soit loué le Dieu vivant : Il existe, et Son existence est hors du temps' },
+    ],
+  },
+  {
+    id: 'maoz-tzur', category: 'ashkenaz', title: 'Maoz Tzour', hebrew: 'מָעוֹז צוּר',
+    author: 'Chant de Hanoukka', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=maoz+tzur' },
+    lines: [
+      { he: 'מָעוֹז צוּר יְשׁוּעָתִי · לְךָ נָאֶה לְשַׁבֵּחַ', tr: 'Ma‘oz tsur yeshu‘ati · lekha na’e le-shabe’aḥ', fr: 'Rocher, forteresse de mon salut, il est beau de Te louer' },
+      { he: 'תִּכּוֹן בֵּית תְּפִלָּתִי · וְשָׁם תּוֹדָה נְזַבֵּחַ', tr: 'Tikon beit tefilati · ve-sham toda nezabe’aḥ', fr: 'Rétablis ma maison de prière, et là nous offrirons des actions de grâce' },
+    ],
+  },
+
+  // ======================== HASSIDIQUE & POPULAIRE =========================
+  {
+    id: 'am-yisrael-chai', category: 'hassidique', title: 'Am Yisrael Chai', hebrew: 'עַם יִשְׂרָאֵל חַי',
+    author: 'Chant populaire', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=am+yisrael+chai' },
+    lines: [
+      { he: 'עוֹד אָבִינוּ חַי · עַם יִשְׂרָאֵל חַי', tr: 'Od avinu ḥai · am Yisrael ḥai', fr: 'Notre Père vit encore — le peuple d’Israël vit !' },
+    ],
+  },
+  {
+    id: 'oseh-shalom', category: 'hassidique', title: 'Oseh Chalom', hebrew: 'עוֹשֶׂה שָׁלוֹם',
+    author: 'D’après la Amida', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=oseh+shalom+song' },
+    lines: [
+      { he: 'עוֹשֶׂה שָׁלוֹם בִּמְרוֹמָיו · הוּא יַעֲשֶׂה שָׁלוֹם עָלֵינוּ', tr: 'Ose shalom bi-mromav · hu ya‘ase shalom aleinu', fr: 'Que Celui qui fait la paix dans Ses hauteurs fasse la paix sur nous' },
+      { he: 'וְעַל כָּל יִשְׂרָאֵל · וְאִמְרוּ אָמֵן', tr: 've-al kol Yisrael · ve-imru amen', fr: 'et sur tout Israël, et dites : Amen' },
+    ],
+  },
+  {
+    id: 'hine-ma-tov', category: 'hassidique', title: 'Hiné Ma Tov', hebrew: 'הִנֵּה מַה טּוֹב',
+    author: 'Psaumes 133', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=hine+ma+tov' },
+    lines: [
+      { he: 'הִנֵּה מַה טּוֹב וּמַה נָּעִים · שֶׁבֶת אַחִים גַּם יָחַד', tr: 'Hine ma tov u-ma na‘im · shevet aḥim gam yaḥad', fr: 'Qu’il est bon et agréable pour des frères de demeurer ensemble' },
+    ],
+  },
+  {
+    id: 'ani-maamin', category: 'hassidique', title: 'Ani Maamin', hebrew: 'אֲנִי מַאֲמִין',
+    author: 'D’après Maïmonide', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=ani+maamin' },
+    lines: [
+      { he: 'אֲנִי מַאֲמִין בֶּאֱמוּנָה שְׁלֵמָה · בְּבִיאַת הַמָּשִׁיחַ', tr: 'Ani ma’amin be-emuna shelema · be-vi’at ha-mashi’aḥ', fr: 'Je crois d’une foi entière en la venue du Machia’h' },
+      { he: 'וְאַף עַל פִּי שֶׁיִּתְמַהְמֵהַּ · עִם כָּל זֶה אֲחַכֶּה לּוֹ', tr: 've-af al pi she-yitmahme’ah · im kol ze aḥake lo', fr: 'et même s’il tarde, malgré tout je l’attendrai' },
+    ],
+  },
+  {
+    id: 'siman-tov', category: 'hassidique', title: 'Siman Tov ouMazal Tov', hebrew: 'סִימָן טוֹב וּמַזָּל טוֹב',
+    author: 'Chant de fête', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=siman+tov+umazal+tov' },
+    lines: [
+      { he: 'סִימָן טוֹב וּמַזָּל טוֹב · יְהֵא לָנוּ וּלְכָל יִשְׂרָאֵל', tr: 'Siman tov u-mazal tov · yehe lanu u-le-khol Yisrael', fr: 'Bon signe et bonne étoile pour nous et pour tout Israël !' },
+    ],
+  },
+  {
+    id: 'od-yishama', category: 'hassidique', title: 'Od Yishama', hebrew: 'עוֹד יִשָּׁמַע',
+    author: 'Chant de mariage (Jérémie 33)', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=od+yishama' },
+    lines: [
+      { he: 'עוֹד יִשָּׁמַע בְּעָרֵי יְהוּדָה וּבְחוּצוֹת יְרוּשָׁלָיִם · קוֹל שָׂשׂוֹן וְקוֹל שִׂמְחָה', tr: 'Od yishama be-arei Yehuda u-ve-ḥutsot Yerushalayim · kol sason ve-kol simḥa', fr: 'On entendra encore, dans les villes de Juda et les rues de Jérusalem, la voix de l’allégresse et de la joie' },
+    ],
   },
 ];
 
