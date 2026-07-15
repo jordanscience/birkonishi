@@ -242,8 +242,18 @@ const SONGS = [
     id: 'yedid-nefesh', category: 'chabbat', title: 'Yédid Néfesh', hebrew: 'יְדִיד נֶפֶשׁ',
     author: 'Rabbi Eléazar Azikri', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yedid+nefesh' },
     lines: [
-      { he: 'יְדִיד נֶפֶשׁ אָב הָרַחֲמָן · מְשֹׁךְ עַבְדְּךָ אֶל רְצוֹנֶךָ', tr: 'Yedid nefesh av ha-raḥaman · meshokh avdekha el retsonekha', fr: 'Ami de l’âme, Père miséricordieux, attire Ton serviteur vers Ta volonté' },
-      { he: 'יָרוּץ עַבְדְּךָ כְּמוֹ אַיָּל · יִשְׁתַּחֲוֶה אֶל מוּל הֲדָרֶךָ', tr: 'Yaruts avdekha kemo ayal · yishtaḥave el mul hadarekha', fr: 'Ton serviteur courra comme une biche pour se prosterner devant Ta splendeur' },
+      { he: 'יְדִיד נֶפֶשׁ אָב הָרַחֲמָן · מְשֹׁךְ עַבְדָּךְ אֶל רְצוֹנָךְ', tr: 'Yedid nefesh av ha-raḥaman · meshokh avdakh el retsonakh', fr: 'Ami de l’âme, Père miséricordieux, attire Ton serviteur vers Ta volonté' },
+      { he: 'יָרוּץ עַבְדָּךְ כְּמוֹ אַיָּל · יִשְׁתַּחֲוֶה מוּל הֲדָרָךְ', tr: '', fr: 'Ton serviteur courra comme une biche pour se prosterner devant Ta splendeur' },
+      { he: 'כִּי יֶעֱרַב לוֹ יְדִידוּתָךְ · מִנֹּפֶת צוּף וְכָל טַעַם', tr: '', fr: 'car Ton amitié lui est plus douce que le rayon de miel et toute saveur' },
+      { he: 'הָדוּר נָאֶה זִיו הָעוֹלָם · נַפְשִׁי חוֹלַת אַהֲבָתָךְ', tr: '', fr: 'Majestueux, splendide, éclat du monde : mon âme est malade de Ton amour' },
+      { he: 'אָנָּא אֵל נָא רְפָא נָא לָהּ · בְּהַרְאוֹת לָהּ נֹעַם זִיוָךְ', tr: '', fr: 'De grâce, ô Dieu, guéris-la en lui montrant la douceur de Ta lumière' },
+      { he: 'אָז תִּתְחַזֵּק וְתִתְרַפֵּא · וְהָיְתָה לָךְ שִׁפְחַת עוֹלָם', tr: '', fr: 'alors elle se raffermira et guérira, et sera pour Toi servante à jamais' },
+      { he: 'וָתִיק יֶהֱמוּ רַחֲמֶיךָ · וְחוּסָה נָא עַל בֶּן אוֹהֲבָךְ', tr: '', fr: 'Toi l’Éternel, que Ta miséricorde s’émeuve : aie pitié du fils de Ton bien-aimé' },
+      { he: 'כִּי זֶה כַמֶּה נִכְסֹף נִכְסַף · לִרְאוֹת בְּתִפְאֶרֶת עֻזָּךְ', tr: '', fr: 'car depuis si longtemps il aspire ardemment à voir la splendeur de Ta force' },
+      { he: 'אָנָּא אֵלִי מַחְמַד לִבִּי · חוּשָׁה נָּא וְאַל תִּתְעַלָּם', tr: '', fr: 'De grâce, mon Dieu, désir de mon cœur : hâte-Toi et ne Te dérobe pas' },
+      { he: 'הִגָּלֶה נָא וּפְרֹשׂ חָבִיב · עָלַי אֶת סֻכַּת שְׁלוֹמָךְ', tr: '', fr: 'Révèle-Toi, mon Bien-aimé, et étends sur moi la souccah de Ta paix' },
+      { he: 'תָּאִיר אֶרֶץ מִכְּבוֹדָךְ · נָגִילָה וְנִשְׂמְחָה בָךְ', tr: '', fr: 'Que la terre s’illumine de Ta gloire ; nous exulterons et nous nous réjouirons en Toi' },
+      { he: 'מַהֵר אָהוּב כִּי בָא מוֹעֵד · וְחָנֵּנִי כִּימֵי עוֹלָם', tr: '', fr: 'Hâte-Toi, Bien-aimé, car le temps est venu, et fais-moi grâce comme aux jours d’antan' },
     ],
   },
   {
@@ -280,8 +290,16 @@ const SONGS = [
     id: 'lecha-dodi', category: 'chabbat', title: 'Lécha Dodi', hebrew: 'לְכָה דוֹדִי',
     author: 'Rabbi Chlomo Alkabetz', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=lecha+dodi' },
     lines: [
-      { he: 'לְכָה דוֹדִי לִקְרַאת כַּלָּה · פְּנֵי שַׁבָּת נְקַבְּלָה', tr: 'Lekha dodi likrat kala · penei Shabbat nekabela', fr: 'Viens, mon bien-aimé, au-devant de la fiancée : accueillons la face du Chabbat' },
-      { he: 'שָׁמוֹר וְזָכוֹר בְּדִבּוּר אֶחָד · הִשְׁמִיעָנוּ אֵל הַמְיֻחָד', tr: 'Shamor ve-zakhor be-dibur eḥad · hishmi‘anu El ha-meyuḥad', fr: '« Garde » et « Souviens-toi » en une seule parole : le Dieu unique nous les fit entendre' },
+      { he: 'לְכָה דוֹדִי לִקְרַאת כַּלָּה · פְּנֵי שַׁבָּת נְקַבְּלָה', tr: 'Lekha dodi likrat kala · penei Shabbat nekabela', fr: '(refrain) Viens, mon bien-aimé, au-devant de la fiancée ; accueillons la face du Chabbat' },
+      { he: 'שָׁמוֹר וְזָכוֹר בְּדִבּוּר אֶחָד · הִשְׁמִיעָנוּ אֵל הַמְיֻחָד · ה׳ אֶחָד וּשְׁמוֹ אֶחָד · לְשֵׁם וּלְתִפְאֶרֶת וְלִתְהִלָּה', tr: '', fr: '« Garde » et « Souviens-toi » en une seule parole : le Dieu unique nous les fit entendre ; l’Éternel est Un et Son Nom est Un, pour la renommée, la splendeur et la louange' },
+      { he: 'לִקְרַאת שַׁבָּת לְכוּ וְנֵלְכָה · כִּי הִיא מְקוֹר הַבְּרָכָה · מֵרֹאשׁ מִקֶּדֶם נְסוּכָה · סוֹף מַעֲשֶׂה בְּמַחֲשָׁבָה תְּחִלָּה', tr: '', fr: 'Vers le Chabbat, allons, marchons, car il est la source de la bénédiction ; dès l’origine il fut établi — dernier dans l’action, premier dans la pensée' },
+      { he: 'מִקְדַּשׁ מֶלֶךְ עִיר מְלוּכָה · קוּמִי צְאִי מִתּוֹךְ הַהֲפֵכָה · רַב לָךְ שֶׁבֶת בְּעֵמֶק הַבָּכָא · וְהוּא יַחֲמֹל עָלַיִךְ חֶמְלָה', tr: '', fr: 'Sanctuaire du Roi, ville royale, lève-toi, sors du bouleversement ; assez d’habiter la vallée des pleurs, Il aura pour toi compassion' },
+      { he: 'הִתְנַעֲרִי מֵעָפָר קוּמִי · לִבְשִׁי בִּגְדֵי תִפְאַרְתֵּךְ עַמִּי · עַל יַד בֶּן יִשַׁי בֵּית הַלַּחְמִי · קָרְבָה אֶל נַפְשִׁי גְאָלָהּ', tr: '', fr: 'Secoue-toi de la poussière, lève-toi, revêts tes habits de gloire, mon peuple ; par la main du fils de Jessé, le Bethléémite, approche de mon âme, délivre-la' },
+      { he: 'הִתְעוֹרְרִי הִתְעוֹרְרִי · כִּי בָא אוֹרֵךְ קוּמִי אוֹרִי · עוּרִי עוּרִי שִׁיר דַּבֵּרִי · כְּבוֹד ה׳ עָלַיִךְ נִגְלָה', tr: '', fr: 'Réveille-toi, réveille-toi, car ta lumière est venue, lève-toi, brille ; éveille-toi, entonne un chant, la gloire de l’Éternel se révèle sur toi' },
+      { he: 'לֹא תֵבוֹשִׁי וְלֹא תִכָּלְמִי · מַה תִּשְׁתּוֹחֲחִי וּמַה תֶּהֱמִי · בָּךְ יֶחֱסוּ עֲנִיֵּי עַמִּי · וְנִבְנְתָה עִיר עַל תִּלָּהּ', tr: '', fr: 'Ne sois ni honteuse ni confuse ; pourquoi t’abattre et gémir ? En toi s’abriteront les pauvres de mon peuple, et la ville sera rebâtie sur ses ruines' },
+      { he: 'וְהָיוּ לִמְשִׁסָּה שֹׁאסָיִךְ · וְרָחֲקוּ כָּל מְבַלְּעָיִךְ · יָשִׂישׂ עָלַיִךְ אֱלֹהָיִךְ · כִּמְשׂוֹשׂ חָתָן עַל כַּלָּה', tr: '', fr: 'Tes pillards seront pillés, tous ceux qui te dévoraient s’éloigneront ; ton Dieu se réjouira de toi comme l’époux se réjouit de l’épouse' },
+      { he: 'יָמִין וּשְׂמֹאל תִּפְרוֹצִי · וְאֶת ה׳ תַּעֲרִיצִי · עַל יַד אִישׁ בֶּן פַּרְצִי · וְנִשְׂמְחָה וְנָגִילָה', tr: '', fr: 'À droite et à gauche tu t’étendras, et tu révéreras l’Éternel ; par la main de l’homme issu de Pérets, nous nous réjouirons et exulterons' },
+      { he: 'בּוֹאִי בְשָׁלוֹם עֲטֶרֶת בַּעְלָהּ · גַּם בְּשִׂמְחָה וּבְצָהֳלָה · תּוֹךְ אֱמוּנֵי עַם סְגֻלָּה · בּוֹאִי כַלָּה בּוֹאִי כַלָּה', tr: '', fr: 'Viens en paix, couronne de ton époux, dans la joie et l’allégresse, parmi les fidèles du peuple élu ; viens, ô fiancée, viens, ô fiancée' },
     ],
   },
   {
@@ -302,10 +320,19 @@ const SONGS = [
 
   // ===================== MAROCAINES / SÉFARADES (ajouts) ===================
   {
-    id: 'aoufa-eshkona', category: 'maroc', title: "A'oufa Eshkona", hebrew: 'אָעוּפָה וְאֶשְׁכֹּנָה',
-    author: 'D’après Psaumes 55', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=aufa+eshkona+piyout' },
+    id: 'aoufa-eshkona', category: 'maroc', title: "A'oufa Eshkona", hebrew: 'אָעוּפָה אֶשְׁכֹּנָה',
+    author: 'Bakacha (tradition marocaine)', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=aufa+eshkona+piyout' },
     lines: [
-      { he: 'מִי יִתֶּן לִי אֵבֶר כַּיּוֹנָה · אָעוּפָה וְאֶשְׁכֹּנָה', tr: 'Mi yiten li ever ka-yona · a‘ufa ve-eshkona', fr: 'Qui me donnera des ailes comme la colombe ? Je m’envolerais et je trouverais le repos' },
+      { he: 'אָעוּפָה אֶשְׁכֹּנָה וְאַרְחִיקָה נְדֹד · בַּמִּדְבָּר אָלִינָה וְאוּלַי אֶמְצָא דּוֹד', tr: 'A‘ufa eshkona ve-arḥika nedod · ba-midbar alina ve-ulai emtsa dod', fr: '(refrain) Je m’envolerai et me poserai, je m’éloignerai au loin ; dans le désert je passerai la nuit, et peut-être trouverai-je mon Bien-aimé' },
+      { he: 'נֶשֶׁק אַהֲבָתוֹ בְּלִבִּי בֹּעֵרָה · מִיּוֹם פְּרֵדָתוֹ נַפְשִׁי עָלַי מָרָה', tr: '', fr: 'Le feu de son amour brûle en mon cœur ; depuis le jour de sa séparation, mon âme s’est aigrie en moi' },
+      { he: 'יְדִיד מֶנִּי בָּרַח הָלַךְ עֲזָבַנִי · אֵיזוֹ דֶּרֶךְ אָרַח וְאֵלְכָה גַּם אֲנִי', tr: '', fr: 'L’ami s’est enfui loin de moi, il m’a quitté ; quelle voie a-t-il prise ? j’irai moi aussi' },
+      { he: 'יָצָאתִי לְבַקֵּשׁ דּוֹדִי בֵּין חֲבֵרִים · נִלְכַּדְתִּי בְּמוֹקֵשׁ הִכּוּנִי הַשֹּׁמְרִים', tr: '', fr: 'Je suis sortie chercher mon Bien-aimé parmi les compagnons ; j’ai été prise au piège, les gardiens m’ont frappée' },
+      { he: 'צִפִּיתִי לְדוֹדִי מָתַי יָבוֹא אֵלַי · יַלְבִּישֵׁנִי עֶדְיִי וִירַחֵם עָלַי', tr: '', fr: 'J’ai guetté mon Bien-aimé : quand viendra-t-il vers moi, me revêtira de ma parure et aura pitié de moi' },
+      { he: 'חֲשֹׂף זְרוֹעֲךָ לְקַבֵּץ פְּזוּרִים · גַּלֵּה קֵץ יִשְׁעֲךָ וְדִגְלְךָ הָרֵם', tr: '', fr: 'Dévoile Ton bras pour rassembler les dispersés ; révèle le terme de Ton salut et lève Ton étendard' },
+      { he: 'קוּמִי יְחִידָתִי וְשׁוּבִי בִּתְשׁוּבָה · אֲחוֹתִי רַעְיָתִי הִנֵּה גוֹאֲלֵךְ בָּא', tr: '', fr: 'Lève-toi, mon unique, reviens par le repentir ; ma sœur, ma compagne, voici que ton Rédempteur vient' },
+      { he: 'חֲמוּדָה יְקָרָה רַבַּת הַמַּעֲלוֹת · גַּם מִפָּז נִבְחָרָה צְאִי נָא בִמְחוֹלוֹת', tr: '', fr: 'Précieuse et chérie, riche de vertus, plus choisie que l’or fin : sors donc dans les danses' },
+      { he: 'זָכַרְתִּי לָךְ חֶסֶד נְעוּרַיִךְ נְעוּרִים · הֵיכָלֵךְ אֲיַסֵּד בְּאַבְנֵי סַפִּירִים', tr: '', fr: 'Je me suis souvenu en ta faveur de la grâce de ta jeunesse ; je fonderai ton palais sur des pierres de saphir' },
+      { he: 'קוֹל דּוֹדִי הִנֵּה בָּא מְדַלֵּג עַל הֶהָרִים · קוּמִי לָךְ אֲהוּבָה כִּי בָּא קֵץ דְּרוֹרִים', tr: '', fr: 'La voix de mon Bien-aimé, le voici qui vient, bondissant sur les montagnes ; lève-toi, bien-aimée, car le temps de la délivrance est venu' },
     ],
   },
   {
