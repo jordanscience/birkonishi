@@ -99,6 +99,7 @@
           </div>`;
         card.querySelector('.add-btn').onclick = (e) => { e.stopPropagation(); addSong(s.id); };
         card.onclick = (e) => { if (!e.target.closest('.card-actions')) addSong(s.id); };
+        wireLibraryDrag(card, s.id);
         group.appendChild(card);
       });
       list.appendChild(group);
@@ -119,24 +120,20 @@
     syncControls(); renderBook(); save();
   }
 
-  function addSong(songId) {
+  // Insère un bloc avant `beforeUid` (ou à la fin si absent), puis navigue
+  // vers la page qui le contient.
+  function insertBlock(block, beforeUid) {
     pushHistory();
-    state.blocks.push({ uid: uid(), type: 'song', songId });
+    const arr = state.blocks;
+    const i = beforeUid ? arr.findIndex((b) => b.uid === beforeUid) : -1;
+    if (i >= 0) arr.splice(i, 0, block); else arr.push(block);
     renderBook(); save();
-    scrollToBottom();
+    goToBlockPage(block.uid);
   }
 
-  function addText(title, body) {
-    pushHistory();
-    state.blocks.push({ uid: uid(), type: 'text', title, body });
-    renderBook(); save(); scrollToBottom();
-  }
-
-  function addImage(dataUrl, caption) {
-    pushHistory();
-    state.blocks.push({ uid: uid(), type: 'image', src: dataUrl, caption: caption || '' });
-    renderBook(); save(); scrollToBottom();
-  }
+  function addSong(songId, beforeUid) { insertBlock({ uid: uid(), type: 'song', songId }, beforeUid); }
+  function addText(title, body)       { insertBlock({ uid: uid(), type: 'text', title, body }, null); }
+  function addImage(dataUrl, caption) { insertBlock({ uid: uid(), type: 'image', src: dataUrl, caption: caption || '' }, null); }
 
   function removeBlock(uidVal) {
     pushHistory();
@@ -154,10 +151,17 @@
     const [item] = arr.splice(from, 1);
     arr.splice(to, 0, item);
     renderBook(); save();
+    goToBlockPage(item.uid);
   }
 
-  function scrollToBottom() {
-    requestAnimationFrame(() => { $('#stage').scrollTop = $('#stage').scrollHeight; });
+  // Amène le feuilleteur sur la page contenant un bloc donné.
+  function goToBlockPage(blockUid) {
+    setTimeout(() => {
+      const el = $(`#book [data-uid="${blockUid}"]`);
+      const page = el && el.closest('.page');
+      const idx = page ? pageEls().indexOf(page) : pageEls().length - 1;
+      if (idx >= 0) gotoPage(idx);
+    }, 70);
   }
 
   // ============================================================ Rendu bloc ===
@@ -426,27 +430,51 @@
   }
 
   // ============================================================ Drag & drop ==
-  let dragUid = null;
+  let dragUid = null;       // bloc existant en cours de déplacement
+  let dragNewSong = null;   // chanson glissée depuis la bibliothèque
+  function clearDragMarks() { $$('.drag-over').forEach((b) => b.classList.remove('drag-over')); }
+
+  // Rend un bloc du livret déplaçable et cible de dépôt (réordonner / insérer).
   function wireDrag(el) {
     el.addEventListener('dragstart', (e) => {
-      dragUid = el.dataset.uid;
+      dragUid = el.dataset.uid; dragNewSong = null;
       el.classList.add('dragging');
       e.dataTransfer.effectAllowed = 'move';
+      try { e.dataTransfer.setData('text/plain', 'block:' + dragUid); } catch (_) {}
     });
-    el.addEventListener('dragend', () => {
-      dragUid = null;
-      el.classList.remove('dragging');
-      $$('.block.drag-over').forEach((b) => b.classList.remove('drag-over'));
-    });
+    el.addEventListener('dragend', () => { dragUid = null; el.classList.remove('dragging'); clearDragMarks(); });
     el.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      if (el.dataset.uid !== dragUid) el.classList.add('drag-over');
+      if (dragNewSong || (dragUid && dragUid !== el.dataset.uid)) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = dragNewSong ? 'copy' : 'move';
+        el.classList.add('drag-over');
+      }
     });
     el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
     el.addEventListener('drop', (e) => {
-      e.preventDefault();
+      e.preventDefault(); e.stopPropagation();        // évite le double-dépôt sur le lecteur
       el.classList.remove('drag-over');
-      if (dragUid && dragUid !== el.dataset.uid) moveBlock(dragUid, el.dataset.uid);
+      if (dragNewSong) addSong(dragNewSong, el.dataset.uid);              // insère la chanson AVANT ce bloc
+      else if (dragUid && dragUid !== el.dataset.uid) moveBlock(dragUid, el.dataset.uid);
+    });
+  }
+
+  // Rend une carte de la bibliothèque glissable vers le livret.
+  function wireLibraryDrag(card, songId) {
+    card.draggable = true;
+    card.addEventListener('dragstart', (e) => {
+      dragNewSong = songId; dragUid = null;
+      card.classList.add('dragging');
+      document.body.classList.add('dragging-song');
+      e.dataTransfer.effectAllowed = 'copy';
+      try { e.dataTransfer.setData('text/plain', 'newsong:' + songId); } catch (_) {}
+    });
+    card.addEventListener('dragend', () => {
+      dragNewSong = null;
+      card.classList.remove('dragging');
+      document.body.classList.remove('dragging-song');
+      $('#reader').classList.remove('drop-target');
+      clearDragMarks();
     });
   }
 
@@ -499,6 +527,23 @@
       if (title || body) addText(title, body);
       closeTextModal();
     };
+
+    // Zone de dépôt : glisser une chanson depuis la bibliothèque vers le livret.
+    // (Les dépôts précis sur un bloc sont gérés par wireDrag, qui stoppe la
+    //  propagation ; ici on gère le dépôt « dans le vide » → ajout à la fin.)
+    const reader = $('#reader');
+    reader.addEventListener('dragover', (e) => {
+      if (dragNewSong) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; reader.classList.add('drop-target'); }
+    });
+    reader.addEventListener('dragleave', (e) => {
+      if (!reader.contains(e.relatedTarget)) reader.classList.remove('drop-target');
+    });
+    reader.addEventListener('drop', (e) => {
+      if (!dragNewSong) return;
+      e.preventDefault();
+      reader.classList.remove('drop-target');
+      addSong(dragNewSong, null);      // ajout à la fin
+    });
 
     // Feuilleteur : navigation horizontale
     $('#prevPage').onclick = () => { toggleOverview(false); gotoPage(currentPage - 1); };
