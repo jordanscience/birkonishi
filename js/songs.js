@@ -11,6 +11,7 @@
 // ============================================================================
 
 const CATEGORIES = [
+  { key: 'prieres',  label: 'Prières',                 icon: '🕎' },
   { key: 'maroc',    label: 'Chansons marocaines',     icon: '🇲🇦' },
   { key: 'babasale', label: 'Baba Salé (Abir Yaacov)', icon: '🕯️' },
   { key: 'ashkenaz', label: 'Chansons ashkénazes',     icon: '🎻' },
@@ -18,6 +19,76 @@ const CATEGORIES = [
 ];
 
 const SONGS = [
+  // ----------------------------- PRIÈRES -----------------------------------
+  //  Textes liturgiques traditionnels (domaine public).
+  //  ⚠️ À faire relire par un référent avant impression réelle.
+  {
+    id: 'kiddoush-chabbat',
+    category: 'prieres',
+    title: 'Kiddoush du vendredi soir',
+    hebrew: 'קִדּוּשׁ לְלֵיל שַׁבָּת',
+    author: 'À réciter sur le vin — à relire',
+    lines: [
+      { he: 'וַיְהִי עֶרֶב וַיְהִי בֹקֶר', tr: 'Va-yehi erev va-yehi voker', fr: '(à voix basse) Il y eut un soir, il y eut un matin' },
+      { he: 'יוֹם הַשִּׁשִּׁי. וַיְכֻלּוּ הַשָּׁמַיִם וְהָאָרֶץ וְכָל צְבָאָם', tr: 'Yom ha-shishi. Va-yekhulu ha-shamayim ve-ha-arets ve-khol tseva’am', fr: 'Le sixième jour. Ainsi furent achevés les cieux, la terre et toute leur armée' },
+      { he: 'וַיְכַל אֱלֹהִים בַּיּוֹם הַשְּׁבִיעִי מְלַאכְתּוֹ אֲשֶׁר עָשָׂה · וַיִּשְׁבֹּת בַּיּוֹם הַשְּׁבִיעִי מִכָּל מְלַאכְתּוֹ', tr: '', fr: 'Dieu acheva au septième jour l’œuvre qu’il avait faite, et il se reposa le septième jour' },
+      { he: 'וַיְבָרֶךְ אֱלֹהִים אֶת יוֹם הַשְּׁבִיעִי וַיְקַדֵּשׁ אֹתוֹ · כִּי בוֹ שָׁבַת מִכָּל מְלַאכְתּוֹ אֲשֶׁר בָּרָא אֱלֹהִים לַעֲשׂוֹת', tr: '', fr: 'Dieu bénit le septième jour et le sanctifia, car en ce jour il se reposa de toute son œuvre' },
+      { he: 'סַבְרִי מָרָנָן וְרַבָּנָן וְרַבּוֹתַי:', tr: 'Savri maranan ve-rabanan ve-rabotai', fr: 'Avec votre permission, messieurs' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם בּוֹרֵא פְּרִי הַגָּפֶן', tr: 'Baroukh ata Adonai … boré peri ha-gafen', fr: 'Béni sois-Tu, Éternel notre Dieu, Roi du monde, qui crées le fruit de la vigne' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם אֲשֶׁר קִדְּשָׁנוּ בְּמִצְוֹתָיו וְרָצָה בָנוּ', tr: '', fr: 'Béni sois-Tu… qui nous as sanctifiés par Tes commandements et nous as agréés' },
+      { he: 'וְשַׁבַּת קָדְשׁוֹ בְּאַהֲבָה וּבְרָצוֹן הִנְחִילָנוּ · זִכָּרוֹן לְמַעֲשֵׂה בְרֵאשִׁית', tr: '', fr: 'et nous as donné en héritage, avec amour, Son saint Chabbat, souvenir de l’œuvre de la Création' },
+      { he: 'כִּי הוּא יוֹם תְּחִלָּה לְמִקְרָאֵי קֹדֶשׁ · זֵכֶר לִיצִיאַת מִצְרָיִם', tr: '', fr: 'car c’est le premier des jours saints, en souvenir de la sortie d’Égypte' },
+      { he: 'כִּי בָנוּ בָחַרְתָּ וְאוֹתָנוּ קִדַּשְׁתָּ מִכָּל הָעַמִּים · וְשַׁבַּת קָדְשְׁךָ בְּאַהֲבָה וּבְרָצוֹן הִנְחַלְתָּנוּ', tr: '', fr: 'car Tu nous as choisis et sanctifiés parmi tous les peuples, et nous as donné Ton saint Chabbat' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ מְקַדֵּשׁ הַשַּׁבָּת', tr: 'Baroukh ata Adonai mekadesh ha-Shabbat', fr: 'Béni sois-Tu, Éternel, qui sanctifies le Chabbat' },
+    ],
+  },
+  {
+    id: 'birkat-hamazon-sefarade',
+    category: 'prieres',
+    title: 'Birkat Hamazon (séfarade)',
+    hebrew: 'בִּרְכַּת הַמָּזוֹן · נֻסַּח סְפָרַד',
+    author: 'Action de grâces après le repas — à relire',
+    lines: [
+      { he: 'שִׁיר הַמַּעֲלוֹת · בְּשׁוּב ה׳ אֶת שִׁיבַת צִיּוֹן הָיִינוּ כְּחֹלְמִים', tr: '', fr: 'Cantique des degrés : quand l’Éternel ramena les captifs de Sion, nous étions comme en rêve' },
+      { he: 'אָז יִמָּלֵא שְׂחוֹק פִּינוּ וּלְשׁוֹנֵנוּ רִנָּה · הַזֹּרְעִים בְּדִמְעָה בְּרִנָּה יִקְצֹרוּ', tr: '', fr: 'Alors notre bouche s’emplit de rires ; ceux qui sèment dans les larmes moissonnent dans la joie' },
+      { he: 'בִּרְשׁוּת מָרָנָן: נְבָרֵךְ שֶׁאָכַלְנוּ מִשֶּׁלּוֹ', tr: 'Bir’shout maranan : nevarekh she-akhalnou mi-shelo', fr: 'Avec votre permission : bénissons Celui de qui nous avons mangé' },
+      { he: 'בָּרוּךְ שֶׁאָכַלְנוּ מִשֶּׁלּוֹ וּבְטוּבוֹ חָיִינוּ', tr: 'Baroukh she-akhalnou mi-shelo u-vetuvo ḥayinou', fr: 'Béni soit Celui de qui nous avons mangé et par la bonté de qui nous vivons' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם הַזָּן אֶת הָעוֹלָם כֻּלּוֹ בְּטוּבוֹ בְּחֵן בְּחֶסֶד וּבְרַחֲמִים', tr: '', fr: '1. Béni sois-Tu… qui nourris le monde entier par Ta bonté, avec grâce et miséricorde' },
+      { he: 'הוּא נוֹתֵן לֶחֶם לְכָל בָּשָׂר כִּי לְעוֹלָם חַסְדּוֹ · בָּרוּךְ אַתָּה ה׳ הַזָּן אֶת הַכֹּל', tr: '', fr: 'Il donne le pain à toute chair, car Sa bonté est éternelle. Béni sois-Tu, qui nourris tout' },
+      { he: 'נוֹדֶה לְּךָ ה׳ אֱלֹהֵינוּ עַל שֶׁהִנְחַלְתָּ לַאֲבוֹתֵינוּ אֶרֶץ חֶמְדָּה טוֹבָה וּרְחָבָה', tr: '', fr: '2. Nous Te remercions de nous avoir donné en héritage un pays précieux, bon et vaste' },
+      { he: 'וְעַל הַכֹּל ה׳ אֱלֹהֵינוּ אֲנַחְנוּ מוֹדִים לָךְ וּמְבָרְכִים אֶת שְׁמָךְ · בָּרוּךְ אַתָּה ה׳ עַל הָאָרֶץ וְעַל הַמָּזוֹן', tr: '', fr: 'Pour tout cela nous Te rendons grâce. Béni sois-Tu, pour le pays et pour la nourriture' },
+      { he: 'רַחֵם ה׳ אֱלֹהֵינוּ עָלֵינוּ וְעַל יִשְׂרָאֵל עַמֶּךָ וְעַל יְרוּשָׁלַיִם עִירֶךָ', tr: '', fr: '3. Aie pitié, Éternel, de nous, de Ton peuple Israël et de Jérusalem Ta ville' },
+      { he: 'רְצֵה וְהַחֲלִיצֵנוּ ה׳ אֱלֹהֵינוּ בְּמִצְוֹתֶיךָ וּבְמִצְוַת יוֹם הַשְּׁבִיעִי הַשַּׁבָּת הַגָּדוֹל וְהַקָּדוֹשׁ הַזֶּה', tr: '', fr: '(Chabbat) Fortifie-nous par Tes commandements et par celui de ce grand et saint septième jour' },
+      { he: 'וּבְנֵה יְרוּשָׁלַיִם עִיר הַקֹּדֶשׁ בִּמְהֵרָה בְיָמֵינוּ · בָּרוּךְ אַתָּה ה׳ בּוֹנֵה יְרוּשָׁלָיִם. אָמֵן', tr: '', fr: 'Reconstruis Jérusalem, la ville sainte, bientôt et de nos jours. Béni sois-Tu, qui rebâtis Jérusalem. Amen' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם הָאֵל אָבִינוּ מַלְכֵּנוּ … הַטּוֹב וְהַמֵּטִיב לַכֹּל', tr: '', fr: '4. Béni sois-Tu… notre Père, notre Roi… Lui qui est bon et fait le bien envers tous' },
+      { he: 'הָרַחֲמָן הוּא יִמְלֹךְ עָלֵינוּ לְעוֹלָם וָעֶד · הָרַחֲמָן הוּא יִשְׁלַח בְּרָכָה בַּבַּיִת הַזֶּה', tr: '', fr: 'Que le Miséricordieux règne sur nous à jamais ; qu’Il envoie la bénédiction dans cette maison' },
+      { he: 'עֹשֶׂה שָׁלוֹם בִּמְרוֹמָיו הוּא יַעֲשֶׂה שָׁלוֹם עָלֵינוּ וְעַל כָּל יִשְׂרָאֵל וְאִמְרוּ אָמֵן', tr: 'Osé shalom bi-mromav…', fr: 'Que Celui qui fait la paix dans Ses hauteurs fasse la paix sur nous et sur tout Israël. Amen' },
+    ],
+  },
+  {
+    id: 'birkat-hamazon-ashkenaze',
+    category: 'prieres',
+    title: 'Birkat Hamazon (ashkénaze)',
+    hebrew: 'בִּרְכַּת הַמָּזוֹן · נֻסַּח אַשְׁכְּנַז',
+    author: 'Action de grâces après le repas — à relire',
+    lines: [
+      { he: 'שִׁיר הַמַּעֲלוֹת · בְּשׁוּב ה׳ אֶת שִׁיבַת צִיּוֹן הָיִינוּ כְּחֹלְמִים', tr: '', fr: 'Cantique des degrés : quand l’Éternel ramena les captifs de Sion, nous étions comme en rêve' },
+      { he: 'רַבּוֹתַי נְבָרֵךְ · יְהִי שֵׁם ה׳ מְבֹרָךְ מֵעַתָּה וְעַד עוֹלָם', tr: 'Rabotai nevarekh · yehi shem Adonai mevorakh', fr: 'Messieurs, bénissons. Que le nom de l’Éternel soit béni dès maintenant et à jamais' },
+      { he: 'בִּרְשׁוּת מָרָנָן וְרַבָּנָן וְרַבּוֹתַי · נְבָרֵךְ אֱלֹהֵינוּ שֶׁאָכַלְנוּ מִשֶּׁלּוֹ', tr: '', fr: 'Avec votre permission : bénissons notre Dieu, de qui nous avons mangé' },
+      { he: 'בָּרוּךְ אֱלֹהֵינוּ שֶׁאָכַלְנוּ מִשֶּׁלּוֹ וּבְטוּבוֹ חָיִינוּ', tr: 'Baroukh Eloheinou she-akhalnou mi-shelo u-vetuvo ḥayinou', fr: 'Béni soit notre Dieu, de qui nous avons mangé et par la bonté de qui nous vivons' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם הַזָּן אֶת הָעוֹלָם כֻּלּוֹ בְּטוּבוֹ בְּחֵן בְּחֶסֶד וּבְרַחֲמִים', tr: '', fr: '1. Béni sois-Tu… qui nourris le monde entier par Ta bonté, avec grâce et miséricorde' },
+      { he: 'הוּא נוֹתֵן לֶחֶם לְכָל בָּשָׂר כִּי לְעוֹלָם חַסְדּוֹ · בָּרוּךְ אַתָּה ה׳ הַזָּן אֶת הַכֹּל', tr: '', fr: 'Il donne le pain à toute chair, car Sa bonté est éternelle. Béni sois-Tu, qui nourris tout' },
+      { he: 'נוֹדֶה לְּךָ ה׳ אֱלֹהֵינוּ עַל שֶׁהִנְחַלְתָּ לַאֲבוֹתֵינוּ אֶרֶץ חֶמְדָּה טוֹבָה וּרְחָבָה', tr: '', fr: '2. Nous Te remercions de nous avoir donné en héritage un pays précieux, bon et vaste' },
+      { he: 'וְעַל הַכֹּל ה׳ אֱלֹהֵינוּ אֲנַחְנוּ מוֹדִים לָךְ · בָּרוּךְ אַתָּה ה׳ עַל הָאָרֶץ וְעַל הַמָּזוֹן', tr: '', fr: 'Pour tout cela nous Te rendons grâce. Béni sois-Tu, pour le pays et pour la nourriture' },
+      { he: 'רַחֵם נָא ה׳ אֱלֹהֵינוּ עַל יִשְׂרָאֵל עַמֶּךָ וְעַל יְרוּשָׁלַיִם עִירֶךָ וְעַל צִיּוֹן מִשְׁכַּן כְּבוֹדֶךָ', tr: '', fr: '3. Aie pitié de Ton peuple Israël, de Jérusalem Ta ville et de Sion, demeure de Ta gloire' },
+      { he: 'רְצֵה וְהַחֲלִיצֵנוּ ה׳ אֱלֹהֵינוּ בְּמִצְוֹתֶיךָ וּבְמִצְוַת יוֹם הַשְּׁבִיעִי הַשַּׁבָּת הַגָּדוֹל וְהַקָּדוֹשׁ הַזֶּה', tr: '', fr: '(Chabbat) Fortifie-nous par Tes commandements et par celui de ce grand et saint septième jour' },
+      { he: 'וּבְנֵה יְרוּשָׁלַיִם עִיר הַקֹּדֶשׁ בִּמְהֵרָה בְיָמֵינוּ · בָּרוּךְ אַתָּה ה׳ בּוֹנֵה בְרַחֲמָיו יְרוּשָׁלָיִם. אָמֵן', tr: '', fr: 'Reconstruis Jérusalem, la ville sainte, bientôt. Béni sois-Tu, qui rebâtis dans Sa miséricorde Jérusalem. Amen' },
+      { he: 'בָּרוּךְ אַתָּה ה׳ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם הָאֵל אָבִינוּ מַלְכֵּנוּ … הַטּוֹב וְהַמֵּטִיב לַכֹּל', tr: '', fr: '4. Béni sois-Tu… notre Père, notre Roi… Lui qui est bon et fait le bien envers tous' },
+      { he: 'הָרַחֲמָן הוּא יִמְלֹךְ עָלֵינוּ לְעוֹלָם וָעֶד · הָרַחֲמָן הוּא יְבָרֵךְ אֶת כָּל הַמְּסֻבִּין', tr: '', fr: 'Que le Miséricordieux règne sur nous à jamais ; qu’Il bénisse tous les convives' },
+      { he: 'עֹשֶׂה שָׁלוֹם בִּמְרוֹמָיו הוּא יַעֲשֶׂה שָׁלוֹם עָלֵינוּ וְעַל כָּל יִשְׂרָאֵל וְאִמְרוּ אָמֵן', tr: 'Osé shalom bi-mromav…', fr: 'Que Celui qui fait la paix dans Ses hauteurs fasse la paix sur nous et sur tout Israël. Amen' },
+    ],
+  },
+
   // ----------------------------- MAROC -------------------------------------
   {
     id: 'deror-yikra',
@@ -173,14 +244,16 @@ const PRESETS = {
     blocks: [],
   },
   classic: {
-    label: 'Livret classique (repas de Chabbat)',
-    cover: { title: 'Birkonishi', subtitle: 'Chansons du Chabbat' },
+    label: 'Repas de Chabbat complet',
+    cover: { title: 'Birkonishi', subtitle: 'Repas de Chabbat' },
     blocks: [
+      { type: 'song', songId: 'kiddoush-chabbat' },
       { type: 'song', songId: 'shalom-aleichem' },
       { type: 'song', songId: 'deror-yikra' },
       { type: 'song', songId: 'ki-eshmera-shabbat' },
       { type: 'song', songId: 'yom-ze-leyisrael' },
       { type: 'song', songId: 'adon-olam' },
+      { type: 'song', songId: 'birkat-hamazon-sefarade' },
     ],
   },
   maroc: {
