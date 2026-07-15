@@ -578,6 +578,15 @@
       if (e.key === 'ArrowLeft')  { e.preventDefault(); toggleOverview(false); gotoPage(currentPage - 1); }
     });
 
+    // Vider le livret
+    $('#clearBtn').onclick = () => {
+      if (!state.blocks.length) return;
+      if (!confirm('Vider le livret ? Toutes les chansons ajoutées seront retirées.')) return;
+      pushHistory();
+      state.blocks = [];
+      renderBook(); save();
+    };
+
     // Actions
     $('#undoBtn').onclick = undo;
     $('#exportBtn').onclick = () => { toggleOverview(false); setTimeout(() => window.print(), 60); };
