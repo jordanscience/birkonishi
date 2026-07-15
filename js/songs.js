@@ -310,9 +310,12 @@ const SONGS = [
   },
   {
     id: 'yafa-vetama', category: 'maroc', title: 'Yafa VeTama', hebrew: 'יָפָה וְתַמָּה',
-    author: 'Piyout séfarade — paroles à compléter/relire', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yafa+vetama+piyout' },
+    author: 'Rabbi Chlomo Abitbol (Marrakech)', audio: { type: 'youtube', url: 'https://www.youtube.com/results?search_query=yafa+vetama+piyout' },
     lines: [
-      { he: 'יָפָה וְתַמָּה', tr: 'Yafa ve-tama', fr: 'Belle et parfaite (piyout — texte complet à ajouter, voir l’enregistrement)' },
+      { he: 'יָפָה וְתַמָּה תּוֹרָה תְּמִימָה הַנְּעִימָה · מִי יוּכַל לְהַעֲמִיק בְּסוֹדֵךְ סוֹד אֱלֹהִים חַיִּים', tr: 'Yafa ve-tama Torah temima ha-ne‘ima · mi yukhal le-ha‘amik be-sodekh sod Elohim ḥayim', fr: 'Belle et parfaite, Torah intègre et douce : qui peut sonder tes secrets, le secret du Dieu vivant ? (refrain)' },
+      { he: 'אוֹר זִיו זָהֳרֵךְ בּוֹעֵר תּוֹךְ קִרְבִּי · תָּמִיד יִדְרְשׁוּ אוֹתָךְ רַבִּים חֻקִּים וּמִצְוֹת טוֹבִים', tr: '', fr: 'La splendeur de ton éclat brûle en moi ; sans cesse beaucoup te recherchent — lois et bons commandements' },
+      { he: 'חֵן דַּדַּיִךְ יַרְווּ בְּכָל עֵת תּוֹרַת אֱמֶת · מִפִּיךְ אָנוּ חַיִּים מִיֵּין סוֹד אֱלֹהִים חַיִּים', tr: '', fr: 'La grâce de tes sources nous abreuve à tout instant, Torah de vérité ; de ta bouche nous vivons' },
+      { he: 'נִתְעַלְּסָה בְגִיל בַּאֲהָבִים · בְּסוֹד נְקֻדּוֹת עִם הַתֵּבוֹת כְּתָרִים עִם אוֹתִיּוֹת', tr: '', fr: 'Réjouissons-nous dans l’amour, dans le secret des voyelles, des mots, des couronnes et des lettres' },
     ],
   },
   {
