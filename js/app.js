@@ -10,7 +10,8 @@
   const DEFAULT_STATE = {
     template: 'royal',
     cover: { title: 'Mon Birkon', subtitle: 'Chansons du Chabbat' },
-    lang: 'none',                 // none | fr | en
+    phonetic: true,               // afficher la translittération (phonétique)
+    translation: false,           // afficher la traduction française
     zoom: 0.92,                   // fraction de la taille « ajustée » (0.3–1)
     blocks: [],                   // { uid, type:'song'|'text'|'image', ... }
   };
@@ -20,6 +21,12 @@
   if (typeof state.zoom !== 'number' || !isFinite(state.zoom)) state.zoom = 0.92;
   if (!state.cover) state.cover = Object.assign({}, DEFAULT_STATE.cover);
   if (!Array.isArray(state.blocks)) state.blocks = [];
+  // Migration depuis l'ancien champ `lang` (none | fr)
+  if (state.lang !== undefined) {
+    if (typeof state.translation !== 'boolean') state.translation = state.lang === 'fr';
+    if (typeof state.phonetic !== 'boolean') state.phonetic = true;
+    delete state.lang;
+  }
   let currentPage = 0;            // index de page affiché dans le feuilleteur
   let navLock = false;            // ignore le suivi au scroll pendant une navigation
   let navTimer = null;
@@ -207,13 +214,17 @@
 
   function verseEl(item) {
     const ln = item.line;
-    const xl = state.lang === 'fr' ? ln.fr : '';
+    const showTr = state.phonetic && ln.tr;
+    const showFr = state.translation && ln.fr;
     const el = document.createElement('div');
     el.className = 'verse';
+    el.dataset.uid = item.block.uid;               // permet de glisser depuis n'importe quelle ligne
+    el.draggable = true;
     el.innerHTML = `
       <div class="he">${ln.he}</div>
-      ${ln.tr ? `<div class="tr">${escapeHtml(ln.tr)}</div>` : ''}
-      ${xl ? `<div class="xl">${escapeHtml(xl)}</div>` : ''}`;
+      ${showTr ? `<div class="tr">${escapeHtml(ln.tr)}</div>` : ''}
+      ${showFr ? `<div class="xl">${escapeHtml(ln.fr)}</div>` : ''}`;
+    wireDrag(el);                                    // glisser un verset = déplacer/insérer sa chanson
     return el;
   }
 
@@ -483,7 +494,11 @@
     $('#coverTitle').value = state.cover.title || '';
     $('#coverSubtitle').value = state.cover.subtitle || '';
     $('#templateSelect').value = state.template;
-    $$('#langToggle button').forEach((b) => b.classList.toggle('active', b.dataset.lang === state.lang));
+    $$('#optToggles .opt-btn').forEach((b) => {
+      const on = !!state[b.dataset.opt];
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
   }
 
   function initControls() {
@@ -499,11 +514,12 @@
     $('#coverTitle').oninput   = (e) => { state.cover.title = e.target.value; updateCoverLive(); save(); };
     $('#coverSubtitle').oninput = (e) => { state.cover.subtitle = e.target.value; updateCoverLive(); save(); };
 
-    // Traduction
-    $('#langToggle').addEventListener('click', (e) => {
-      const b = e.target.closest('button[data-lang]');
+    // Interrupteurs Phonétique / Traduction (indépendants)
+    $('#optToggles').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-opt]');
       if (!b) return;
-      state.lang = b.dataset.lang;
+      const key = b.dataset.opt;
+      state[key] = !state[key];
       syncControls(); renderBook(); save();
     });
 

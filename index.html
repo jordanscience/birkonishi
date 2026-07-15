@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=7" />
+  <link rel="stylesheet" href="css/styles.css?v=8" />
 </head>
 <body>
   <!-- ================= BARRE SUPÉRIEURE ================= -->
@@ -83,10 +83,10 @@
           <input id="coverTitle" class="cover-input title" placeholder="Titre du livret" />
           <input id="coverSubtitle" class="cover-input sub" placeholder="Sous-titre (noms, date…)" />
         </div>
-        <div class="lang-toggle" id="langToggle" role="group" aria-label="Traduction">
+        <div class="opt-toggles" id="optToggles" role="group" aria-label="Affichage du texte">
           <span class="lang-icon" data-icon="languages" data-icon-size="16"></span>
-          <button data-lang="none" class="active">Hébreu seul</button>
-          <button data-lang="fr">+ Traduction</button>
+          <button type="button" class="opt-btn" data-opt="phonetic" aria-pressed="false">Phonétique</button>
+          <button type="button" class="opt-btn" data-opt="translation" aria-pressed="false">Traduction</button>
         </div>
       </div>
 
@@ -141,8 +141,8 @@
     <span class="footer-note">Version démo — sans paiement. Commande à partir de 100 exemplaires (bientôt).</span>
   </footer>
 
-  <script src="js/icons.js?v=7"></script>
-  <script src="js/songs.js?v=7"></script>
-  <script src="js/app.js?v=7"></script>
+  <script src="js/icons.js?v=8"></script>
+  <script src="js/songs.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>

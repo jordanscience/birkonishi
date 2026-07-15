@@ -243,18 +243,24 @@ body {
 .cover-input.title { font-family: var(--font-display); font-size: 18px; font-weight: 600; }
 .cover-input.sub { font-size: 13.5px; color: var(--muted); }
 
-.lang-toggle {
+.opt-toggles {
   display: flex; align-items: center; gap: 4px; padding: 4px; background: var(--surface-2);
   border: 1px solid var(--border); border-radius: 11px;
 }
 .lang-icon { color: var(--muted); margin: 0 4px 0 6px; }
-.lang-toggle button {
+.opt-btn {
+  display: inline-flex; align-items: center; gap: 5px;
   border: none; background: transparent; padding: 7px 12px; border-radius: 8px; color: var(--muted);
   cursor: pointer; font-size: 12.5px; font-weight: 600; font-family: inherit; transition: background var(--dur), color var(--dur);
 }
-.lang-toggle button:hover { color: var(--ink); }
-.lang-toggle button.active { background: var(--primary); color: #fff; box-shadow: var(--sh-1); }
-@media (prefers-color-scheme: dark) { .lang-toggle button.active { color: #2a0f19; } }
+.opt-btn::before {
+  content: ""; width: 14px; height: 14px; border-radius: 4px;
+  border: 1.5px solid var(--border-2); background: var(--surface); transition: background var(--dur), border-color var(--dur);
+}
+.opt-btn:hover { color: var(--ink); }
+.opt-btn.active { background: var(--primary); color: #fff; box-shadow: var(--sh-1); }
+.opt-btn.active::before { background: #fff; border-color: #fff; }
+@media (prefers-color-scheme: dark) { .opt-btn.active { color: #2a0f19; } .opt-btn.active::before { background: #2a0f19; border-color: #2a0f19; } }
 
 /* ----------------------- Feuilleteur (reader) -------------------------- */
 /* Barre de lecture : navigation pages + vue d'ensemble + zoom */
@@ -365,7 +371,12 @@ body.dragging-song { cursor: grabbing; }
 .song-lat { font-family: var(--font-display); font-size: 12.5px; color: #8a8175; font-style: italic; }
 .song-author { font-size: 10.5px; color: #9a9184; margin: 0; }
 
-.verse { margin: 2px 0; padding: 0 4px; }
+.song-head, .verse { cursor: grab; }
+.song-head:active, .verse:active { cursor: grabbing; }
+.verse { margin: 2px 0; padding: 0 4px; border-radius: 6px; transition: background var(--dur); }
+.verse:hover { background: rgba(124,29,63,.04); }
+.verse.dragging { opacity: .4; }
+.verse.drag-over { border-top: 3px solid var(--accent); }
 .verse .he { direction: rtl; text-align: right; font-size: 15.5px; line-height: 1.5; }
 .verse .tr { font-size: 10.5px; color: #6a6155; font-style: italic; line-height: 1.3; }
 .verse .xl { font-size: 10.5px; color: var(--accent); line-height: 1.3; }
