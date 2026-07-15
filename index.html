@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7c1d3f" />
+  <title>Birkonishi — Créez votre livret personnalisé</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=1" />
+</head>
+<body>
+  <!-- ================= BARRE SUPÉRIEURE ================= -->
+  <header class="topbar no-print">
+    <div class="brand">
+      <button id="menuToggle" class="btn btn-icon btn-ghost menu-toggle" aria-label="Menu">
+        <span data-icon="menu"></span>
+      </button>
+      <span class="logo" data-icon="book" data-icon-size="24"></span>
+      <div class="brand-text">
+        <h1>Birkonishi</h1>
+        <p>Composez votre livret en moins d'une heure</p>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <label class="field">
+        <span>Modèle</span>
+        <select id="templateSelect" aria-label="Modèle graphique"></select>
+      </label>
+      <button id="undoBtn" class="btn btn-icon btn-ghost" title="Annuler" aria-label="Annuler">
+        <span data-icon="undo"></span>
+      </button>
+      <button id="previewToggle" class="btn btn-ghost">
+        <span data-icon="maximize"></span><span class="btn-label">Aperçu</span>
+      </button>
+      <button id="exportBtn" class="btn btn-primary">
+        <span data-icon="printer"></span><span class="btn-label">Exporter en PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- ================= COLONNE GAUCHE : BIBLIOTHÈQUE ================= -->
+    <aside class="sidebar no-print" id="library">
+      <div class="sidebar-section">
+        <h2>Démarrer</h2>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2>Ajouter un élément</h2>
+        <div class="add-grid">
+          <button class="add-tile" data-add="text">
+            <span data-icon="type"></span><span>Texte libre</span>
+          </button>
+          <button class="add-tile" data-add="image">
+            <span data-icon="image"></span><span>Image</span>
+          </button>
+        </div>
+        <input type="file" id="imageInput" accept="image/*" hidden />
+      </div>
+
+      <div class="sidebar-section grow">
+        <h2>Chansons &amp; piyoutim</h2>
+        <div class="search-wrap">
+          <span class="search-icon" data-icon="search" data-icon-size="18"></span>
+          <input type="search" id="songSearch" placeholder="Rechercher une chanson…" />
+        </div>
+        <div id="songList" class="song-list"></div>
+      </div>
+    </aside>
+
+    <!-- ================= CENTRE : APERÇU DU LIVRET ================= -->
+    <section class="stage" id="stage">
+      <div class="stage-toolbar no-print">
+        <div class="cover-fields">
+          <label class="mini-label">Couverture</label>
+          <input id="coverTitle" class="cover-input title" placeholder="Titre du livret" />
+          <input id="coverSubtitle" class="cover-input sub" placeholder="Sous-titre (noms, date…)" />
+        </div>
+        <div class="lang-toggle" id="langToggle" role="group" aria-label="Traduction">
+          <span class="lang-icon" data-icon="languages" data-icon-size="16"></span>
+          <button data-lang="none" class="active">Hébreu seul</button>
+          <button data-lang="fr">+ Traduction</button>
+        </div>
+      </div>
+
+      <div class="reader-bar no-print">
+        <div class="pager-nav">
+          <button id="prevPage" class="btn btn-icon btn-ghost" title="Page précédente" aria-label="Page précédente">
+            <span data-icon="chevron-left"></span>
+          </button>
+          <span id="pageIndicator">1 / 1</span>
+          <button id="nextPage" class="btn btn-icon btn-ghost" title="Page suivante" aria-label="Page suivante">
+            <span data-icon="chevron-right"></span>
+          </button>
+        </div>
+        <div class="reader-tools">
+          <button id="overviewBtn" class="btn btn-ghost">
+            <span data-icon="grid"></span><span class="btn-label">Vue d'ensemble</span>
+          </button>
+          <div class="zoom-ctrl">
+            <span data-icon="zoom-out" data-icon-size="16"></span>
+            <input type="range" id="zoom" min="0.3" max="1" step="0.01" value="0.92" aria-label="Zoom" />
+            <span data-icon="zoom-in" data-icon-size="16"></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="reader" class="reader">
+        <div id="book" class="book"></div>
+      </div>
+
+      <div class="empty-hint no-print" id="emptyHint">
+        <span class="empty-mark" data-icon="book" data-icon-size="32"></span>
+        <p>Choisissez une composition de départ, ou ajoutez des chansons depuis la bibliothèque.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modale d'édition de texte libre -->
+  <div class="modal-backdrop no-print" id="textModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Texte personnalisé">
+      <h3>Texte personnalisé</h3>
+      <input id="textModalTitle" placeholder="Titre (facultatif)" />
+      <textarea id="textModalBody" rows="6" placeholder="Votre texte…"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="textModalCancel">Annuler</button>
+        <button class="btn btn-primary" id="textModalSave">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer no-print">
+    <span id="pageCount">0 page</span>
+    <span class="footer-note">Version démo — sans paiement. Commande à partir de 100 exemplaires (bientôt).</span>
+  </footer>
+
+  <script src="js/icons.js?v=1"></script>
+  <script src="js/songs.js?v=1"></script>
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>
