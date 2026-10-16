@@ -1,5 +1,5 @@
 // ============================================================================
-//  BikoNim — icônes SVG (style Lucide, trait 2px, currentColor)
+//  Birkonishi — icônes SVG (style Lucide, trait 2px, currentColor)
 //  Remplace les emojis (règle "no emojis as icons" de la checklist pro).
 // ============================================================================
 (function () {
@@ -25,6 +25,8 @@
     x:       { inner: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' },
     'chevron-left':  { inner: '<polyline points="15 18 9 12 15 6"/>' },
     'chevron-right': { inner: '<polyline points="9 18 15 12 9 6"/>' },
+    'chevron-up':    { inner: '<polyline points="18 15 12 9 6 15"/>' },
+    'chevron-down':  { inner: '<polyline points="6 9 12 15 18 9"/>' },
     grid:    { inner: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>' },
     'zoom-in':  { inner: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>' },
     'zoom-out': { inner: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/>' },

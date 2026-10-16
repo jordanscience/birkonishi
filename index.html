@@ -7,8 +7,8 @@
   <title>Birkonishi — Créez votre livret personnalisé</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=9" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=David+Libre:wght@400;500;700&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=10" />
 </head>
 <body>
   <!-- ================= BARRE SUPÉRIEURE ================= -->
@@ -25,14 +25,10 @@
     </div>
 
     <div class="topbar-actions">
-      <label class="field">
-        <span>Modèle</span>
-        <select id="templateSelect" aria-label="Modèle graphique"></select>
-      </label>
-      <button id="undoBtn" class="btn btn-icon btn-ghost" title="Annuler" aria-label="Annuler">
+      <button id="undoBtn" class="btn btn-icon btn-ghost" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled>
         <span data-icon="undo"></span>
       </button>
-      <button id="previewToggle" class="btn btn-ghost">
+      <button id="previewToggle" class="btn btn-ghost" aria-pressed="false" title="Masquer les outils">
         <span data-icon="maximize"></span><span class="btn-label">Aperçu</span>
       </button>
       <button id="exportBtn" class="btn btn-primary">
@@ -53,6 +49,11 @@
       </div>
 
       <div class="sidebar-section">
+        <h2>Style du livret</h2>
+        <div class="tpl-grid" id="templateGrid"></div>
+      </div>
+
+      <div class="sidebar-section">
         <h2>Ajouter un élément</h2>
         <div class="add-grid">
           <button class="add-tile" data-add="text">
@@ -69,7 +70,7 @@
         <h2>Chansons &amp; piyoutim</h2>
         <div class="search-wrap">
           <span class="search-icon" data-icon="search" data-icon-size="18"></span>
-          <input type="search" id="songSearch" placeholder="Rechercher une chanson…" />
+          <input type="search" id="songSearch" placeholder="Rechercher (titre, hébreu, auteur)…" aria-label="Rechercher une chanson" />
         </div>
         <div id="songList" class="song-list"></div>
       </div>
@@ -116,7 +117,7 @@
         <div id="book" class="book"></div>
       </div>
 
-      <div class="empty-hint no-print" id="emptyHint">
+      <div class="empty-hint no-print" id="emptyHint" hidden>
         <span class="empty-mark" data-icon="book" data-icon-size="32"></span>
         <p>Choisissez une composition de départ, ou ajoutez des chansons depuis la bibliothèque.</p>
       </div>
@@ -136,13 +137,16 @@
     </div>
   </div>
 
+  <div class="toast no-print" id="toast" role="status" aria-live="polite" hidden></div>
+
   <footer class="footer no-print">
     <span id="pageCount">0 page</span>
-    <span class="footer-note">Version démo — sans paiement. Commande à partir de 100 exemplaires (bientôt).</span>
+    <span class="footer-note">Gratuit — export PDF à imprimer. Commande imprimée à partir de 100 exemplaires : bientôt.</span>
   </footer>
 
-  <script src="js/icons.js?v=9"></script>
-  <script src="js/songs.js?v=9"></script>
-  <script src="js/app.js?v=9"></script>
+  <script src="js/icons.js?v=10"></script>
+  <script src="js/translit.js?v=10"></script>
+  <script src="js/songs.js?v=10"></script>
+  <script src="js/app.js?v=10"></script>
 </body>
 </html>

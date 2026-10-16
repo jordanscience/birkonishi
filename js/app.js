@@ -1,15 +1,15 @@
 // ============================================================================
-//  BikoNim — logique de l'éditeur de livret
+//  Birkonishi — logique de l'éditeur de livret
 // ============================================================================
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'bikonim.project.v1';
+  const STORAGE_KEY = 'bikonim.project.v1';     // clé conservée : garde les livrets existants
 
   // -------------------------------------------------------------- État ------
   const DEFAULT_STATE = {
     template: 'royal',
-    cover: { title: 'Mon Birkon', subtitle: 'Chansons du Chabbat' },
+    cover: { title: 'Mon Birkon', subtitle: 'Chants du Chabbat' },
     phonetic: true,               // afficher la translittération (phonétique)
     translation: false,           // afficher la traduction française
     zoom: 0.92,                   // fraction de la taille « ajustée » (0.3–1)
@@ -21,6 +21,7 @@
   if (typeof state.zoom !== 'number' || !isFinite(state.zoom)) state.zoom = 0.92;
   if (!state.cover) state.cover = Object.assign({}, DEFAULT_STATE.cover);
   if (!Array.isArray(state.blocks)) state.blocks = [];
+  if (!TEMPLATES[state.template]) state.template = 'royal';
   // Migration depuis l'ancien champ `lang` (none | fr)
   if (state.lang !== undefined) {
     if (typeof state.translation !== 'boolean') state.translation = state.lang === 'fr';
@@ -30,6 +31,7 @@
   let currentPage = 0;            // index de page affiché dans le feuilleteur
   let navLock = false;            // ignore le suivi au scroll pendant une navigation
   let navTimer = null;
+  let searchQuery = '';
   const history = [];             // pile pour l'annulation
 
   // ---------------------------------------------------------- Raccourcis ----
@@ -37,22 +39,45 @@
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
   const songById = (id) => SONGS.find((s) => s.id === id);
   const svg = (name, size) => (window.icon ? window.icon(name, size) : '');
+  const HEB = /[א-ת]/;
+  const translit = (he) => (window.transliterate ? window.transliterate(he) : '');
 
   // Couleur de pastille par catégorie
   const CAT_COLORS = { prieres: '#5b3a8c', chabbat: '#1e7b5a', maroc: '#7c1d3f', babasale: '#b07a1e', ashkenaz: '#1e5a7b', hassidique: '#c2410c', habad: '#2f5fb0' };
   const uid = () => 'b' + Math.floor(performance.now() * 1000) + Math.floor(Math.random() * 1e6);
 
+  // Recherche tolérante : sans accents, sans niqqoud, sans apostrophes.
+  const fold = (s) => String(s || '').normalize('NFD')
+    .replace(/[̀-֑ͯ-ׇ]/g, '')
+    .replace(/[’'`´ʼ\-]/g, '').toLowerCase();
+
   // ============================================================ Persistance =
-  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) { toast('Sauvegarde impossible : le livret est trop volumineux (images ?).'); }
+  }
   function load() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
     catch (e) { return null; }
   }
-  function pushHistory() { history.push(JSON.stringify(state)); if (history.length > 50) history.shift(); }
+  function pushHistory() {
+    history.push(JSON.stringify(state));
+    if (history.length > 50) history.shift();
+    $('#undoBtn').disabled = false;
+  }
   function undo() {
     if (!history.length) return;
     state = JSON.parse(history.pop());
+    $('#undoBtn').disabled = !history.length;
     syncControls(); renderBook(); save();
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
   }
 
   // ============================================================ Bibliothèque =
@@ -63,49 +88,70 @@
     Object.entries(PRESETS).forEach(([key, p]) => {
       const b = document.createElement('button');
       b.className = 'preset-tile';
-      b.textContent = p.label;
+      b.innerHTML = `<span>${escapeHtml(p.label)}</span>
+        <small>${p.blocks.length ? p.blocks.length + ' éléments' : 'Page blanche'}</small>`;
       b.onclick = () => applyPreset(key);
       pg.appendChild(b);
     });
 
-    renderSongList('');
+    // Styles graphiques (pastilles)
+    const tg = $('#templateGrid');
+    tg.innerHTML = '';
+    Object.entries(TEMPLATES).forEach(([key, t]) => {
+      const b = document.createElement('button');
+      b.className = 'tpl-tile';
+      b.dataset.tpl = key;
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = `<span class="tpl-swatch" style="background:${t.paper};color:${t.accent};font-family:${t.font.replace(/"/g, "'")}">שַׁבָּת</span>
+        <span class="tpl-name">${escapeHtml(t.label)}</span>`;
+      b.onclick = () => { if (state.template === key) return; pushHistory(); state.template = key; syncControls(); renderBook(); save(); };
+      tg.appendChild(b);
+    });
+
+    renderSongList();
   }
 
-  function renderSongList(query) {
+  function renderSongList() {
     const list = $('#songList');
     list.innerHTML = '';
-    const q = query.trim().toLowerCase();
+    const q = fold(searchQuery.trim());
+    const inBook = new Set(state.blocks.filter((b) => b.type === 'song').map((b) => b.songId));
 
     CATEGORIES.forEach((cat) => {
-      const songs = SONGS.filter((s) =>
-        s.category === cat.key &&
-        (!q || s.title.toLowerCase().includes(q) || (s.hebrew || '').includes(q)));
+      const songs = SONGS.filter((s) => s.category === cat.key &&
+        (!q || [s.title, s.hebrew, s.author].some((f) => fold(f).includes(q))));
       if (!songs.length) return;
 
       const group = document.createElement('div');
       group.className = 'cat-group';
       const color = CAT_COLORS[cat.key] || 'var(--primary)';
       group.innerHTML = `<p class="cat-title">
-        <span class="cat-dot" style="background:${color}">${svg('music', 13)}</span>${cat.label}</p>`;
+        <span class="cat-dot" style="background:${color}">${svg('music', 13)}</span>${escapeHtml(cat.label)}
+        <span class="cat-count">${songs.length}</span></p>`;
 
       songs.forEach((s) => {
         const card = document.createElement('div');
-        card.className = 'song-card';
+        const added = inBook.has(s.id);
+        card.className = 'song-card' + (added ? ' in-book' : '');
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Ajouter ${s.title} au livret`);
+        card.title = s.author || '';
         const listenBtn = s.audio && s.audio.url
           ? `<a class="listen-btn" href="${s.audio.url}" target="_blank" rel="noopener"
-                title="Écouter l’air" aria-label="Écouter ${s.title}">${svg('play', 15)}</a>`
+                title="Écouter l’air (YouTube)" aria-label="Écouter ${escapeHtml(s.title)}">${svg('play', 15)}</a>`
           : '';
         card.innerHTML = `
           <div class="meta">
-            <div class="name">${s.title}</div>
+            <div class="name">${escapeHtml(s.title)}${added ? `<span class="added" title="Déjà dans le livret">${svg('check', 13)}</span>` : ''}</div>
             <div class="heb">${s.hebrew || ''}</div>
           </div>
           <div class="card-actions">
             ${listenBtn}
-            <button class="add-btn" title="Ajouter au livret" aria-label="Ajouter ${s.title}">${svg('plus', 16)}</button>
+            <button class="add-btn" tabindex="-1" title="Ajouter au livret" aria-hidden="true">${svg('plus', 16)}</button>
           </div>`;
-        card.querySelector('.add-btn').onclick = (e) => { e.stopPropagation(); addSong(s.id); };
-        card.onclick = (e) => { if (!e.target.closest('.card-actions')) addSong(s.id); };
+        card.onclick = (e) => { if (!e.target.closest('.listen-btn')) addSong(s.id); };
+        card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); addSong(s.id); } };
         wireLibraryDrag(card, s.id);
         group.appendChild(card);
       });
@@ -113,7 +159,7 @@
     });
 
     if (!list.children.length) {
-      list.innerHTML = '<p style="color:#6b7280;font-size:13px">Aucune chanson trouvée.</p>';
+      list.innerHTML = '<p class="no-result">Aucune chanson trouvée.</p>';
     }
   }
 
@@ -121,10 +167,15 @@
   function applyPreset(key) {
     const p = PRESETS[key];
     if (!p) return;
+    if (state.blocks.length && !confirm('Remplacer le contenu actuel du livret par « ' + p.label + ' » ?')) return;
     pushHistory();
     state.cover = { ...p.cover };
-    state.blocks = p.blocks.map((b) => ({ uid: uid(), ...b }));
+    state.blocks = p.blocks.map((b) => typeof b === 'string'
+      ? { uid: uid(), type: 'song', songId: b }
+      : { uid: uid(), ...b });
+    currentPage = 0;
     syncControls(); renderBook(); save();
+    setTimeout(() => gotoPage(0), 60);
   }
 
   // Insère un bloc avant `beforeUid` (ou à la fin si absent), puis navigue
@@ -138,7 +189,11 @@
     goToBlockPage(block.uid);
   }
 
-  function addSong(songId, beforeUid) { insertBlock({ uid: uid(), type: 'song', songId }, beforeUid); }
+  function addSong(songId, beforeUid) {
+    const s = songById(songId);
+    insertBlock({ uid: uid(), type: 'song', songId }, beforeUid);
+    if (s) toast('« ' + s.title + ' » ajouté au livret');
+  }
   function addText(title, body)       { insertBlock({ uid: uid(), type: 'text', title, body }, null); }
   function addImage(dataUrl, caption) { insertBlock({ uid: uid(), type: 'image', src: dataUrl, caption: caption || '' }, null); }
 
@@ -146,19 +201,32 @@
     pushHistory();
     state.blocks = state.blocks.filter((b) => b.uid !== uidVal);
     renderBook(); save();
+    toast('Élément retiré — Ctrl+Z pour annuler');
   }
 
   function moveBlock(fromUid, toUid) {
     if (fromUid === toUid) return;
-    pushHistory();
     const arr = state.blocks;
     const from = arr.findIndex((b) => b.uid === fromUid);
     const to   = arr.findIndex((b) => b.uid === toUid);
     if (from < 0 || to < 0) return;
+    pushHistory();
     const [item] = arr.splice(from, 1);
-    arr.splice(to, 0, item);
+    arr.splice(arr.findIndex((b) => b.uid === toUid), 0, item);   // avant la cible
     renderBook(); save();
     goToBlockPage(item.uid);
+  }
+
+  // Déplacement d'un cran (boutons ↑ ↓ — utile au doigt et au clavier)
+  function shiftBlock(uidVal, dir) {
+    const arr = state.blocks;
+    const i = arr.findIndex((b) => b.uid === uidVal);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= arr.length) return;
+    pushHistory();
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+    renderBook(); save();
+    goToBlockPage(uidVal);
   }
 
   // Amène le feuilleteur sur la page contenant un bloc donné.
@@ -167,12 +235,12 @@
       const el = $(`#book [data-uid="${blockUid}"]`);
       const page = el && el.closest('.page');
       const idx = page ? pageEls().indexOf(page) : pageEls().length - 1;
-      if (idx >= 0) gotoPage(idx);
+      if (idx >= 0) { toggleOverview(false); gotoPage(idx); }
     }, 70);
   }
 
   // ============================================================ Rendu bloc ===
-  //  Le contenu est aplati en « items » de flux (en-tête de chanson, verset,
+  //  Le contenu est aplati en « items » de flux (en-tête de chanson, strophe,
   //  bloc libre) pour permettre à une chanson longue de se poursuivre sur la
   //  page suivante. « Écouter » n'apparaît PAS dans le livret (uniquement dans
   //  la bibliothèque) : on ne peut ni écouter dans un livre, ni à l'impression.
@@ -183,12 +251,26 @@
         const s = songById(b.songId);
         items.push({ kind: 'songHead', block: b });
         if (s && s.lines) s.lines.forEach((line) => items.push({ kind: 'verse', block: b, line }));
-        else items.push({ kind: 'verse', block: b, line: { he: 'Chanson introuvable.', tr: '', fr: '' } });
+        else items.push({ kind: 'verse', block: b, line: { he: 'Chanson introuvable.', fr: '' } });
       } else {
         items.push({ kind: 'free', block: b });
       }
     });
     return items;
+  }
+
+  function toolsHtml() {
+    return `<div class="block-tools no-print">
+        <button class="up" title="Monter" aria-label="Monter">${svg('chevron-up', 15)}</button>
+        <button class="down" title="Descendre" aria-label="Descendre">${svg('chevron-down', 15)}</button>
+        <button class="drag-handle" title="Glisser pour déplacer" aria-label="Déplacer">${svg('grip', 15)}</button>
+        <button class="del" title="Retirer du livret" aria-label="Retirer du livret">${svg('trash', 15)}</button>
+      </div>`;
+  }
+  function wireTools(el, blockUid) {
+    el.querySelector('.del').onclick  = (e) => { e.stopPropagation(); removeBlock(blockUid); };
+    el.querySelector('.up').onclick   = (e) => { e.stopPropagation(); shiftBlock(blockUid, -1); };
+    el.querySelector('.down').onclick = (e) => { e.stopPropagation(); shiftBlock(blockUid, 1); };
   }
 
   function songHeadEl(block, cont) {
@@ -203,28 +285,64 @@
         <span class="song-lat">${escapeHtml(s.title || '')}${cont ? ' <em>(suite)</em>' : ''}</span>
       </div>
       ${(!cont && s.author) ? `<p class="song-author">${escapeHtml(s.author)}</p>` : ''}
-      <div class="block-tools no-print">
-        <button class="drag-handle" title="Déplacer" aria-label="Déplacer">${svg('grip', 16)}</button>
-        <button class="del" title="Supprimer" aria-label="Supprimer">${svg('trash', 16)}</button>
-      </div>`;
-    el.querySelector('.del').onclick = (e) => { e.stopPropagation(); removeBlock(block.uid); };
+      ${toolsHtml()}`;
+    wireTools(el, block.uid);
     wireDrag(el);
     return el;
   }
 
+  // Texte hébreu → HTML : « · » devient un séparateur discret, les indications
+  // de rôle (« le meneur : », « les convives : ») sont mises en valeur.
+  function heHtml(s) {
+    return escapeHtml(s)
+      .replace(/ · /g, ' <span class="sep">׀</span> ')
+      .replace(/(הַמְזַמֵּן|הַמְסֻבִּים):/g, '<span class="who">$1 :</span>');
+  }
+  function trHtml(s) {
+    return escapeHtml(s).replace(/ · /g, ' · ')
+      .replace(/^(Hamzammén|Hamsoubbim):/g, '<span class="who">$1 :</span>')
+      .replace(/ (Hamzammén|Hamsoubbim):/g, ' <span class="who">$1 :</span>');
+  }
+  const bareLen = (s) => s.replace(/[^א-ת ]/g, '').length;
+  // Mise en page décidée pour toute la chanson (homogène d'une strophe à
+  // l'autre) : deux colonnes si tous les vers sont courts et vont par paires.
+  const twoColCache = {};
+  function twoColumns(songId) {
+    if (songId in twoColCache) return twoColCache[songId];
+    const s = songById(songId);
+    const stanzas = s ? s.lines.map((l) => l.he.split(' / ')).filter((ls) => ls.length > 1) : [];
+    return (twoColCache[songId] = stanzas.length > 0 &&
+      stanzas.every((ls) => ls.length % 2 === 0 && ls.every((x) => bareLen(x) <= 30)));
+  }
+
+  // Une strophe : vers (« / ») disposés sur deux colonnes quand ils sont
+  // courts (comme dans les birkonim imprimés), phonétique sous chaque vers,
+  // traduction sous la strophe. Une prière (sans « / ») est un paragraphe.
   function verseEl(item) {
     const ln = item.line;
-    const showTr = state.phonetic && ln.tr;
+    const hasHeb = HEB.test(ln.he);
+    const trText = state.phonetic && hasHeb ? (ln.tr || translit(ln.he)) : '';
     const showFr = state.translation && ln.fr;
+    const heLines = ln.he.split(' / ');
+    const trLines = trText ? trText.split(' / ') : [];
     const el = document.createElement('div');
-    el.className = 'verse';
     el.dataset.uid = item.block.uid;               // permet de glisser depuis n'importe quelle ligne
     el.draggable = true;
-    el.innerHTML = `
-      <div class="he">${ln.he}</div>
-      ${showTr ? `<div class="tr">${escapeHtml(ln.tr)}</div>` : ''}
+
+    let body;
+    if (heLines.length > 1) {
+      const two = twoColumns(item.block.songId);
+      body = `<div class="poem${two ? ' two' : ''}">${heLines.map((h, i) => `
+          <div class="ln"><div class="he">${heHtml(h)}</div>${trText ? `<div class="tr">${trHtml(trLines[i] || '')}</div>` : ''}</div>`).join('')}
+        </div>`;
+    } else {
+      body = `<div class="prose"><div class="he">${heHtml(ln.he)}</div>
+        ${trText ? `<div class="tr">${trHtml(trText)}</div>` : ''}</div>`;
+    }
+    el.className = 'verse' + (heLines.length > 1 ? ' is-poem' : ' is-prose') + (ln.r ? ' refrain' : '');
+    el.innerHTML = `${ln.r ? '<span class="refrain-tag">Refrain</span>' : ''}${body}
       ${showFr ? `<div class="xl">${escapeHtml(ln.fr)}</div>` : ''}`;
-    wireDrag(el);                                    // glisser un verset = déplacer/insérer sa chanson
+    wireDrag(el);                                    // glisser une strophe = déplacer/insérer sa chanson
     return el;
   }
 
@@ -241,12 +359,8 @@
       inner = `<img class="free-img" src="${block.src}" alt="" />
         ${block.caption ? `<p class="free-cap">${escapeHtml(block.caption)}</p>` : ''}`;
     }
-    el.innerHTML = `${inner}
-      <div class="block-tools no-print">
-        <button class="drag-handle" title="Déplacer" aria-label="Déplacer">${svg('grip', 16)}</button>
-        <button class="del" title="Supprimer" aria-label="Supprimer">${svg('trash', 16)}</button>
-      </div>`;
-    el.querySelector('.del').onclick = (e) => { e.stopPropagation(); removeBlock(block.uid); };
+    el.innerHTML = `${inner}${toolsHtml()}`;
+    wireTools(el, block.uid);
     wireDrag(el);
     return el;
   }
@@ -285,7 +399,7 @@
     const book = $('#book');
     applyZoom();
     book.innerHTML = '';
-    $('#emptyHint').style.display = state.blocks.length ? 'none' : 'block';
+    $('#emptyHint').hidden = state.blocks.length > 0;
 
     // Page de couverture
     const cover = newPage(book, 'cover');
@@ -299,7 +413,16 @@
     // Une chanson trop longue se poursuit sur la page suivante avec « (suite) ».
     const items = flattenBlocks(state.blocks);
     let inner = newPage(book).querySelector('.page-inner');
-    const overflow = () => inner.scrollHeight > inner.clientHeight;
+    // Débordement : bas du dernier élément au-delà de la zone de contenu.
+    // (scrollHeight ne compte pas la marge basse d'un conteneur flex sous Chrome.)
+    const limitOf = (el) => el.clientHeight - parseFloat(getComputedStyle(el).paddingBottom || 0);
+    const limit = limitOf(inner);
+    const overflow = () => {
+      const last = inner.lastElementChild;
+      return !!last && last.offsetTop + last.offsetHeight > limit + 0.5;
+    };
+    // Un élément seul trop haut pour une page : on le resserre plutôt que de le couper.
+    const fitAlone = (el) => { if (overflow() && inner.childElementCount <= 2) el.classList.add('dense'); };
     let headEl = null, headUid = null, versesOnPage = 0;
 
     items.forEach((item) => {
@@ -317,7 +440,7 @@
         inner.appendChild(el);
         if (overflow() && inner.childElementCount > 1) {
           inner.removeChild(el);
-          // en-tête orphelin (aucun verset placé) → on le déplace au lieu d'en recréer un
+          // en-tête orphelin (aucune strophe placée) → on le déplace au lieu d'en recréer un
           const orphan = versesOnPage === 0 && headUid === item.block.uid &&
                          headEl && headEl.parentNode === inner && headEl === inner.lastElementChild;
           if (orphan) inner.removeChild(headEl);
@@ -326,6 +449,7 @@
           inner.appendChild(headEl);
           headUid = item.block.uid; versesOnPage = 0;
           inner.appendChild(el);
+          fitAlone(el);
         }
         versesOnPage++;
       } else {
@@ -336,16 +460,28 @@
           inner = newPage(book).querySelector('.page-inner');
           inner.appendChild(el);
         }
+        fitAlone(el);
         headEl = null; headUid = null; versesOnPage = 0;
       }
     });
 
-    const pages = book.querySelectorAll('.page').length;
-    $('#pageCount').textContent = pages + (pages > 1 ? ' pages' : ' page');
-    if (currentPage >= pages) currentPage = pages - 1;
+    // Numéros de page (la couverture n'est pas numérotée)
+    const pages = book.querySelectorAll('.page');
+    pages.forEach((p, i) => {
+      if (!i) return;
+      const n = document.createElement('span');
+      n.className = 'page-num';
+      n.textContent = i;
+      p.querySelector('.page-inner').appendChild(n);
+    });
+
+    $('#pageCount').textContent = pages.length + (pages.length > 1 ? ' pages' : ' page') +
+      ' · format carré 14,8 cm';
+    if (currentPage >= pages.length) currentPage = pages.length - 1;
     if (currentPage < 0) currentPage = 0;
     updatePageIndicator();
-    scheduleFit();   // réajuste l'échelle une fois la mise en page stabilisée
+    renderSongList();     // met à jour les coches « déjà dans le livret »
+    scheduleFit();        // réajuste l'échelle une fois la mise en page stabilisée
   }
 
   function newPage(book, cls) {
@@ -361,11 +497,12 @@
   // ------------------------------------------------------- Feuilleteur -------
   function pageEls() { return $$('#book .page'); }
 
-  function gotoPage(i, smooth) {
+  function gotoPage(i) {
     const pages = pageEls();
     if (!pages.length) return;
     currentPage = Math.max(0, Math.min(i, pages.length - 1));
     const reader = $('#reader');
+    if (reader.classList.contains('overview')) { updatePageIndicator(); return; }
     const rr = reader.getBoundingClientRect();
     const pr = pages[currentPage].getBoundingClientRect();
     const delta = (pr.left + pr.width / 2) - (rr.left + rr.width / 2);
@@ -373,9 +510,7 @@
     updatePageIndicator();
   }
 
-  // Défilement horizontal : position posée directement (fiable partout) ;
-  // le lissage est assuré par `scroll-behavior: smooth` en CSS (vrais
-  // navigateurs) et désactivé sous prefers-reduced-motion.
+  // Défilement horizontal : position posée directement (fiable partout).
   function scrollReaderTo(left) {
     const reader = $('#reader');
     const max = reader.scrollWidth - reader.clientWidth;
@@ -413,7 +548,7 @@
     $('#zoom').value = state.zoom;
     save();
     // garde la page courante centrée après le changement d'échelle
-    setTimeout(() => gotoPage(currentPage, false), 20);
+    setTimeout(() => gotoPage(currentPage), 20);
   }
 
   function toggleOverview(force) {
@@ -424,11 +559,12 @@
     reader.classList.toggle('overview', on);
     $('#overviewBtn').classList.toggle('btn-primary', on);
     $('#overviewBtn').classList.toggle('btn-ghost', !on);
+    $('#overviewBtn').setAttribute('aria-pressed', on ? 'true' : 'false');
     if (on) {
       $('#book').style.setProperty('--z', 0.28);
     } else {
       applyZoom();
-      setTimeout(() => gotoPage(currentPage, false), 20);
+      setTimeout(() => gotoPage(currentPage), 20);
     }
   }
 
@@ -449,11 +585,11 @@
   function wireDrag(el) {
     el.addEventListener('dragstart', (e) => {
       dragUid = el.dataset.uid; dragNewSong = null;
-      el.classList.add('dragging');
+      $$(`#book [data-uid="${dragUid}"]`).forEach((x) => x.classList.add('dragging'));
       e.dataTransfer.effectAllowed = 'move';
       try { e.dataTransfer.setData('text/plain', 'block:' + dragUid); } catch (_) {}
     });
-    el.addEventListener('dragend', () => { dragUid = null; el.classList.remove('dragging'); clearDragMarks(); });
+    el.addEventListener('dragend', () => { dragUid = null; $$('#book .dragging').forEach((x) => x.classList.remove('dragging')); clearDragMarks(); });
     el.addEventListener('dragover', (e) => {
       if (dragNewSong || (dragUid && dragUid !== el.dataset.uid)) {
         e.preventDefault();
@@ -465,6 +601,7 @@
     el.addEventListener('drop', (e) => {
       e.preventDefault(); e.stopPropagation();        // évite le double-dépôt sur le lecteur
       el.classList.remove('drag-over');
+      $('#reader').classList.remove('drop-target');
       if (dragNewSong) addSong(dragNewSong, el.dataset.uid);              // insère la chanson AVANT ce bloc
       else if (dragUid && dragUid !== el.dataset.uid) moveBlock(dragUid, el.dataset.uid);
     });
@@ -493,23 +630,20 @@
   function syncControls() {
     $('#coverTitle').value = state.cover.title || '';
     $('#coverSubtitle').value = state.cover.subtitle || '';
-    $('#templateSelect').value = state.template;
+    $$('#templateGrid .tpl-tile').forEach((b) => {
+      const on = b.dataset.tpl === state.template;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
     $$('#optToggles .opt-btn').forEach((b) => {
       const on = !!state[b.dataset.opt];
       b.classList.toggle('active', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    $('#undoBtn').disabled = !history.length;
   }
 
   function initControls() {
-    // Modèles
-    const sel = $('#templateSelect');
-    Object.entries(TEMPLATES).forEach(([key, t]) => {
-      const o = document.createElement('option');
-      o.value = key; o.textContent = t.label; sel.appendChild(o);
-    });
-    sel.onchange = () => { pushHistory(); state.template = sel.value; renderBook(); save(); };
-
     // Couverture
     $('#coverTitle').oninput   = (e) => { state.cover.title = e.target.value; updateCoverLive(); save(); };
     $('#coverSubtitle').oninput = (e) => { state.cover.subtitle = e.target.value; updateCoverLive(); save(); };
@@ -524,7 +658,7 @@
     });
 
     // Recherche
-    $('#songSearch').oninput = (e) => renderSongList(e.target.value);
+    $('#songSearch').oninput = (e) => { searchQuery = e.target.value; renderSongList(); };
 
     // Ajouts
     $$('.add-tile').forEach((t) => t.addEventListener('click', () => {
@@ -536,7 +670,6 @@
     // Modale texte
     $('#textModalCancel').onclick = closeTextModal;
     $('#textModal').addEventListener('click', (e) => { if (e.target.id === 'textModal') closeTextModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#textModal').hidden) closeTextModal(); });
     $('#textModalSave').onclick = () => {
       const title = $('#textModalTitle').value.trim();
       const body  = $('#textModalBody').value.trim();
@@ -574,22 +707,28 @@
 
     // Suivi de la page courante au défilement + clic sur une vignette
     let st;
-    $('#reader').addEventListener('scroll', () => { clearTimeout(st); st = setTimeout(syncCurrentFromScroll, 80); });
-    $('#reader').addEventListener('click', (e) => {
-      const reader = $('#reader');
+    reader.addEventListener('scroll', () => { clearTimeout(st); st = setTimeout(syncCurrentFromScroll, 80); });
+    reader.addEventListener('click', (e) => {
       if (!reader.classList.contains('overview')) return;
       const p = e.target.closest('.page');
       if (!p) return;
       const idx = pageEls().indexOf(p);
       currentPage = idx;
       toggleOverview(false);
-      setTimeout(() => gotoPage(idx, false), 30);
+      setTimeout(() => gotoPage(idx), 30);
     });
 
-    // Flèches clavier (hors saisie de texte)
+    // Clavier : flèches (hors saisie), Échap, Ctrl+Z
     document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!$('#textModal').hidden) closeTextModal();
+        else document.body.classList.remove('sidebar-open', 'preview-mode');
+        return;
+      }
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName || ''));
       if (typing || !$('#textModal').hidden) return;
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); undo(); return; }
+      if (e.target.closest && e.target.closest('.song-card')) return;
       if (e.key === 'ArrowRight') { e.preventDefault(); toggleOverview(false); gotoPage(currentPage + 1); }
       if (e.key === 'ArrowLeft')  { e.preventDefault(); toggleOverview(false); gotoPage(currentPage - 1); }
     });
@@ -605,13 +744,18 @@
 
     // Actions
     $('#undoBtn').onclick = undo;
-    $('#exportBtn').onclick = () => { toggleOverview(false); setTimeout(() => window.print(), 60); };
-    $('#previewToggle').onclick = () => document.body.classList.toggle('preview-mode');
+    $('#exportBtn').onclick = exportPdf;
+    window.addEventListener('beforeprint', () => toggleOverview(false));
+    $('#previewToggle').onclick = () => {
+      document.body.classList.toggle('preview-mode');
+      $('#previewToggle').setAttribute('aria-pressed', document.body.classList.contains('preview-mode'));
+    };
 
     // Menu latéral (mobile) : ouvre/ferme la bibliothèque en tiroir
     $('#menuToggle').onclick = (e) => { e.stopPropagation(); document.body.classList.toggle('sidebar-open'); };
     $('#library').addEventListener('click', (e) => {
-      if (e.target.closest('.preset-tile, .add-tile, .song-card') && window.innerWidth <= 768) {
+      if (e.target.closest('.preset-tile, .add-tile, .song-card') && !e.target.closest('.listen-btn') &&
+          window.innerWidth <= 768) {
         document.body.classList.remove('sidebar-open');
       }
     });
@@ -622,12 +766,15 @@
         document.body.classList.remove('sidebar-open');
       }
     });
+  }
 
-    // Ré-paginer + réajuster le zoom si la fenêtre change (responsive)
-    let rt; window.addEventListener('resize', () => {
-      clearTimeout(rt);
-      rt = setTimeout(() => { renderBook(); setTimeout(() => gotoPage(currentPage, false), 30); }, 150);
-    });
+  // Export : la boîte d'impression du navigateur, réglée sur des pages
+  // carrées de 14,8 cm (voir @page dans styles.css) → « Enregistrer en PDF ».
+  function exportPdf() {
+    toggleOverview(false);
+    if (!state.blocks.length) { toast('Ajoutez au moins une chanson avant d’exporter.'); return; }
+    toast('Choisissez « Enregistrer au format PDF » comme imprimante.');
+    setTimeout(() => window.print(), 400);
   }
 
   function updateCoverLive() {
@@ -644,14 +791,29 @@
   }
   function closeTextModal() { $('#textModal').hidden = true; }
 
-  // -------- Image (encodée en base64, reste dans le navigateur)
+  // -------- Image : réduite (1200 px max, JPEG) pour rester légère dans le
+  //          navigateur ; rien n'est envoyé sur Internet.
   function handleImage(e) {
     const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => addImage(reader.result, file.name.replace(/\.[^.]+$/, ''));
-    reader.readAsDataURL(file);
     e.target.value = '';
+    if (!file) return;
+    const caption = file.name.replace(/\.[^.]+$/, '');
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const max = 1200, k = Math.min(1, max / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        addImage(c.toDataURL('image/jpeg', 0.85), caption);
+      };
+      img.onerror = () => toast('Image illisible.');
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   // -------- Utilitaire
@@ -666,17 +828,22 @@
   initControls();
   syncControls();
   renderBook();
+  // La pagination dépend des métriques des polices : on la refait une fois
+  // les polices web chargées (sinon des pages peuvent déborder).
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderBook());
 
-  // Ajuste l'échelle dès que la taille réelle du lecteur est connue,
-  // puis à chaque changement de taille (fiable, indépendant des polices).
+  // Ajuste l'échelle dès que la taille réelle du lecteur est connue, puis à
+  // chaque changement de taille. Le contenu logique (640×640) ne change pas :
+  // inutile de re-paginer, seule l'échelle d'affichage varie.
   if (window.ResizeObserver) {
     const ro = new ResizeObserver(() => {
       if ($('#reader').classList.contains('overview')) return;
-      // applyZoom ne modifie pas la taille du lecteur → pas de boucle.
       const before = $('#book').style.getPropertyValue('--z');
       applyZoom();
-      if ($('#book').style.getPropertyValue('--z') !== before) gotoPage(currentPage, false);
+      if ($('#book').style.getPropertyValue('--z') !== before) gotoPage(currentPage);
     });
     ro.observe($('#reader'));
+  } else {
+    window.addEventListener('resize', () => { applyZoom(); gotoPage(currentPage); });
   }
 })();
