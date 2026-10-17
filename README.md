@@ -11,7 +11,7 @@ En ligne : https://jordanscience.github.io/birkonishi/
 
 ## Fonctionnalités
 
-- **35 textes complets**, vérifiés mot à mot contre les sources hébraïques :
+- **64 textes complets**, vérifiés mot à mot contre les sources hébraïques :
   - **Prières** : Kiddouch du vendredi soir (séfarade et ashkénaze), **Birkat Hamazon complet**
     (rite séfarade / Edot HaMizra'h et rite ashkénaze : zimoun, 4 bénédictions, Retsé de
     Chabbat, Harahaman, bénédiction de l'invité, versets de conclusion).
@@ -24,13 +24,20 @@ En ligne : https://jordanscience.github.io/birkonishi/
     Yaakov »), Bar Yo'haï, Tsadik Katamar.
   - **Liturgie / ashkénaze** : Adon Olam, Yigdal, Maoz Tsour. **Hassidique & Habad** : Am Israël
     'Haï, Ossé Chalom, Hiné Ma Tov, Ani Maamin, Siman Tov, Od Yichama, Oufaratsta, niggoun.
+  - **Ajouts** : Yah Chimkha, Tsama Nafchi, Agadelkha, Hamavdil (version Edot HaMizra'h),
+    Et Chaaré Ratson, Adon Hasseli'hot ; Achira Na et É'erokh Mahalal (Rabbi Aharon
+    Abihatsira) ; Baroukh El Elyon, Chabbat Hayom ; Ana Béko'ah ; zemirot du Ari (Azamer
+    Bichva'hin, Assader Lis'oudata, Bné Hékhala), Yah Ekhsof (Karlin), Mizmor LeDavid,
+    Kol Ha'olam Koullo (Breslev), Véhaèr Énénou, Achrénou, Essa Énaï, Tov Léhodot,
+    Hamal'akh Hagoël, Léma'an A'haï, Mi Ha'ich, Yévarékhékha, Pit'hou Li, Ki Lo Naé,
+    Hava Naguila, Tsama Lekha Nafchi.
 - **Traduction française** de chaque strophe (affichable ou non).
 - **Phonétique** générée automatiquement depuis l'hébreu vocalisé (`js/translit.js`,
   prononciation séfarade, graphie francophone : ch, 'h, kh, ou, é…), affichable ou non.
 - **Mise en page de birkon** : vers courts sur deux colonnes, prières en paragraphes justifiés,
   refrains signalés, en-tête « (suite) » quand un chant continue, numéros de page.
-- **Compositions de départ** : Chabbat séfarade, Chabbat ashkénaze, livret marocain, Simha,
-  livret vierge. **4 styles** (Royal, Désert, Océan, Classique) avec polices hébraïques complètes.
+- **Compositions de départ** : Chabbat séfarade, Chabbat ashkénaze, livret marocain, Chabbat
+  hassidique, Hilloula, Simha, livret vierge. **4 styles** (Royal, Désert, Océan, Classique) avec polices hébraïques complètes.
 - **Feuilleteur** à pages **carrées**, navigation horizontale (‹ ›, flèches), zoom, vue d'ensemble.
 - **Glisser-déposer** : de la bibliothèque vers le livret, et dans le livret pour réordonner ;
   boutons ↑ ↓ et suppression sur chaque chant (pratique au doigt) ; **Ctrl+Z** pour annuler.

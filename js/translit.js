@@ -75,6 +75,16 @@
     if (bare === 'יי' || bare === 'ה' && /׳|'/.test(w)) return 'Adonaï';
     const C = clusters(w);
     if (!C.length) return w;
+
+    // Nom divin précédé d'un préfixe (לַיְיָ → ladonaï, וּמֵיְיָ → oumé'adonaï)
+    if (/^[והבכלמש]{1,3}יי$/.test(bare) && C[C.length - 2].v === 'shva') {
+      let pre = '';
+      C.slice(0, -2).forEach((c) => {
+        if (c.l === 'ו' && c.dagesh && c.v === null) pre += 'ou';
+        else pre += consonant(c) + (c.v === 'shva' ? 'e' : c.v || '');
+      });
+      return /a$/.test(pre) ? pre + 'donaï' : pre + "'adonaï";
+    }
     const last = C.length - 1;
 
     // « kol » : כָּל en fin de mot
@@ -125,6 +135,7 @@
       else if (!prev) na = true;
       else if (prev.initialU) na = false;                         // וּבְ… → ouv…
       else if (wasShva[k - 1]) na = k - 1 > 0;                    // 2ᵉ de deux chva
+      else if (c.l === 'י' && (prev.v === 'a' || prev.v === 'é')) na = false;   // diphtongue : לָיְלָה → layla
       else if (c.dagesh && prev.v) na = true;                     // daguech fort
       else na = !!prev.long;
       c.v = na ? 'e' : '';
