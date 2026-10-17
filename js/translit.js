@@ -101,7 +101,7 @@
         if (prev && prev.v === null && !prev.skip) { prev.v = 'o'; prev.long = true; c.skip = true; }
         else if (!prev) { c.out = 'o'; }
       } else if (c.l === 'ו' && c.dagesh && c.v === null) {     // וּ
-        if (prev && prev.v === null && !prev.skip) { prev.v = 'ou'; prev.long = true; c.skip = true; }
+        if (prev && prev.v === null && !prev.skip) { prev.v = 'ou'; prev.long = false; c.skip = true; }   // ou bref : אוּשְׁפִּיזִין
         else { c.out = 'ou'; c.initialU = !prev; c.long = true; c.v = 'ou'; }
       } else if (c.l === 'י' && c.v === null && !c.dagesh && prev) {
         // voyelle qui précède (en sautant un א muet : יוֹחַאי → Yo'haï)
@@ -135,8 +135,9 @@
       else if (!prev) na = true;
       else if (prev.initialU) na = false;                         // וּבְ… → ouv…
       else if (wasShva[k - 1]) na = k - 1 > 0;                    // 2ᵉ de deux chva
-      else if (c.l === 'י' && (prev.v === 'a' || prev.v === 'é')) na = false;   // diphtongue : לָיְלָה → layla
+      else if (c.l === 'י' && !c.dagesh && (prev.v === 'a' || prev.v === 'é')) na = false;   // diphtongue : לָיְלָה → layla
       else if (c.dagesh && prev.v) na = true;                     // daguech fort
+      else if (prev.v === 'ou' && /^(ך|כם)$/.test(live.slice(k + 1).map((x) => x.l).join(''))) na = true;   // טוּבְךָ → touvekha
       else na = !!prev.long;
       c.v = na ? 'e' : '';
     });

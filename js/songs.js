@@ -21,9 +21,10 @@
 const CATEGORIES = [
   { key: 'prieres',    label: 'Prières (Kiddouch, Birkat Hamazon)' },
   { key: 'chabbat',    label: 'Zemirot de Chabbat' },
+  { key: 'fetes',      label: 'Fêtes de l’année' },
   { key: 'maroc',      label: 'Piyoutim marocains & séfarades' },
   { key: 'babasale',   label: 'Baba Salé & hilloula' },
-  { key: 'ashkenaz',   label: 'Chants ashkénazes & liturgie' },
+  { key: 'ashkenaz',   label: 'Liturgie (Adon Olam, Yigdal)' },
   { key: 'hassidique', label: 'Hassidique & fêtes' },
   { key: 'habad',      label: 'Chants Habad' },
 ];
@@ -340,6 +341,294 @@ const SONGS = [
     ],
   },
 
+  // ============================== FÊTES DE L’ANNÉE ===============================
+  // ---- Roch Hachana
+  {
+    id: 'simanim', category: 'fetes', title: 'Les Simanim de Roch Hachana', hebrew: 'סֵדֶר הַסִּימָנִים',
+    author: 'Soir de Roch Hachana — d’après le Choul’han ’Aroukh (O.H. 583) et le Ben Ich ’Haï ; ordre séfarade et marocain',
+    lines: [
+      { he: 'בָּרוּךְ אַתָּה יְיָ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם בּוֹרֵא פְּרִי הָעֵץ', fr: '(Sur les dattes) Béni sois-Tu, Éternel notre Dieu, Roi du monde, qui crées le fruit de l’arbre.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁיִּתַּמּוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכׇל מְבַקְשֵׁי רָעָתֵנוּ', fr: '(Dattes — tamar) Qu’il soit Ta volonté, Éternel notre Dieu et Dieu de nos pères, que prennent fin nos ennemis, ceux qui nous haïssent et tous ceux qui nous veulent du mal.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁיִּרְבּוּ זְכֻיּוֹתֵינוּ', fr: '(Haricots / loubia — roubia) … que se multiplient nos mérites.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁיִּכָּרְתוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכׇל מְבַקְשֵׁי רָעָתֵנוּ', fr: '(Poireau — karti) … que soient retranchés nos ennemis, ceux qui nous haïssent et tous ceux qui nous veulent du mal.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁיִּסְתַּלְּקוּ אוֹיְבֵינוּ וְשׂוֹנְאֵינוּ וְכׇל מְבַקְשֵׁי רָעָתֵנוּ', fr: '(Blettes — silka) … que s’éloignent nos ennemis, ceux qui nous haïssent et tous ceux qui nous veulent du mal.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁתִּקְרַע רֹעַ גְּזַר דִּינֵנוּ וְיִקָּרְאוּ לְפָנֶיךָ זְכֻיּוֹתֵינוּ', fr: '(Courge — kera) … que Tu déchires tout mauvais décret porté contre nous, et que nos mérites soient proclamés devant Toi.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁנִּהְיֶה מְלֵאִים מִצְוֹת כָּרִמּוֹן', fr: '(Grenade — rimon) … que nous soyons remplis de mitsvot comme la grenade de ses grains.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁתְּחַדֵּשׁ עָלֵינוּ שָׁנָה טוֹבָה וּמְתוּקָה', fr: '(Pomme — tapoua’h) … que Tu renouvelles pour nous une année bonne et douce.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁנִּהְיֶה לְרֹאשׁ וְלֹא לְזָנָב · וְתִזְכּוֹר לָנוּ עֲקֵדָתוֹ וְאֵילוֹ שֶׁל יִצְחָק אָבִינוּ בֶּן אַבְרָהָם אָבִינוּ עֲלֵיהֶם הַשָּׁלוֹם', fr: '(Tête — roch) … que nous soyons à la tête et non à la queue ; et souviens-Toi pour nous de la ’Akéda et du bélier d’Its’hak notre père, fils d’Avraham notre père.' },
+      { he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ יְיָ אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ שֶׁנִּפְרֶה וְנִרְבֶּה כְּדָגִים', fr: '(Poisson — dag, coutume répandue) … que nous soyons féconds et nombreux comme les poissons.' },
+    ],
+  },
+  {
+    id: 'ahot-ketana', category: 'fetes', title: 'A’hot Ketana', hebrew: 'אָחוֹת קְטַנָּה',
+    author: 'Rabbi Avraham ’Hazan Gerondi (XIIIᵉ s.) — chanté au début de Roch Hachana', audio: yt('achot ketana'),
+    lines: [
+      { r: 1, he: 'תִּכְלֶה שָׁנָה וְקִלְלוֹתֶיהָ', fr: 'Que s’achève l’année avec ses malédictions ! (refrain)' },
+      { he: 'אָחוֹת קְטַנָּה תְּפִלּוֹתֶיהָ / עוֹרְכָה וְעוֹנָה תְהִלּוֹתֶיהָ / אֵל נָא רְפָא נָא לְמַחֲלוֹתֶיהָ / תִּכְלֶה שָׁנָה וְקִלְלוֹתֶיהָ', fr: 'La petite sœur (Israël) dispose ses prières et entonne ses louanges : « Ô Dieu, de grâce, guéris ses maladies ! » Que s’achève l’année avec ses malédictions !' },
+      { he: 'בְּנֹעַם מִלִּים לְךָ תִּקְרָאֶה / וְשִׁיר וְהִלּוּלִים כִּי לְךָ נָאֶה / עַד מַה תַּעֲלִים עֵינְךָ וְתִרְאֶה / זָרִים אוֹכְלִים נַחֲלוֹתֶיהָ', fr: 'Par la douceur des mots elle T’appelle, avec chants et louanges, car ils Te conviennent : jusqu’à quand détourneras-Tu les yeux, voyant des étrangers dévorer son héritage ?' },
+      { he: 'רְעֵה אֶת צֹאנְךָ אֲרָיוֹת זֵרוּ / וּשְׁפוֹךְ חֲרוֹנְךָ בְּאוֹמְרִים עָרוּ / וְכַנַּת יְמִינְךָ פָּרְצוּ וְאָרוּ / לֹא הִשְׁאִירוּ עוֹלְלוֹתֶיהָ', fr: 'Fais paître Ton troupeau, que des lions ont dispersé ; déverse Ta colère sur ceux qui crient « Rasez ! » ; la vigne plantée par Ta droite, ils l’ont forcée et dépouillée, sans laisser un grappillon.' },
+      { he: 'הָקֵם מִשִּׁפְלוּת לְרֹאשׁ מַמְלֶכֶת / כִּי בְּבוֹר גָּלוּת נַפְשָׁהּ נִתֶּכֶת / וּכְרוּם זֻלּוּת לִבָּהּ שׁוֹפֶכֶת / בְּדַלֵּי דַּלּוּת מִשְׁכְּנוֹתֶיהָ', fr: '(strophe parfois omise) Relève-la de l’abaissement à la tête du royaume, car dans la fosse de l’exil son âme se consume ; au plus fort de l’humiliation elle épanche son cœur, ses demeures au plus bas de la misère.' },
+      { he: 'מָתַי תַּעֲלֶה בִּתְּךָ מִבּוֹר / וּמִבֵּית כֶּלֶא עֻלָּהּ תִּשְׁבֹּר / וְתַפְלִיא פֶלֶא בְּצֵאתְךָ כְּגִבּוֹר / לְהָתֵם וְכַלֵּה מַחֲלוֹתֶיהָ', fr: 'Quand feras-Tu remonter Ta fille de la fosse et briseras-Tu son joug dans sa prison ? Fais un prodige en sortant comme un héros, pour achever et faire cesser ses maux.' },
+      { he: 'חֵילָהּ קָבְעוּ הַגּוֹי כֻּלּוֹ / וְטוּבָהּ שָׂבְעוּ וּבָזְזוּ אִישׁ לוֹ / וְלִבָּהּ קָרְעוּ וּבְכׇל זֹאת לֹא / מִמְּךָ נָעוּ מַעְגְּלוֹתֶיהָ', fr: 'Toutes les nations ont pillé sa richesse, se sont rassasiées de ses biens, chacun prenant son butin ; ils ont déchiré son cœur, et malgré tout ses sentiers ne se sont pas écartés de Toi.' },
+      { he: 'זְמִירָהּ שָׁבַת וְחִשְׁקָהּ תַּגְבִּיר / לַחְפֹּץ קִרְבַת דּוֹדָהּ וְתַעֲבִיר / מִלֵּב דַּאֲבַת נַפְשָׁהּ וְתָסִיר / לְבַקֵּשׁ אַהֲבַת כְּלוּלוֹתֶיהָ', fr: 'Son chant s’est tu : ranime son désir de s’approcher de son Bien-aimé ; ôte de son cœur l’affliction de son âme, pour qu’elle recherche l’amour de ses épousailles.' },
+      { he: 'נְחֶהָ בְּנַחַת לִנְוֵה רִבְצָהּ / רַב נִזְנַחַת מִדּוֹד חֶפְצָהּ / וְהִיא כְפֹרֵחַת עָלְתָה נִצָּהּ / לֹא הִבְשִׁילוּ אַשְׁכְּלוֹתֶיהָ', fr: 'Conduis-la doucement vers le pâturage où elle repose, elle si longtemps délaissée par le Bien-aimé qu’elle désire ; comme une plante en fleur, ses boutons ont éclos, mais ses grappes n’ont pas encore mûri.' },
+      { he: 'חִזְקוּ וְגִילוּ כִּי שֹׁד גָּמַר / לְצוּר הוֹחִילוּ בְּרִיתוֹ שָׁמַר / לָכֶם וְתַעֲלוּ לְצִיּוֹן וְאָמַר / סֹלּוּ סֹלּוּ מְסִלּוֹתֶיהָ / תָּחֵל שָׁנָה וּבִרְכוֹתֶיהָ', fr: 'Fortifiez-vous et réjouissez-vous, car le dévastateur a disparu ; espérez dans le Rocher, Il a gardé Son alliance avec vous ; vous monterez à Sion et Il dira : « Frayez, frayez ses chemins ! » Que commence l’année avec ses bénédictions !' },
+    ],
+  },
+  {
+    id: 'avinu-malkenu', category: 'fetes', title: 'Avinou Malkénou', hebrew: 'אָבִינוּ מַלְכֵּנוּ',
+    author: 'Dernier verset de la prière des Yamim Noraïm (Roch Hachana – Kippour), tel qu’on le chante', audio: yt('avinu malkeinu'),
+    lines: [
+      { he: 'אָבִינוּ מַלְכֵּנוּ חָנֵּנוּ וַעֲנֵנוּ / כִּי אֵין בָּנוּ מַעֲשִׂים / עֲשֵׂה עִמָּנוּ צְדָקָה וָחֶסֶד / וְהוֹשִׁיעֵנוּ', fr: 'Notre Père, notre Roi, fais-nous grâce et réponds-nous, car nous n’avons pas d’œuvres ; agis envers nous avec justice et bonté, et sauve-nous.' },
+    ],
+  },
+  // ---- Souccot, Sim'hat Torah
+  {
+    id: 'ushpizin', category: 'fetes', title: 'Ouchpizin', hebrew: 'אוּשְׁפִּיזִין',
+    author: 'Souccot — invitation des hôtes célestes dans la souccah (d’après le Zohar)', audio: yt('ushpizin'),
+    lines: [
+      { he: 'תִּיבוּ תִּיבוּ אוּשְׁפִּיזִין עִילָּאִין / תִּיבוּ תִּיבוּ אוּשְׁפִּיזִין קַדִּישִׁין / תִּיבוּ תִּיבוּ אוּשְׁפִּיזִין דִּמְהֵימְנוּתָא / זַכָּאָה חוּלְקֵיהוֹן דְּיִשְׂרָאֵל / דִּכְתִיב כִּי חֵלֶק יְיָ עַמּוֹ יַעֲקֹב חֶבֶל נַחֲלָתוֹ', fr: 'Asseyez-vous, asseyez-vous, hôtes sublimes ; asseyez-vous, hôtes saints ; asseyez-vous, hôtes de la foi. Heureuse la part d’Israël, comme il est écrit : « Car la part de l’Éternel, c’est Son peuple ; Jacob est le lot de Son héritage. »' },
+      { he: 'אֲזַמִּין לִסְעוּדָתִי אוּשְׁפִּיזִין עִילָּאִין / אַבְרָהָם יִצְחָק יַעֲקֹב מֹשֶׁה אַהֲרֹן יוֹסֵף וְדָוִד', fr: 'J’invite à mon repas les hôtes sublimes : Avraham, Its’hak, Yaakov, Moché, Aharon, Yossef et David.' },
+    ],
+  },
+  {
+    id: 'ana-hashem', category: 'fetes', title: 'Ana Hachem Hochi’a Na', hebrew: 'אָנָּא יְיָ הוֹשִׁיעָה נָּא',
+    author: 'Psaume 118, 25 — Hallel ; Souccot et Hochana Rabba', audio: yt('ana hashem hoshia na'),
+    lines: [
+      { he: 'אָנָּא יְיָ הוֹשִׁיעָה נָּא / אָנָּא יְיָ הַצְלִיחָה נָּא', fr: 'De grâce, Éternel, sauve donc ! De grâce, Éternel, fais réussir !' },
+    ],
+  },
+  {
+    id: 'sisu-vesimchu', category: 'fetes', title: 'Sissou Vessim’hou', hebrew: 'שִׂישׂוּ וְשִׂמְחוּ',
+    author: 'Sim’hat Torah — piyout chanté pendant les hakafot', audio: yt('sisu vesimchu besimchat torah'),
+    lines: [
+      { r: 1, he: 'נָגִיל וְנָשִׂישׂ בְּזֹאת הַתּוֹרָה / כִּי הִיא לָנוּ עֹז וְאוֹרָה', fr: 'Exultons et réjouissons-nous en cette Torah, car elle est pour nous force et lumière. (refrain)' },
+      { he: 'שִׂישׂוּ וְשִׂמְחוּ בְּשִׂמְחַת תּוֹרָה / וּתְנוּ כָבוֹד לַתּוֹרָה / כִּי טוֹב סַחְרָהּ מִכׇּל סְחוֹרָה / מִפָּז וּמִפְּנִינִים יְקָרָה', fr: 'Réjouissez-vous et soyez heureux en la joie de la Torah, et rendez honneur à la Torah ; car sa valeur dépasse tout commerce, plus précieuse que l’or fin et les perles.' },
+      { he: 'אֲהַלְלָה אֱלֹהַי וְאֶשְׂמְחָה בוֹ / וְאָשִׂימָה תִקְוָתִי בּוֹ / אֲהוֹדֶנּוּ בְּסוֹד עַם קְרוֹבוֹ / אֱלֹהֵי צוּרִי אֶחֱסֶה בּוֹ', fr: 'Je louerai mon Dieu et me réjouirai en Lui, je placerai en Lui mon espoir ; je Le célébrerai dans l’assemblée du peuple qui Lui est proche : Dieu, mon Rocher, en qui je m’abrite.' },
+      { he: 'בְּכׇל לֵב אֲרַנֵּן צִדְקוֹתֶיךָ / וַאֲסַפְּרָה תְּהִלָּתֶךָ / בְּעוֹדִי אַגִּיד נִפְלְאוֹתֶיךָ / עַל חַסְדְּךָ וְעַל אֲמִתֶּךָ', fr: 'De tout mon cœur je chanterai Ta justice et raconterai Ta louange ; tant que je vivrai, je dirai Tes merveilles, Ta bonté et Ta vérité.' },
+      { he: 'גּוֹאֵל הָחִישׁ מְבַשֵּׂר טוֹב / כִּי אַתָּה מִגְדַּל עֹז וָטוֹב / גְּאוּלִים יְשַׁבְּחוּךָ בְּלֵב טוֹב / הוֹדוּ לַיְיָ כִּי טוֹב', fr: '(strophe moins connue) Rédempteur, hâte le messager de la bonne nouvelle, car Tu es une tour de force et de bonté ; les rachetés Te loueront le cœur joyeux : rendez grâce à l’Éternel, car Il est bon !' },
+      { he: 'דָּגוּל גְּאֹל נָא הֲמוֹנַי / כִּי אֵין קָדוֹשׁ כַּיְיָ / דְּגָלֶיךָ יוֹדוּךָ יְיָ / מִי יְמַלֵּל גְּבוּרוֹת יְיָ', fr: '(strophe moins connue) Ô Glorieux, délivre donc mon peuple, car nul n’est saint comme l’Éternel ; Tes légions Te rendront grâce, Éternel : qui dira les prodiges de l’Éternel ?' },
+      { he: 'הֲלֹא בְּאַהֲבָתוֹ בָּחַר בָּנוּ / בְּנִי בְכוֹרִי קְרָאָנוּ / הוֹד וְהָדָר הֶחְכִּימָנוּ / כִּי לְעוֹלָם חַסְדּוֹ עִמָּנוּ', fr: '(strophe moins connue) N’est-ce pas par amour qu’Il nous a choisis et nous a appelés « Mon fils, Mon premier-né » ? Il nous a donné sagesse, majesté et splendeur, car Sa bonté envers nous est éternelle.' },
+    ],
+  },
+  {
+    id: 'mipi-el', category: 'fetes', title: 'Mipi El', hebrew: 'מִפִּי אֵל',
+    author: 'Sim’hat Torah — piyout alphabétique (version Edot HaMizra’h)', audio: yt('mipi el'),
+    lines: [
+      { r: 1, he: 'מִפִּי אֵל מִפִּי אֵל / יִתְבָּרַךְ יִשְׂרָאֵל', fr: 'Par la bouche de Dieu, par la bouche de Dieu, Israël sera béni ! (refrain)' },
+      { he: 'אֵין אַדִּיר כַּיְיָ / וְאֵין בָּרוּךְ כְּבֶן עַמְרָם / אֵין גְּדוֹלָה כַּתּוֹרָה / וְאֵין דּוֹרְשָׁהּ כְּיִשְׂרָאֵל', fr: 'Nul n’est puissant comme l’Éternel, nul n’est béni comme le fils d’Amram (Moïse) ; rien n’est grand comme la Torah, nul ne l’étudie comme Israël.' },
+      { he: 'אֵין הָדוּר כַּיְיָ / וְאֵין וָתִיק כְּבֶן עַמְרָם / אֵין זַכָּאָה כַּתּוֹרָה / וְאֵין חוֹמְדָהּ כְּיִשְׂרָאֵל', fr: 'Nul n’est glorieux comme l’Éternel, nul n’est fidèle comme le fils d’Amram ; rien n’est pur comme la Torah, nul ne la chérit comme Israël.' },
+      { he: 'אֵין טָהוֹר כַּיְיָ / וְאֵין יָשָׁר כְּבֶן עַמְרָם / אֵין כְּבוּדָּה כַּתּוֹרָה / וְאֵין לוֹמְדָהּ כְּיִשְׂרָאֵל', fr: 'Nul n’est pur comme l’Éternel, nul n’est droit comme le fils d’Amram ; rien n’est honoré comme la Torah, nul ne l’apprend comme Israël.' },
+      { he: 'אֵין מֶלֶךְ כַּיְיָ / וְאֵין נָבִיא כְּבֶן עַמְרָם / אֵין סְמוּכָה כַּתּוֹרָה / וְאֵין עוֹזְרָהּ כְּיִשְׂרָאֵל', fr: 'Nul n’est roi comme l’Éternel, nul n’est prophète comme le fils d’Amram ; rien n’est solide comme la Torah, nul ne la soutient comme Israël.' },
+      { he: 'אֵין פּוֹדֶה כַּיְיָ / וְאֵין צַדִּיק כְּבֶן עַמְרָם / אֵין קְדוֹשָׁה כַּתּוֹרָה / וְאֵין רוֹחֲשָׁהּ כְּיִשְׂרָאֵל', fr: 'Nul ne rachète comme l’Éternel, nul n’est juste comme le fils d’Amram ; rien n’est saint comme la Torah, nul ne la murmure comme Israël.' },
+      { he: 'אֵין שׁוֹמֵר כַּיְיָ / וְאֵין שָׁלֵם כְּבֶן עַמְרָם / אֵין תְּמִימָה כַּתּוֹרָה / וְאֵין תּוֹמְכָהּ כְּיִשְׂרָאֵל', fr: 'Nul ne garde comme l’Éternel, nul n’est parfait comme le fils d’Amram ; rien n’est intègre comme la Torah, nul ne la soutient comme Israël.' },
+    ],
+  },
+  // ---- 'Hanouka
+  {
+    id: 'hanouka-brachot', category: 'fetes', title: 'Bénédictions de ’Hanouka', hebrew: 'בִּרְכוֹת הַדְלָקַת נֵר חֲנֻכָּה',
+    author: 'Avant l’allumage des lumières de ’Hanouka', audio: yt('chanukah blessings'),
+    lines: [
+      { he: 'בָּרוּךְ אַתָּה יְיָ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם / אֲשֶׁר קִדְּשָׁנוּ בְּמִצְוֹתָיו וְצִוָּנוּ לְהַדְלִיק נֵר שֶׁל חֲנֻכָּה', fr: 'Béni sois-Tu, Éternel notre Dieu, Roi du monde, qui nous as sanctifiés par Tes commandements et nous as ordonné d’allumer la lumière de ’Hanouka.' },
+      { he: 'בָּרוּךְ אַתָּה יְיָ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם / שֶׁעָשָׂה נִסִּים לַאֲבוֹתֵינוּ בַּיָּמִים הָהֵם בַּזְּמַן הַזֶּה', fr: 'Béni sois-Tu, Éternel notre Dieu, Roi du monde, qui as fait des miracles pour nos pères, en ces jours-là, à cette époque.' },
+      { he: 'בָּרוּךְ אַתָּה יְיָ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם / שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה', fr: '(Le premier soir) Béni sois-Tu, Éternel notre Dieu, Roi du monde, qui nous as fait vivre, nous as maintenus et nous as fait parvenir jusqu’à ce moment.' },
+    ],
+  },
+  {
+    id: 'hanerot-halalu', category: 'fetes', title: 'Hanérot Hallalou', hebrew: 'הַנֵּרוֹת הַלָּלוּ',
+    author: '’Hanouka — après l’allumage (traité Soferim)', audio: yt('haneirot halalu'),
+    lines: [
+      { he: 'הַנֵּרוֹת הַלָּלוּ שֶׁאָנוּ מַדְלִיקִין עַל הַנִּסִּים וְעַל הַנִּפְלָאוֹת וְעַל הַתְּשׁוּעוֹת וְעַל הַמִּלְחָמוֹת · שֶׁעָשִׂיתָ לַאֲבוֹתֵינוּ בַּיָּמִים הָהֵם בַּזְּמַן הַזֶּה עַל יְדֵי כֹּהֲנֶיךָ הַקְּדוֹשִׁים', fr: 'Ces lumières que nous allumons, c’est pour les miracles, les merveilles, les délivrances et les victoires que Tu as accomplis pour nos pères, en ces jours-là, à cette époque, par Tes saints prêtres.' },
+      { he: 'וְכׇל שְׁמוֹנַת יְמֵי הַחֲנֻכָּה הַנֵּרוֹת הַלָּלוּ קֹדֶשׁ הֵם · וְאֵין לָנוּ רְשׁוּת לְהִשְׁתַּמֵּשׁ בָּהֶם אֶלָּא לִרְאוֹתָם בִּלְבָד · כְּדֵי לְהוֹדוֹת וּלְהַלֵּל לְשִׁמְךָ הַגָּדוֹל עַל נִסֶּיךָ וְעַל נִפְלְאוֹתֶיךָ וְעַל יְשׁוּעָתֶךָ', fr: 'Durant les huit jours de ’Hanouka, ces lumières sont saintes ; nous n’avons pas le droit de nous en servir, mais seulement de les regarder, afin de rendre grâce et de louer Ton grand Nom pour Tes miracles, Tes merveilles et Ton salut.' },
+    ],
+  },
+  {
+    id: 'maoz-tzur', category: 'fetes', title: 'Maoz Tsour', hebrew: 'מָעוֹז צוּר',
+    author: 'Signé « Mordekhaï » (XIIIᵉ s.) — chant de ’Hanouka', audio: yt('maoz tzur'),
+    lines: [
+      { he: 'מָעוֹז צוּר יְשׁוּעָתִי לְךָ נָאֶה לְשַׁבֵּחַ / תִּכּוֹן בֵּית תְּפִלָּתִי וְשָׁם תּוֹדָה נְזַבֵּחַ / לְעֵת תָּכִין מַטְבֵּחַ מִצָּר הַמְנַבֵּחַ / אָז אֶגְמוֹר בְּשִׁיר מִזְמוֹר חֲנֻכַּת הַמִּזְבֵּחַ', fr: 'Rocher puissant de mon salut, il est beau de Te louer ; que soit rétablie ma maison de prière, et là nous offrirons des sacrifices de reconnaissance ; quand Tu prépareras la défaite de l’ennemi qui aboie, alors j’achèverai par un psaume l’inauguration de l’autel.' },
+      { he: 'רָעוֹת שָׂבְעָה נַפְשִׁי בְּיָגוֹן כֹּחִי כָּלָה / חַיַּי מֵרְרוּ בְקֹשִׁי בְּשִׁעְבּוּד מַלְכוּת עֶגְלָה / וּבְיָדוֹ הַגְּדוֹלָה הוֹצִיא אֶת הַסְּגֻלָּה / חֵיל פַּרְעֹה וְכׇל זַרְעוֹ יָרְדוּ כְּאֶבֶן בִּמְצוּלָה', fr: 'Mon âme était rassasiée de malheurs, ma force s’épuisait dans le chagrin ; ils ont rendu ma vie amère par la dure servitude de l’Égypte ; mais de Sa grande main Il fit sortir le peuple élu : l’armée de Pharaon et toute sa descendance sombrèrent comme une pierre dans l’abîme.' },
+      { he: 'דְּבִיר קׇדְשׁוֹ הֱבִיאַנִי וְגַם שָׁם לֹא שָׁקַטְתִּי / וּבָא נוֹגֵשׂ וְהִגְלַנִי כִּי זָרִים עָבַדְתִּי / וְיֵין רַעַל מָסַכְתִּי כִּמְעַט שֶׁעָבַרְתִּי / קֵץ בָּבֶל זְרֻבָּבֶל לְקֵץ שִׁבְעִים נוֹשַׁעְתִּי', fr: 'Il m’amena à Son saint sanctuaire, mais là non plus je ne fus pas en paix : l’oppresseur vint et m’exila, car j’avais servi des dieux étrangers ; j’avais bu le vin du poison, j’ai failli disparaître ; à la fin de Babylone, avec Zeroubavel, au bout de soixante-dix ans, je fus sauvé.' },
+      { he: 'כְּרוֹת קוֹמַת בְּרוֹשׁ בִּקֵּשׁ אֲגָגִי בֶּן הַמְּדָתָא / וְנִהְיָתָה לוֹ לְפַח וּלְמוֹקֵשׁ וְגַאֲוָתוֹ נִשְׁבָּתָה / רֹאשׁ יְמִינִי נִשֵּׂאתָ וְאוֹיֵב שְׁמוֹ מָחִיתָ / רֹב בָּנָיו וְקִנְיָנָיו עַל הָעֵץ תָּלִיתָ', fr: 'L’Agaguite, fils de Hamedata, voulut abattre le haut cyprès, mais ce fut pour lui un piège, et son orgueil prit fin ; Tu as élevé la tête du Benjaminite et effacé le nom de l’ennemi ; ses nombreux fils et ses biens, Tu les as pendus à la potence.' },
+      { he: 'יְוָנִים נִקְבְּצוּ עָלַי אֲזַי בִּימֵי חַשְׁמַנִּים / וּפָרְצוּ חוֹמוֹת מִגְדָּלַי וְטִמְּאוּ כׇּל הַשְּׁמָנִים / וּמִנּוֹתַר קַנְקַנִּים נַעֲשָׂה נֵס לַשּׁוֹשַׁנִּים / בְּנֵי בִינָה יְמֵי שְׁמוֹנָה קָבְעוּ שִׁיר וּרְנָנִים', fr: 'Les Grecs se liguèrent contre moi, aux jours des ’Hachmonaïm ; ils percèrent les murailles de mes tours et souillèrent toutes les huiles ; mais d’une seule fiole restante, un miracle fut fait pour Israël ; les sages instituèrent huit jours de chants et d’allégresse.' },
+      { he: 'חֲשׂוֹף זְרוֹעַ קׇדְשֶׁךָ וְקָרֵב קֵץ הַיְשׁוּעָה / נְקֹם נִקְמַת עֲבָדֶיךָ מֵאֻמָּה הָרְשָׁעָה / כִּי אָרְכָה הַשָּׁעָה וְאֵין קֵץ לִימֵי הָרָעָה / דְּחֵה אַדְמוֹן בְּצֵל צַלְמוֹן הָקֵם לָנוּ רוֹעִים שִׁבְעָה', fr: 'Dévoile le bras de Ta sainteté et rapproche la fin du salut ; venge le sang de Tes serviteurs sur la nation méchante, car l’heure se prolonge et les jours de malheur n’ont pas de fin ; repousse l’ennemi dans l’ombre, et suscite pour nous les sept bergers.' },
+    ],
+  },
+  // ---- Pourim
+  {
+    id: 'shoshanat-yaakov', category: 'fetes', title: 'Chochanat Yaakov', hebrew: 'שׁוֹשַׁנַּת יַעֲקֹב',
+    author: 'Pourim — piyout alphabétique dit après la lecture de la Méguila', audio: yt('shoshanat yaakov'),
+    lines: [
+      { r: 1, he: 'שׁוֹשַׁנַּת יַעֲקֹב צָהֲלָה וְשָׂמֵחָה / בִּרְאוֹתָם יַחַד תְּכֵלֶת מָרְדְּכָי / תְּשׁוּעָתָם הָיִיתָ לָנֶצַח / וְתִקְוָתָם בְּכׇל דּוֹר וָדוֹר', fr: 'La rose de Jacob exultait et se réjouissait en voyant ensemble Mordekhaï vêtu d’azur ; Tu as été leur salut pour toujours, et leur espoir de génération en génération. (chanté en refrain)' },
+      { he: 'אֲשֶׁר הֵנִיא עֲצַת גּוֹיִם / וַיָּפֶר מַחְשְׁבוֹת עֲרוּמִים · בְּקוּם עָלֵינוּ אָדָם רָשָׁע / נֵצֶר זָדוֹן מִזֶּרַע עֲמָלֵק', fr: 'Lui qui a déjoué le conseil des nations et anéanti les desseins des rusés, quand se dressa contre nous un homme méchant, rejeton insolent de la race d’Amalek.' },
+      { he: 'גָּאָה בְעָשְׁרוֹ וְכָרָה לוֹ בּוֹר / וּגְדֻלָּתוֹ יָקְשָׁה לּוֹ לָכֶד · דִּמָּה בְנַפְשׁוֹ לִלְכֹּד וְנִלְכַּד / בִּקֵּשׁ לְהַשְׁמִיד וְנִשְׁמַד מְהֵרָה', fr: 'Fier de sa richesse, il se creusa une fosse, et sa grandeur lui tendit un piège ; il pensait prendre au piège et fut pris, il voulut exterminer et fut bientôt exterminé.' },
+      { he: 'הָמָן הוֹדִיעַ אֵיבַת אֲבוֹתָיו / וְעוֹרֵר שִׂנְאַת אַחִים לַבָּנִים · וְלֹא זָכַר רַחֲמֵי שָׁאוּל / כִּי בְחֶמְלָתוֹ עַל אֲגָג נוֹלַד אוֹיֵב', fr: 'Haman révéla la haine de ses pères et réveilla contre les fils la haine entre frères ; il ne se souvint pas de la pitié de Chaoul : c’est de sa pitié pour Agag qu’était né l’ennemi.' },
+      { he: 'זָמַם רָשָׁע לְהַכְרִית צַדִּיק / וְנִלְכַּד טָמֵא בִּידֵי טָהוֹר · חֶסֶד גָּבַר עַל שִׁגְגַת אָב / וְרָשָׁע הוֹסִיף חֵטְא עַל חֲטָאָיו', fr: 'Le méchant complota d’éliminer le juste, mais l’impur fut pris par la main du pur ; la bonté l’emporta sur l’erreur du père, et le méchant ajouta faute sur faute.' },
+      { he: 'טָמַן בְּלִבּוֹ מַחְשְׁבוֹת עֲרוּמָיו / וַיִּתְמַכֵּר לַעֲשׂוֹת רָעָה · יָדוֹ שָׁלַח בִּקְדוֹשֵׁי אֵל / כַּסְפּוֹ נָתַן לְהַכְרִית זִכְרָם', fr: 'Il cacha en son cœur ses desseins perfides et se livra tout entier au mal ; il porta la main sur les saints de Dieu et donna son argent pour effacer leur souvenir.' },
+      { he: 'כִּרְאוֹת מָרְדְּכַי כִּי יָצָא קֶצֶף / וְדָתֵי הָמָן נִתְּנוּ בְשׁוּשָׁן · לָבַשׁ שַׂק וְקָשַׁר מִסְפֵּד / וְגָזַר צוֹם וַיֵּשֶׁב עַל הָאֵפֶר', fr: 'Quand Mordekhaï vit la colère se déchaîner et les décrets de Haman promulgués à Suse, il revêtit un sac, prit le deuil, décréta un jeûne et s’assit sur la cendre :' },
+      { he: 'מִי זֶה יַעֲמֹד לְכַפֵּר שְׁגָגָה / וְלִמְחֹל חַטַּאת עֲוֹן אֲבוֹתֵינוּ · נֵץ פָּרַח מִלּוּלָב / הֵן הֲדַסָּה עָמְדָה לְעוֹרֵר יְשֵׁנִים', fr: '« Qui se lèvera pour expier l’erreur et faire pardonner la faute de nos pères ? » Une fleur éclot de la palme : voici Hadassa (Esther) qui se leva pour réveiller les endormis.' },
+      { he: 'סָרִיסֶיהָ הִבְהִילוּ לְהָמָן / לְהַשְׁקוֹתוֹ יֵין חֲמַת תַּנִּינִים · עָמַד בְּעָשְׁרוֹ וְנָפַל בְּרִשְׁעוֹ / עָשָׂה לוֹ עֵץ וְנִתְלָה עָלָיו', fr: 'Ses serviteurs pressèrent Haman, pour lui faire boire le vin du venin des serpents ; dressé par sa richesse, il tomba par sa méchanceté : il prépara une potence et y fut pendu.' },
+      { he: 'פִּיהֶם פָּתְחוּ כׇּל יוֹשְׁבֵי תֵבֵל / כִּי פוּר הָמָן נֶהְפַּךְ לְפוּרֵנוּ · צַדִּיק נֶחֱלַץ מִיַּד רָשָׁע / אוֹיֵב נִתַּן תַּחַת נַפְשׁוֹ', fr: 'Tous les habitants du monde ouvrirent la bouche, car le sort (pour) de Haman devint notre Pourim ; le juste fut sauvé de la main du méchant, l’ennemi fut livré à sa place.' },
+      { he: 'קִיְּמוּ עֲלֵיהֶם לַעֲשׂוֹת פּוּרִים / וְלִשְׂמֹחַ בְּכׇל שָׁנָה וְשָׁנָה · רָאִיתָ אֶת תְּפִלַּת מָרְדְּכַי וְאֶסְתֵּר / הָמָן וּבָנָיו עַל הָעֵץ תָּלִיתָ', fr: 'Ils s’engagèrent à célébrer Pourim et à se réjouir chaque année. Tu as vu la prière de Mordekhaï et d’Esther : Haman et ses fils, Tu les as pendus à la potence.' },
+      { he: 'לְהוֹדִיעַ שֶׁכׇּל קֹוֶיךָ לֹא יֵבֹשׁוּ / וְלֹא יִכָּלְמוּ לָנֶצַח כׇּל הַחוֹסִים בָּךְ', fr: 'Pour faire savoir que tous ceux qui espèrent en Toi n’auront pas honte, et que jamais ne seront confondus ceux qui s’abritent en Toi.' },
+      { he: 'אָרוּר הָמָן אֲשֶׁר בִּקֵּשׁ לְאַבְּדִי / בָּרוּךְ מָרְדְּכַי הַיְּהוּדִי / אֲרוּרָה זֶרֶשׁ אֵשֶׁת מַפְחִידִי / בְּרוּכָה אֶסְתֵּר בַּעֲדִי / אֲרוּרִים כׇּל הָרְשָׁעִים / בְּרוּכִים כׇּל הַצַּדִּיקִים / וְגַם חַרְבוֹנָה זָכוּר לַטּוֹב', fr: 'Maudit soit Haman qui voulut me perdre, béni soit Mordekhaï le Juif ; maudite soit Zérech, la femme de celui qui m’effrayait, bénie soit Esther qui intercéda pour moi ; maudits soient tous les méchants, bénis soient tous les justes — et que Harbona aussi soit rappelé en bien !' },
+    ],
+  },
+  {
+    id: 'layehudim', category: 'fetes', title: 'LaYehoudim Hayeta Ora', hebrew: 'לַיְּהוּדִים הָיְתָה אוֹרָה',
+    author: 'Esther 8, 16 — chanté à Pourim (et à la Havdala)', audio: yt('layehudim hayta orah'),
+    lines: [
+      { he: 'לַיְּהוּדִים הָיְתָה אוֹרָה וְשִׂמְחָה / וְשָׂשֹׂן וִיקָר / כֵּן תִּהְיֶה לָּנוּ', fr: 'Pour les Juifs, ce fut lumière et joie, allégresse et honneur — qu’il en soit ainsi pour nous !' },
+    ],
+  },
+  // ---- Pessa'h
+  {
+    id: 'ha-lachma', category: 'fetes', title: 'Ha La’hma ’Anya', hebrew: 'הָא לַחְמָא עַנְיָא',
+    author: 'Pessa’h — ouverture du récit de la Haggada (en araméen)', audio: yt('ha lachma anya'),
+    lines: [
+      { he: 'הָא לַחְמָא עַנְיָא דִּי אֲכָלוּ אַבְהָתָנָא בְּאַרְעָא דְמִצְרָיִם / כׇּל דִּכְפִין יֵיתֵי וְיֵיכֹל / כׇּל דִּצְרִיךְ יֵיתֵי וְיִפְסַח / הָשַׁתָּא הָכָא לְשָׁנָה הַבָּאָה בְּאַרְעָא דְיִשְׂרָאֵל / הָשַׁתָּא עַבְדֵי לְשָׁנָה הַבָּאָה בְּנֵי חוֹרִין', fr: 'Voici le pain de misère que nos pères ont mangé en terre d’Égypte. Que quiconque a faim vienne et mange ; que quiconque est dans le besoin vienne et fasse la Pâque. Cette année ici, l’an prochain en terre d’Israël ; cette année esclaves, l’an prochain hommes libres.' },
+    ],
+  },
+  {
+    id: 'ma-nishtana', category: 'fetes', title: 'Ma Nichtana', hebrew: 'מַה נִּשְׁתַּנָּה',
+    author: 'Pessa’h — les quatre questions de l’enfant', audio: yt('ma nishtana'),
+    lines: [
+      { he: 'מַה נִּשְׁתַּנָּה הַלַּיְלָה הַזֶּה מִכׇּל הַלֵּילוֹת', fr: 'En quoi cette nuit est-elle différente de toutes les autres nuits ?' },
+      { he: 'שֶׁבְּכׇל הַלֵּילוֹת אָנוּ אוֹכְלִין חָמֵץ וּמַצָּה / הַלַּיְלָה הַזֶּה כֻּלּוֹ מַצָּה', fr: 'Toutes les autres nuits, nous mangeons du ’hamets ou de la matsa ; cette nuit, uniquement de la matsa.' },
+      { he: 'שֶׁבְּכׇל הַלֵּילוֹת אָנוּ אוֹכְלִין שְׁאָר יְרָקוֹת / הַלַּיְלָה הַזֶּה מָרוֹר', fr: 'Toutes les autres nuits, nous mangeons toutes sortes de légumes ; cette nuit, des herbes amères.' },
+      { he: 'שֶׁבְּכׇל הַלֵּילוֹת אֵין אָנוּ מַטְבִּילִין אֲפִילוּ פַּעַם אֶחָת / הַלַּיְלָה הַזֶּה שְׁתֵּי פְעָמִים', fr: 'Toutes les autres nuits, nous ne trempons pas même une fois ; cette nuit, deux fois.' },
+      { he: 'שֶׁבְּכׇל הַלֵּילוֹת אָנוּ אוֹכְלִין בֵּין יוֹשְׁבִין וּבֵין מְסֻבִּין / הַלַּיְלָה הַזֶּה כֻּלָּנוּ מְסֻבִּין', fr: 'Toutes les autres nuits, nous mangeons assis ou accoudés ; cette nuit, nous sommes tous accoudés.' },
+    ],
+  },
+  {
+    id: 'avadim-hayinu', category: 'fetes', title: '’Avadim Hayinou', hebrew: 'עֲבָדִים הָיִינוּ',
+    author: 'Pessa’h — réponse aux quatre questions (Haggada)', audio: yt('avadim hayinu'),
+    lines: [
+      { he: 'עֲבָדִים הָיִינוּ לְפַרְעֹה בְּמִצְרָיִם / וַיּוֹצִיאֵנוּ יְיָ אֱלֹהֵינוּ מִשָּׁם בְּיָד חֲזָקָה וּבִזְרֹעַ נְטוּיָה', fr: 'Nous étions esclaves de Pharaon en Égypte, et l’Éternel notre Dieu nous en a fait sortir d’une main forte et d’un bras étendu.' },
+      { he: 'וְאִלּוּ לֹא הוֹצִיא הַקָּדוֹשׁ בָּרוּךְ הוּא אֶת אֲבוֹתֵינוּ מִמִּצְרָיִם · הֲרֵי אָנוּ וּבָנֵינוּ וּבְנֵי בָנֵינוּ מְשֻׁעְבָּדִים הָיִינוּ לְפַרְעֹה בְּמִצְרָיִם', fr: 'Si le Saint, béni soit-Il, n’avait pas fait sortir nos pères d’Égypte, nous, nos enfants et nos petits-enfants serions encore asservis à Pharaon en Égypte.' },
+      { he: 'וַאֲפִילוּ כֻּלָּנוּ חֲכָמִים כֻּלָּנוּ נְבוֹנִים כֻּלָּנוּ זְקֵנִים כֻּלָּנוּ יוֹדְעִים אֶת הַתּוֹרָה · מִצְוָה עָלֵינוּ לְסַפֵּר בִּיצִיאַת מִצְרָיִם · וְכׇל הַמַּרְבֶּה לְסַפֵּר בִּיצִיאַת מִצְרַיִם הֲרֵי זֶה מְשֻׁבָּח', fr: 'Et même si nous étions tous sages, tous intelligents, tous anciens, tous savants dans la Torah, ce serait pour nous un devoir de raconter la sortie d’Égypte ; et quiconque s’étend sur ce récit est digne d’éloges.' },
+    ],
+  },
+  {
+    id: 'vehi-sheamda', category: 'fetes', title: 'Véhi Chéamda', hebrew: 'וְהִיא שֶׁעָמְדָה',
+    author: 'Pessa’h — Haggada (on lève la coupe)', audio: yt('vehi sheamda'),
+    lines: [
+      { he: 'וְהִיא שֶׁעָמְדָה לַאֲבוֹתֵינוּ וְלָנוּ / שֶׁלֹּא אֶחָד בִּלְבַד עָמַד עָלֵינוּ לְכַלּוֹתֵנוּ / אֶלָּא שֶׁבְּכׇל דּוֹר וָדוֹר עוֹמְדִים עָלֵינוּ לְכַלּוֹתֵנוּ / וְהַקָּדוֹשׁ בָּרוּךְ הוּא מַצִּילֵנוּ מִיָּדָם', fr: 'C’est elle (la promesse divine) qui a soutenu nos pères et nous-mêmes : car ce n’est pas un seul qui s’est dressé contre nous pour nous anéantir, mais à chaque génération on se dresse contre nous pour nous anéantir, et le Saint, béni soit-Il, nous sauve de leurs mains.' },
+    ],
+  },
+  {
+    id: 'dayenu', category: 'fetes', title: 'Dayénou', hebrew: 'דַּיֵּנוּ',
+    author: 'Pessa’h — Haggada', audio: yt('dayenu'),
+    lines: [
+      { r: 1, he: 'דַּיֵּנוּ', fr: 'Cela nous aurait suffi ! (refrain, après chaque verset)' },
+      { he: 'כַּמָּה מַעֲלוֹת טוֹבוֹת לַמָּקוֹם עָלֵינוּ', fr: 'Que de bienfaits Dieu nous a accordés !' },
+      { he: 'אִלּוּ הוֹצִיאָנוּ מִמִּצְרַיִם וְלֹא עָשָׂה בָהֶם שְׁפָטִים / דַּיֵּנוּ', fr: 'S’Il nous avait fait sortir d’Égypte sans exercer sur eux Ses jugements — cela nous aurait suffi !' },
+      { he: 'אִלּוּ עָשָׂה בָהֶם שְׁפָטִים וְלֹא עָשָׂה בֵאלֹהֵיהֶם / דַּיֵּנוּ', fr: 'S’Il avait exercé sur eux Ses jugements sans frapper leurs dieux…' },
+      { he: 'אִלּוּ עָשָׂה בֵאלֹהֵיהֶם וְלֹא הָרַג אֶת בְּכוֹרֵיהֶם / דַּיֵּנוּ', fr: 'S’Il avait frappé leurs dieux sans tuer leurs premiers-nés…' },
+      { he: 'אִלּוּ הָרַג אֶת בְּכוֹרֵיהֶם וְלֹא נָתַן לָנוּ אֶת מָמוֹנָם / דַּיֵּנוּ', fr: 'S’Il avait tué leurs premiers-nés sans nous donner leurs richesses…' },
+      { he: 'אִלּוּ נָתַן לָנוּ אֶת מָמוֹנָם וְלֹא קָרַע לָנוּ אֶת הַיָּם / דַּיֵּנוּ', fr: 'S’Il nous avait donné leurs richesses sans fendre pour nous la mer…' },
+      { he: 'אִלּוּ קָרַע לָנוּ אֶת הַיָּם וְלֹא הֶעֱבִירָנוּ בְתוֹכוֹ בֶּחָרָבָה / דַּיֵּנוּ', fr: 'S’Il avait fendu pour nous la mer sans nous y faire passer à pied sec…' },
+      { he: 'אִלּוּ הֶעֱבִירָנוּ בְתוֹכוֹ בֶּחָרָבָה וְלֹא שִׁקַּע צָרֵנוּ בְּתוֹכוֹ / דַּיֵּנוּ', fr: 'S’Il nous y avait fait passer à pied sec sans y engloutir nos oppresseurs…' },
+      { he: 'אִלּוּ שִׁקַּע צָרֵנוּ בְּתוֹכוֹ וְלֹא סִפֵּק צׇרְכֵּנוּ בַּמִּדְבָּר אַרְבָּעִים שָׁנָה / דַּיֵּנוּ', fr: 'S’Il y avait englouti nos oppresseurs sans pourvoir à nos besoins au désert pendant quarante ans…' },
+      { he: 'אִלּוּ סִפֵּק צׇרְכֵּנוּ בַּמִּדְבָּר אַרְבָּעִים שָׁנָה וְלֹא הֶאֱכִילָנוּ אֶת הַמָּן / דַּיֵּנוּ', fr: 'S’Il avait pourvu à nos besoins au désert pendant quarante ans sans nous nourrir de la manne…' },
+      { he: 'אִלּוּ הֶאֱכִילָנוּ אֶת הַמָּן וְלֹא נָתַן לָנוּ אֶת הַשַּׁבָּת / דַּיֵּנוּ', fr: 'S’Il nous avait nourris de la manne sans nous donner le Chabbat…' },
+      { he: 'אִלּוּ נָתַן לָנוּ אֶת הַשַּׁבָּת וְלֹא קֵרְבָנוּ לִפְנֵי הַר סִינַי / דַּיֵּנוּ', fr: 'S’Il nous avait donné le Chabbat sans nous rapprocher du mont Sinaï…' },
+      { he: 'אִלּוּ קֵרְבָנוּ לִפְנֵי הַר סִינַי וְלֹא נָתַן לָנוּ אֶת הַתּוֹרָה / דַּיֵּנוּ', fr: 'S’Il nous avait rapprochés du mont Sinaï sans nous donner la Torah…' },
+      { he: 'אִלּוּ נָתַן לָנוּ אֶת הַתּוֹרָה וְלֹא הִכְנִיסָנוּ לְאֶרֶץ יִשְׂרָאֵל / דַּיֵּנוּ', fr: 'S’Il nous avait donné la Torah sans nous faire entrer en terre d’Israël…' },
+      { he: 'אִלּוּ הִכְנִיסָנוּ לְאֶרֶץ יִשְׂרָאֵל וְלֹא בָנָה לָנוּ אֶת בֵּית הַבְּחִירָה / דַּיֵּנוּ', fr: 'S’Il nous avait fait entrer en terre d’Israël sans nous bâtir le Temple — cela nous aurait suffi !' },
+      { he: 'עַל אַחַת כַּמָּה וְכַמָּה טוֹבָה כְפוּלָה וּמְכֻפֶּלֶת לַמָּקוֹם עָלֵינוּ · שֶׁהוֹצִיאָנוּ מִמִּצְרַיִם וְעָשָׂה בָהֶם שְׁפָטִים וְעָשָׂה בֵאלֹהֵיהֶם וְהָרַג אֶת בְּכוֹרֵיהֶם וְנָתַן לָנוּ אֶת מָמוֹנָם · וְקָרַע לָנוּ אֶת הַיָּם וְהֶעֱבִירָנוּ בְתוֹכוֹ בֶּחָרָבָה וְשִׁקַּע צָרֵנוּ בְּתוֹכוֹ וְסִפֵּק צׇרְכֵּנוּ בַּמִּדְבָּר אַרְבָּעִים שָׁנָה וְהֶאֱכִילָנוּ אֶת הַמָּן · וְנָתַן לָנוּ אֶת הַשַּׁבָּת וְקֵרְבָנוּ לִפְנֵי הַר סִינַי וְנָתַן לָנוּ אֶת הַתּוֹרָה וְהִכְנִיסָנוּ לְאֶרֶץ יִשְׂרָאֵל · וּבָנָה לָנוּ אֶת בֵּית הַבְּחִירָה לְכַפֵּר עַל כׇּל עֲוֹנוֹתֵינוּ', fr: 'Combien plus encore devons-nous de reconnaissance à Dieu pour ce bienfait doublé et redoublé : Il nous a fait sortir d’Égypte, a exercé Ses jugements, frappé leurs dieux, tué leurs premiers-nés, nous a donné leurs richesses, a fendu la mer, nous y a fait passer à pied sec, y a englouti nos oppresseurs, a pourvu à nos besoins quarante ans au désert, nous a nourris de la manne, nous a donné le Chabbat, nous a rapprochés du Sinaï, nous a donné la Torah, nous a fait entrer en terre d’Israël et nous a bâti le Temple pour expier toutes nos fautes.' },
+    ],
+  },
+  {
+    id: 'adir-hu', category: 'fetes', title: 'Adir Hou', hebrew: 'אַדִּיר הוּא',
+    author: 'Pessa’h — acrostiche alphabétique de la fin de la Haggada', audio: yt('adir hu'),
+    lines: [
+      { r: 1, he: 'יִבְנֶה בֵיתוֹ בְּקָרוֹב / בִּמְהֵרָה בִּמְהֵרָה בְּיָמֵינוּ בְּקָרוֹב / אֵל בְּנֵה אֵל בְּנֵה / בְּנֵה בֵיתְךָ בְּקָרוֹב', fr: '… qu’Il rebâtisse bientôt Sa maison, vite, vite, bientôt, de nos jours ! Ô Dieu, bâtis, ô Dieu, bâtis, bâtis bientôt Ta maison ! (refrain)' },
+      { he: 'אַדִּיר הוּא', fr: 'Il est puissant…' },
+      { he: 'בָּחוּר הוּא / גָּדוֹל הוּא / דָּגוּל הוּא', fr: 'Il est élu, Il est grand, Il est éminent…' },
+      { he: 'הָדוּר הוּא / וָתִיק הוּא / זַכַּאי הוּא', fr: 'Il est glorieux, Il est éternel, Il est pur…' },
+      { he: 'חָסִיד הוּא / טָהוֹר הוּא / יָחִיד הוּא', fr: 'Il est bon, Il est saint de pureté, Il est unique…' },
+      { he: 'כַּבִּיר הוּא / לָמוּד הוּא / מֶלֶךְ הוּא', fr: 'Il est puissant, Il est savant, Il est roi…' },
+      { he: 'נוֹרָא הוּא / סַגִּיב הוּא / עִזּוּז הוּא', fr: 'Il est redoutable, Il est sublime, Il est fort…' },
+      { he: 'פּוֹדֶה הוּא / צַדִּיק הוּא / קָדוֹשׁ הוּא', fr: 'Il est rédempteur, Il est juste, Il est saint…' },
+      { he: 'רַחוּם הוּא / שַׁדַּי הוּא / תַּקִּיף הוּא', fr: 'Il est miséricordieux, Il est tout-puissant, Il est fort…' },
+    ],
+  },
+  {
+    id: 'ki-lo-naeh', category: 'fetes', title: 'Ki Lo Naé', hebrew: 'כִּי לוֹ נָאֶה',
+    author: 'Haggada de Pessa’h — acrostiche alphabétique', audio: yt('ki lo naeh'),
+    lines: [
+      { r: 1, he: 'לְךָ וּלְךָ לְךָ כִּי לְךָ / לְךָ אַף לְךָ לְךָ יְיָ הַמַּמְלָכָה / כִּי לוֹ נָאֶה כִּי לוֹ יָאֶה', fr: '« À Toi, oui à Toi, à Toi car à Toi, à Toi seul, à Toi, Éternel, la royauté ! » Car à Lui cela convient, à Lui cela sied. (refrain, après chaque strophe)' },
+      { he: 'אַדִּיר בִּמְלוּכָה / בָּחוּר כַּהֲלָכָה / גְּדוּדָיו יֹאמְרוּ לוֹ', fr: 'Puissant dans la royauté, élu comme il se doit, Ses légions Lui disent :' },
+      { he: 'דָּגוּל בִּמְלוּכָה / הָדוּר כַּהֲלָכָה / וָתִיקָיו יֹאמְרוּ לוֹ', fr: 'Éminent dans la royauté, glorieux comme il se doit, Ses fidèles Lui disent :' },
+      { he: 'זַכַּאי בִּמְלוּכָה / חָסִין כַּהֲלָכָה / טַפְסְרָיו יֹאמְרוּ לוֹ', fr: 'Pur dans la royauté, puissant comme il se doit, Ses dignitaires Lui disent :' },
+      { he: 'יָחִיד בִּמְלוּכָה / כַּבִּיר כַּהֲלָכָה / לִמּוּדָיו יֹאמְרוּ לוֹ', fr: 'Unique dans la royauté, puissant comme il se doit, Ses disciples Lui disent :' },
+      { he: 'מוֹשֵׁל בִּמְלוּכָה / נוֹרָא כַּהֲלָכָה / סְבִיבָיו יֹאמְרוּ לוֹ', fr: 'Souverain dans la royauté, redoutable comme il se doit, ceux qui L’entourent Lui disent :' },
+      { he: 'עָנָו בִּמְלוּכָה / פּוֹדֶה כַּהֲלָכָה / צַדִּיקָיו יֹאמְרוּ לוֹ', fr: 'Humble dans la royauté, rédempteur comme il se doit, Ses justes Lui disent :' },
+      { he: 'קָדוֹשׁ בִּמְלוּכָה / רַחוּם כַּהֲלָכָה / שִׁנְאַנָּיו יֹאמְרוּ לוֹ', fr: 'Saint dans la royauté, miséricordieux comme il se doit, Ses anges Lui disent :' },
+      { he: 'תַּקִּיף בִּמְלוּכָה / תּוֹמֵךְ כַּהֲלָכָה / תְּמִימָיו יֹאמְרוּ לוֹ', fr: 'Fort dans la royauté, soutien comme il se doit, Ses fidèles intègres Lui disent :' },
+    ],
+  },
+  {
+    id: 'echad-mi-yodea', category: 'fetes', title: 'É’had Mi Yodéa', hebrew: 'אֶחָד מִי יוֹדֵעַ',
+    author: 'Pessa’h — chant cumulatif de la fin de la Haggada', audio: yt('echad mi yodea'),
+    lines: [
+      { he: 'אֶחָד מִי יוֹדֵעַ · אֶחָד אֲנִי יוֹדֵעַ · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait un ? Moi, je sais un : un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שְׁנַיִם מִי יוֹדֵעַ · שְׁנַיִם אֲנִי יוֹדֵעַ · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait deux ? Moi, je sais deux : deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שְׁלֹשָׁה מִי יוֹדֵעַ · שְׁלֹשָׁה אֲנִי יוֹדֵעַ · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait trois ? Moi, je sais trois : trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'אַרְבַּע מִי יוֹדֵעַ · אַרְבַּע אֲנִי יוֹדֵעַ · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait quatre ? Moi, je sais quatre : quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'חֲמִשָּׁה מִי יוֹדֵעַ · חֲמִשָּׁה אֲנִי יוֹדֵעַ · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait cinq ? Moi, je sais cinq : cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שִׁשָּׁה מִי יוֹדֵעַ · שִׁשָּׁה אֲנִי יוֹדֵעַ · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait six ? Moi, je sais six : six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שִׁבְעָה מִי יוֹדֵעַ · שִׁבְעָה אֲנִי יוֹדֵעַ · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait sept ? Moi, je sais sept : sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שְׁמוֹנָה מִי יוֹדֵעַ · שְׁמוֹנָה אֲנִי יוֹדֵעַ · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait huit ? Moi, je sais huit : huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'תִּשְׁעָה מִי יוֹדֵעַ · תִּשְׁעָה אֲנִי יוֹדֵעַ · תִּשְׁעָה יַרְחֵי לֵדָה · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait neuf ? Moi, je sais neuf : neuf, les mois de la grossesse ; huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'עֲשָׂרָה מִי יוֹדֵעַ · עֲשָׂרָה אֲנִי יוֹדֵעַ · עֲשָׂרָה דִבְּרַיָא · תִּשְׁעָה יַרְחֵי לֵדָה · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait dix ? Moi, je sais dix : dix, les commandements ; neuf, les mois de la grossesse ; huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'אַחַד עָשָׂר מִי יוֹדֵעַ · אַחַד עָשָׂר אֲנִי יוֹדֵעַ · אַחַד עָשָׂר כּוֹכְבַיָּא · עֲשָׂרָה דִבְּרַיָא · תִּשְׁעָה יַרְחֵי לֵדָה · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait onze ? Moi, je sais onze : onze, les étoiles (du rêve de Joseph) ; dix, les commandements ; neuf, les mois de la grossesse ; huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שְׁנֵים עָשָׂר מִי יוֹדֵעַ · שְׁנֵים עָשָׂר אֲנִי יוֹדֵעַ · שְׁנֵים עָשָׂר שִׁבְטַיָּא · אַחַד עָשָׂר כּוֹכְבַיָּא · עֲשָׂרָה דִבְּרַיָא · תִּשְׁעָה יַרְחֵי לֵדָה · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait douze ? Moi, je sais douze : douze, les tribus ; onze, les étoiles (du rêve de Joseph) ; dix, les commandements ; neuf, les mois de la grossesse ; huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+      { he: 'שְׁלֹשָׁה עָשָׂר מִי יוֹדֵעַ · שְׁלֹשָׁה עָשָׂר אֲנִי יוֹדֵעַ · שְׁלֹשָׁה עָשָׂר מִדַּיָּא · שְׁנֵים עָשָׂר שִׁבְטַיָּא · אַחַד עָשָׂר כּוֹכְבַיָּא · עֲשָׂרָה דִבְּרַיָא · תִּשְׁעָה יַרְחֵי לֵדָה · שְׁמוֹנָה יְמֵי מִילָה · שִׁבְעָה יְמֵי שַׁבָּתָא · שִׁשָּׁה סִדְרֵי מִשְׁנָה · חֲמִשָּׁה חוּמְשֵׁי תוֹרָה · אַרְבַּע אִמָּהוֹת · שְׁלֹשָׁה אָבוֹת · שְׁנֵי לֻחוֹת הַבְּרִית · אֶחָד אֱלֹהֵינוּ שֶׁבַּשָּׁמַיִם וּבָאָרֶץ', fr: 'Qui sait treize ? Moi, je sais treize : treize, les attributs de miséricorde ; douze, les tribus ; onze, les étoiles (du rêve de Joseph) ; dix, les commandements ; neuf, les mois de la grossesse ; huit, les jours avant la circoncision ; sept, les jours de la semaine ; six, les ordres de la Michna ; cinq, les livres de la Torah ; quatre, les matriarches ; trois, les patriarches ; deux, les tables de l’Alliance ; un est notre Dieu, au ciel et sur la terre.' },
+    ],
+  },
+  {
+    id: 'chad-gadya', category: 'fetes', title: '’Had Gadya', hebrew: 'חַד גַּדְיָא',
+    author: 'Pessa’h — chant araméen de la fin de la Haggada', audio: yt('chad gadya'),
+    lines: [
+      { he: 'חַד גַּדְיָא · חַד גַּדְיָא דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Un chevreau, un chevreau, que mon père acheta pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא שׁוּנְרָא וְאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le chat vint et mangea le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא כַלְבָּא וְנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le chien vint et mordit le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא חוּטְרָא והִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le bâton vint et frappa le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא נוּרָא וְשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le feu vint et brûla le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא מַיָא וְכָבָה לְנוּרָא · דְּשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors l’eau vint et éteignit le feu, qui avait brûlé le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא תוֹרָא וְשָׁתָה לְמַיָא · דְּכָבָה לְנוּרָא · דְּשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le bœuf vint et but l’eau, qui avait éteint le feu, qui avait brûlé le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא הַשׁוֹחֵט וְשָׁחַט לְתוֹרָא · דְּשָׁתָה לְמַיָא · דְּכָבָה לְנוּרָא · דְּשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le cho’het vint et égorgea le bœuf, qui avait bu l’eau, qui avait éteint le feu, qui avait brûlé le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא מַלְאָךְ הַמָּוֶת וְשָׁחַט לְשׁוֹחֵט · דְּשָׁחַט לְתוֹרָא · דְּשָׁתָה לְמַיָא · דְּכָבָה לְנוּרָא · דְּשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors l’ange de la mort vint et égorgea le cho’het, qui avait égorgé le bœuf, qui avait bu l’eau, qui avait éteint le feu, qui avait brûlé le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+      { he: 'וְאָתָא הַקָּדוֹשׁ בָּרוּךְ הוּא וְשָׁחַט לְמַלְאַךְ הַמָּוֶת · דְּשָׁחַט לְשׁוֹחֵט · דְּשָׁחַט לְתוֹרָא · דְּשָׁתָה לְמַיָא · דְּכָבָה לְנוּרָא · דְּשָׂרַף לְחוּטְרָא · דְּהִכָּה לְכַלְבָּא · דְּנָשַׁךְ לְשׁוּנְרָא · דְּאַכְלָה לְגַדְיָא · דְּזַבִּין אַבָּא בִּתְרֵי זוּזֵי · חַד גַּדְיָא · חַד גַּדְיָא', fr: 'Alors le Saint, béni soit-Il, vint et égorgea l’ange de la mort, qui avait égorgé le cho’het, qui avait égorgé le bœuf, qui avait bu l’eau, qui avait éteint le feu, qui avait brûlé le bâton, qui avait frappé le chien, qui avait mordu le chat, qui avait mangé le chevreau, que mon père avait acheté pour deux zouzim — un chevreau, un chevreau.' },
+    ],
+  },
+  {
+    id: 'leshana-haba', category: 'fetes', title: 'Léchana Haba’a', hebrew: 'לְשָׁנָה הַבָּאָה',
+    author: 'Pessa’h — conclusion du Séder (et de Kippour)', audio: yt('leshana haba biyerushalayim'),
+    lines: [
+      { he: 'לְשָׁנָה הַבָּאָה בִּירוּשָׁלַיִם הַבְּנוּיָה', fr: 'L’an prochain à Jérusalem rebâtie !' },
+    ],
+  },
+  // ---- Chavouot
+  {
+    id: 'torah-tsiva', category: 'fetes', title: 'Torah Tsiva Lanou Moché', hebrew: 'תּוֹרָה צִוָּה לָנוּ מֹשֶׁה',
+    author: 'Deutéronome 33, 4 — Chavouot et Sim’hat Torah', audio: yt('torah tziva lanu moshe'),
+    lines: [
+      { he: 'תּוֹרָה צִוָּה לָנוּ מֹשֶׁה / מוֹרָשָׁה קְהִלַּת יַעֲקֹב', fr: 'Moïse nous a prescrit la Torah, héritage de l’assemblée de Jacob.' },
+    ],
+  },
+  // ---- Yom Haatsmaout
+  {
+    id: 'hatikva', category: 'fetes', title: 'Hatikva', hebrew: 'הַתִּקְוָה',
+    author: 'Naftali Herz Imber (1878) — hymne national d’Israël ; Yom Haatsmaout', audio: yt('hatikvah'),
+    lines: [
+      { he: 'כׇּל עוֹד בַּלֵּבָב פְּנִימָה / נֶפֶשׁ יְהוּדִי הוֹמִיָּה / וּלְפַאֲתֵי מִזְרָח קָדִימָה / עַיִן לְצִיּוֹן צוֹפִיָּה', fr: 'Tant qu’au fond du cœur vibre une âme juive, et que, vers l’orient, un œil regarde vers Sion,' },
+      { he: 'עוֹד לֹא אָבְדָה תִּקְוָתֵנוּ / הַתִּקְוָה בַּת שְׁנוֹת אַלְפַּיִם / לִהְיוֹת עַם חׇפְשִׁי בְּאַרְצֵנוּ / אֶרֶץ צִיּוֹן וִירוּשָׁלַיִם', fr: 'notre espoir n’est pas perdu, l’espoir deux fois millénaire : être un peuple libre sur notre terre, la terre de Sion et de Jérusalem.' },
+    ],
+  },
+
   // ================= PIYOUTIM MAROCAINS & SÉFARADES ================== ======================
   {
     id: 'aoufa-eshkona', category: 'maroc', title: 'A’oufa Echkona', hebrew: 'אָעוּפָה אֶשְׁכֹּנָה',
@@ -652,18 +941,6 @@ const SONGS = [
       { he: 'תּוֹרַת מֹשֶׁה אֱמֶת וּנְבוּאָתוֹ / בָּרוּךְ עֲדֵי עַד שֵׁם תְּהִלָּתוֹ', fr: '(séfarade) La Torah de Moché est vérité, ainsi que sa prophétie ; béni soit à jamais le Nom de Sa louange.' },
     ],
   },
-  {
-    id: 'maoz-tzur', category: 'ashkenaz', title: 'Maoz Tsour', hebrew: 'מָעוֹז צוּר',
-    author: 'Signé « Mordekhaï » (XIIIᵉ s.) — chant de ’Hanouka', audio: yt('maoz tzur'),
-    lines: [
-      { he: 'מָעוֹז צוּר יְשׁוּעָתִי לְךָ נָאֶה לְשַׁבֵּחַ / תִּכּוֹן בֵּית תְּפִלָּתִי וְשָׁם תּוֹדָה נְזַבֵּחַ / לְעֵת תָּכִין מַטְבֵּחַ מִצָּר הַמְנַבֵּחַ / אָז אֶגְמוֹר בְּשִׁיר מִזְמוֹר חֲנֻכַּת הַמִּזְבֵּחַ', fr: 'Rocher puissant de mon salut, il est beau de Te louer ; que soit rétablie ma maison de prière, et là nous offrirons des sacrifices de reconnaissance ; quand Tu prépareras la défaite de l’ennemi qui aboie, alors j’achèverai par un psaume l’inauguration de l’autel.' },
-      { he: 'רָעוֹת שָׂבְעָה נַפְשִׁי בְּיָגוֹן כֹּחִי כָּלָה / חַיַּי מֵרְרוּ בְקֹשִׁי בְּשִׁעְבּוּד מַלְכוּת עֶגְלָה / וּבְיָדוֹ הַגְּדוֹלָה הוֹצִיא אֶת הַסְּגֻלָּה / חֵיל פַּרְעֹה וְכׇל זַרְעוֹ יָרְדוּ כְּאֶבֶן בִּמְצוּלָה', fr: 'Mon âme était rassasiée de malheurs, ma force s’épuisait dans le chagrin ; ils ont rendu ma vie amère par la dure servitude de l’Égypte ; mais de Sa grande main Il fit sortir le peuple élu : l’armée de Pharaon et toute sa descendance sombrèrent comme une pierre dans l’abîme.' },
-      { he: 'דְּבִיר קׇדְשׁוֹ הֱבִיאַנִי וְגַם שָׁם לֹא שָׁקַטְתִּי / וּבָא נוֹגֵשׂ וְהִגְלַנִי כִּי זָרִים עָבַדְתִּי / וְיֵין רַעַל מָסַכְתִּי כִּמְעַט שֶׁעָבַרְתִּי / קֵץ בָּבֶל זְרֻבָּבֶל לְקֵץ שִׁבְעִים נוֹשַׁעְתִּי', fr: 'Il m’amena à Son saint sanctuaire, mais là non plus je ne fus pas en paix : l’oppresseur vint et m’exila, car j’avais servi des dieux étrangers ; j’avais bu le vin du poison, j’ai failli disparaître ; à la fin de Babylone, avec Zeroubavel, au bout de soixante-dix ans, je fus sauvé.' },
-      { he: 'כְּרוֹת קוֹמַת בְּרוֹשׁ בִּקֵּשׁ אֲגָגִי בֶּן הַמְּדָתָא / וְנִהְיָתָה לוֹ לְפַח וּלְמוֹקֵשׁ וְגַאֲוָתוֹ נִשְׁבָּתָה / רֹאשׁ יְמִינִי נִשֵּׂאתָ וְאוֹיֵב שְׁמוֹ מָחִיתָ / רֹב בָּנָיו וְקִנְיָנָיו עַל הָעֵץ תָּלִיתָ', fr: 'L’Agaguite, fils de Hamedata, voulut abattre le haut cyprès, mais ce fut pour lui un piège, et son orgueil prit fin ; Tu as élevé la tête du Benjaminite et effacé le nom de l’ennemi ; ses nombreux fils et ses biens, Tu les as pendus à la potence.' },
-      { he: 'יְוָנִים נִקְבְּצוּ עָלַי אֲזַי בִּימֵי חַשְׁמַנִּים / וּפָרְצוּ חוֹמוֹת מִגְדָּלַי וְטִמְּאוּ כׇּל הַשְּׁמָנִים / וּמִנּוֹתַר קַנְקַנִּים נַעֲשָׂה נֵס לַשּׁוֹשַׁנִּים / בְּנֵי בִינָה יְמֵי שְׁמוֹנָה קָבְעוּ שִׁיר וּרְנָנִים', fr: 'Les Grecs se liguèrent contre moi, aux jours des ’Hachmonaïm ; ils percèrent les murailles de mes tours et souillèrent toutes les huiles ; mais d’une seule fiole restante, un miracle fut fait pour Israël ; les sages instituèrent huit jours de chants et d’allégresse.' },
-      { he: 'חֲשׂוֹף זְרוֹעַ קׇדְשֶׁךָ וְקָרֵב קֵץ הַיְשׁוּעָה / נְקֹם נִקְמַת עֲבָדֶיךָ מֵאֻמָּה הָרְשָׁעָה / כִּי אָרְכָה הַשָּׁעָה וְאֵין קֵץ לִימֵי הָרָעָה / דְּחֵה אַדְמוֹן בְּצֵל צַלְמוֹן הָקֵם לָנוּ רוֹעִים שִׁבְעָה', fr: 'Dévoile le bras de Ta sainteté et rapproche la fin du salut ; venge le sang de Tes serviteurs sur la nation méchante, car l’heure se prolonge et les jours de malheur n’ont pas de fin ; repousse l’ennemi dans l’ombre, et suscite pour nous les sept bergers.' },
-    ],
-  },
 
   // =========================== HASSIDIQUE & FÊTES ===========================
   {
@@ -872,21 +1149,6 @@ const SONGS = [
     ],
   },
   {
-    id: 'ki-lo-naeh', category: 'hassidique', title: 'Ki Lo Naé', hebrew: 'כִּי לוֹ נָאֶה',
-    author: 'Haggada de Pessa’h — acrostiche alphabétique', audio: yt('ki lo naeh'),
-    lines: [
-      { r: 1, he: 'לְךָ וּלְךָ לְךָ כִּי לְךָ / לְךָ אַף לְךָ לְךָ יְיָ הַמַּמְלָכָה / כִּי לוֹ נָאֶה כִּי לוֹ יָאֶה', fr: '« À Toi, oui à Toi, à Toi car à Toi, à Toi seul, à Toi, Éternel, la royauté ! » Car à Lui cela convient, à Lui cela sied. (refrain, après chaque strophe)' },
-      { he: 'אַדִּיר בִּמְלוּכָה / בָּחוּר כַּהֲלָכָה / גְּדוּדָיו יֹאמְרוּ לוֹ', fr: 'Puissant dans la royauté, élu comme il se doit, Ses légions Lui disent :' },
-      { he: 'דָּגוּל בִּמְלוּכָה / הָדוּר כַּהֲלָכָה / וָתִיקָיו יֹאמְרוּ לוֹ', fr: 'Éminent dans la royauté, glorieux comme il se doit, Ses fidèles Lui disent :' },
-      { he: 'זַכַּאי בִּמְלוּכָה / חָסִין כַּהֲלָכָה / טַפְסְרָיו יֹאמְרוּ לוֹ', fr: 'Pur dans la royauté, puissant comme il se doit, Ses dignitaires Lui disent :' },
-      { he: 'יָחִיד בִּמְלוּכָה / כַּבִּיר כַּהֲלָכָה / לִמּוּדָיו יֹאמְרוּ לוֹ', fr: 'Unique dans la royauté, puissant comme il se doit, Ses disciples Lui disent :' },
-      { he: 'מוֹשֵׁל בִּמְלוּכָה / נוֹרָא כַּהֲלָכָה / סְבִיבָיו יֹאמְרוּ לוֹ', fr: 'Souverain dans la royauté, redoutable comme il se doit, ceux qui L’entourent Lui disent :' },
-      { he: 'עָנָו בִּמְלוּכָה / פּוֹדֶה כַּהֲלָכָה / צַדִּיקָיו יֹאמְרוּ לוֹ', fr: 'Humble dans la royauté, rédempteur comme il se doit, Ses justes Lui disent :' },
-      { he: 'קָדוֹשׁ בִּמְלוּכָה / רַחוּם כַּהֲלָכָה / שִׁנְאַנָּיו יֹאמְרוּ לוֹ', fr: 'Saint dans la royauté, miséricordieux comme il se doit, Ses anges Lui disent :' },
-      { he: 'תַּקִּיף בִּמְלוּכָה / תּוֹמֵךְ כַּהֲלָכָה / תְּמִימָיו יֹאמְרוּ לוֹ', fr: 'Fort dans la royauté, soutien comme il se doit, Ses fidèles intègres Lui disent :' },
-    ],
-  },
-  {
     id: 'hava-nagila', category: 'hassidique', title: 'Hava Naguila', hebrew: 'הָבָה נָגִילָה',
     author: 'Abraham Zvi Idelsohn (1918), sur un niggoun hassidique de Sadigoura', audio: yt('hava nagila'),
     lines: [
@@ -952,6 +1214,17 @@ const PRESETS = {
     cover: { title: 'Hilloula', subtitle: 'En l’honneur des tsadikim' },
     blocks: ['bar-yochai', 'abir-yaacov', 'achira-na', 'eerokh-mahalal', 'baba-sale', 'yafa-vetama',
       'am-yisrael-chai', 'birkat-hamazon-sefarade'],
+  },
+  rochHachana: {
+    label: 'Roch Hachana',
+    cover: { title: 'Chana Tova', subtitle: 'Soir de Roch Hachana' },
+    blocks: ['ahot-ketana', 'kiddoush-chabbat', 'simanim', 'et-shaare-ratson', 'avinu-malkenu', 'birkat-hamazon-sefarade'],
+  },
+  pessah: {
+    label: 'Séder de Pessa’h',
+    cover: { title: 'Haggada', subtitle: 'Séder de Pessa’h' },
+    blocks: ['ha-lachma', 'ma-nishtana', 'avadim-hayinu', 'vehi-sheamda', 'dayenu', 'birkat-hamazon-sefarade',
+      'adir-hu', 'ki-lo-naeh', 'echad-mi-yodea', 'chad-gadya', 'leshana-haba'],
   },
   simha: {
     label: 'Simha (mariage, bar-mitsva)',
