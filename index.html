@@ -2,114 +2,171 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#7c1d3f" />
-  <title>Birkonishi — Créez votre livret personnalisé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#141a2e" />
+  <title>Birkonishi — Créez votre birkon</title>
+  <meta name="description" content="Composez et mettez en page votre birkon (chants, prières, piyoutim) comme un album photo, puis exportez-le en PDF." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=David+Libre:wght@400;500;700&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=12" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Bellefair&display=swap" rel="stylesheet" />
+  <link id="bookFonts" rel="stylesheet" href="" />
+  <link rel="stylesheet" href="css/styles.css?v=13" />
 </head>
 <body>
-  <!-- ================= BARRE SUPÉRIEURE ================= -->
+  <!-- ======================== BARRE SUPÉRIEURE ======================== -->
   <header class="topbar no-print">
-    <div class="brand">
-      <button id="menuToggle" class="btn btn-icon btn-ghost menu-toggle" aria-label="Menu">
-        <span data-icon="menu"></span>
-      </button>
-      <span class="logo" data-icon="book" data-icon-size="24"></span>
-      <div class="brand-text">
-        <h1>Birkonishi</h1>
-        <p>Composez votre livret en moins d'une heure</p>
-      </div>
+    <a class="brand" href="./" aria-label="Birkonishi — accueil">
+      <span class="brand-mark" aria-hidden="true">ב</span>
+      <span class="brand-name">Birkonishi</span>
+    </a>
+    <div class="doc">
+      <input id="docName" class="doc-name" aria-label="Nom du livret" maxlength="60" />
+      <span id="saveState" class="save-state" aria-live="polite">Enregistré</span>
     </div>
-
-    <div class="topbar-actions">
-      <button id="undoBtn" class="btn btn-icon btn-ghost" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled>
-        <span data-icon="undo"></span>
+    <div class="top-actions">
+      <button id="undoBtn" class="ibtn" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled><span data-icon="undo"></span></button>
+      <button id="redoBtn" class="ibtn" title="Rétablir (Ctrl+Y)" aria-label="Rétablir" disabled><span data-icon="redo"></span></button>
+      <span class="top-sep" aria-hidden="true"></span>
+      <button id="previewToggle" class="btn btn-quiet" aria-pressed="false" title="Voir le livret sans les outils">
+        <span data-icon="eye"></span><span class="btn-label">Aperçu</span>
       </button>
-      <button id="previewToggle" class="btn btn-ghost" aria-pressed="false" title="Masquer les outils">
-        <span data-icon="maximize"></span><span class="btn-label">Aperçu</span>
-      </button>
-      <button id="exportBtn" class="btn btn-primary">
-        <span data-icon="printer"></span><span class="btn-label">Exporter en PDF</span>
+      <button id="exportBtn" class="btn btn-cta">
+        <span data-icon="download"></span><span class="btn-label">Exporter en PDF</span>
       </button>
     </div>
   </header>
 
-  <main class="layout">
-    <!-- ================= COLONNE GAUCHE : BIBLIOTHÈQUE ================= -->
-    <aside class="sidebar no-print" id="library">
-      <div class="sidebar-section">
-        <h2>Démarrer</h2>
-        <div class="preset-grid" id="presetGrid"></div>
-        <button id="clearBtn" class="clear-btn">
-          <span data-icon="trash" data-icon-size="15"></span> Vider le livret
-        </button>
-      </div>
+  <div class="workspace">
+    <!-- ======================== RAIL D'OUTILS ========================== -->
+    <nav class="rail no-print" id="rail" aria-label="Outils">
+      <button class="rail-btn" data-tab="modeles"><span data-icon="layout"></span><span>Modèles</span></button>
+      <button class="rail-btn" data-tab="chants"><span data-icon="music"></span><span>Chants</span></button>
+      <button class="rail-btn" data-tab="textes"><span data-icon="type"></span><span>Textes</span></button>
+      <button class="rail-btn" data-tab="photos"><span data-icon="image"></span><span>Photos</span></button>
+      <button class="rail-btn" data-tab="decors"><span data-icon="sparkles"></span><span>Décors</span></button>
+      <button class="rail-btn" data-tab="fonds"><span data-icon="palette"></span><span>Fonds</span></button>
+      <button class="rail-btn" data-tab="style"><span data-icon="brush"></span><span>Style</span></button>
+    </nav>
 
-      <div class="sidebar-section">
-        <h2>Style du livret</h2>
-        <div class="tpl-grid" id="templateGrid"></div>
+    <!-- ======================== PANNEAU DE L'OUTIL ===================== -->
+    <aside class="panel no-print" id="panel" aria-labelledby="panelTitle">
+      <div class="sheet-grab" aria-hidden="true"></div>
+      <div class="panel-head">
+        <h2 id="panelTitle">Modèles</h2>
+        <button class="ibtn ibtn-sm" id="panelClose" aria-label="Fermer le panneau" title="Fermer"><span data-icon="x"></span></button>
       </div>
+      <div class="panel-body" id="panelBody">
 
-      <div class="sidebar-section">
-        <h2>Ajouter un élément</h2>
-        <div class="add-grid">
-          <button class="add-tile" data-add="text">
-            <span data-icon="type"></span><span>Texte libre</span>
-          </button>
-          <button class="add-tile" data-add="image">
-            <span data-icon="image"></span><span>Image</span>
-          </button>
-        </div>
-        <input type="file" id="imageInput" accept="image/*" hidden />
-      </div>
+        <!-- Modèles -->
+        <section class="pane" data-pane="modeles">
+          <div class="group">
+            <h3>Couverture</h3>
+            <label class="field"><span>Titre</span><input id="coverTitle" placeholder="Titre du livret" /></label>
+            <label class="field"><span>Sous-titre</span><input id="coverSubtitle" placeholder="Noms, date, occasion…" /></label>
+            <p class="hint">Mise en page de la couverture</p>
+            <div class="layout-grid" id="coverLayouts"></div>
+          </div>
+          <div class="group">
+            <h3>Compositions de départ</h3>
+            <p class="hint">Remplit le livret avec une sélection de chants. Vos photos et décors de couverture sont conservés.</p>
+            <div class="preset-list" id="presetGrid"></div>
+          </div>
+          <div class="group">
+            <h3>Ajouter une page libre</h3>
+            <p class="hint">Une page entière à composer : photos, dédicace, souvenirs.</p>
+            <div class="layout-grid" id="pageLayouts"></div>
+          </div>
+          <button id="clearBtn" class="link-danger"><span data-icon="trash" data-icon-size="15"></span> Vider le livret</button>
+        </section>
 
-      <div class="sidebar-section grow">
-        <h2>Chansons &amp; piyoutim</h2>
-        <div class="search-wrap">
-          <span class="search-icon" data-icon="search" data-icon-size="18"></span>
-          <input type="search" id="songSearch" placeholder="Rechercher (titre, hébreu, auteur)…" aria-label="Rechercher une chanson" />
-        </div>
-        <div id="songList" class="song-list"></div>
+        <!-- Chants -->
+        <section class="pane" data-pane="chants">
+          <div class="search-wrap">
+            <span class="search-icon" data-icon="search" data-icon-size="18"></span>
+            <input type="search" id="songSearch" placeholder="Titre, hébreu, auteur…" aria-label="Rechercher un chant" />
+          </div>
+          <div class="chips" id="catChips" role="group" aria-label="Catégories"></div>
+          <p class="hint">Cliquez pour ajouter à la fin, ou glissez un chant à l'endroit voulu dans le livret.</p>
+          <div id="songList" class="song-list"></div>
+        </section>
+
+        <!-- Textes -->
+        <section class="pane" data-pane="textes">
+          <p class="hint">Cliquez pour poser un texte sur la page affichée, ou glissez-le où vous voulez. Double-cliquez ensuite pour l'écrire.</p>
+          <div class="text-presets" id="textPresets"></div>
+          <div class="group">
+            <h3>Paragraphe entre les chants</h3>
+            <p class="hint">S'insère dans le fil du livret et suit la pagination.</p>
+            <button class="btn btn-soft w100" id="addFlowText"><span data-icon="plus"></span> Insérer un paragraphe</button>
+          </div>
+        </section>
+
+        <!-- Photos -->
+        <section class="pane" data-pane="photos">
+          <label class="dropzone" id="dropzone" for="imageInput">
+            <span data-icon="upload" data-icon-size="26"></span>
+            <strong>Ajouter des photos</strong>
+            <small>Cliquez ou glissez vos fichiers ici. Elles restent dans votre navigateur.</small>
+          </label>
+          <input type="file" id="imageInput" accept="image/*" multiple hidden />
+          <p class="hint">Cliquez une photo pour la poser sur la page affichée — ou dans le cadre photo sélectionné. Vous pouvez aussi la glisser sur la page.</p>
+          <div class="photo-grid" id="photoGrid"></div>
+        </section>
+
+        <!-- Décors -->
+        <section class="pane" data-pane="decors">
+          <p class="hint">Cliquez ou glissez un décor sur la page. Sa couleur se règle ensuite à droite.</p>
+          <div id="ornGroups"></div>
+          <div class="group">
+            <h3>Formes</h3>
+            <div class="orn-grid" id="shapeGrid"></div>
+          </div>
+        </section>
+
+        <!-- Fonds -->
+        <section class="pane" data-pane="fonds">
+          <div class="seg seg-wide" id="bgScope" role="group" aria-label="Appliquer à">
+            <button data-scope="page" class="on">Cette page</button>
+            <button data-scope="all">Toutes les pages</button>
+          </div>
+          <p class="hint" id="bgScopeHint"></p>
+          <div class="group"><h3>Couleur du papier</h3><div class="swatches" id="bgSwatches"></div></div>
+          <div class="group"><h3>Motif</h3><div class="texture-grid" id="textureGrid"></div></div>
+          <div class="group"><h3>Cadre de page</h3><div class="frame-grid" id="frameGrid"></div></div>
+          <div class="group">
+            <h3>Photo en fond</h3>
+            <div class="photo-grid photo-grid-sm" id="bgPhotoGrid"></div>
+            <label class="field range-field"><span>Intensité <output id="bgOpOut"></output></span>
+              <input type="range" id="bgOp" min="0.05" max="1" step="0.05" /></label>
+            <button class="btn btn-soft w100" id="bgPhotoClear">Retirer la photo de fond</button>
+          </div>
+        </section>
+
+        <!-- Style -->
+        <section class="pane" data-pane="style">
+          <div class="group"><h3>Thèmes</h3><div class="theme-grid" id="themeGrid"></div></div>
+          <div class="group" id="styleForm"></div>
+        </section>
       </div>
     </aside>
 
-    <!-- ================= CENTRE : APERÇU DU LIVRET ================= -->
-    <section class="stage" id="stage">
-      <div class="stage-toolbar no-print">
-        <div class="cover-fields">
-          <label class="mini-label">Couverture</label>
-          <input id="coverTitle" class="cover-input title" placeholder="Titre du livret" />
-          <input id="coverSubtitle" class="cover-input sub" placeholder="Sous-titre (noms, date…)" />
+    <!-- ============================ TOILE ============================== -->
+    <main class="stage" id="stage">
+      <div class="stage-bar no-print">
+        <div class="pager">
+          <button id="prevPage" class="ibtn" title="Page précédente (←)" aria-label="Page précédente"><span data-icon="chevron-left"></span></button>
+          <span id="pageIndicator" class="page-ind">1 / 1</span>
+          <button id="nextPage" class="ibtn" title="Page suivante (→)" aria-label="Page suivante"><span data-icon="chevron-right"></span></button>
         </div>
-        <div class="opt-toggles" id="optToggles" role="group" aria-label="Affichage du texte">
-          <span class="lang-icon" data-icon="languages" data-icon-size="16"></span>
-          <button type="button" class="opt-btn" data-opt="phonetic" aria-pressed="false">Phonétique</button>
-          <button type="button" class="opt-btn" data-opt="translation" aria-pressed="false">Traduction</button>
+        <div class="seg" id="optToggles" role="group" aria-label="Affichage du texte">
+          <button type="button" data-opt="phonetic" aria-pressed="false">Phonétique</button>
+          <button type="button" data-opt="translation" aria-pressed="false">Traduction</button>
         </div>
-      </div>
-
-      <div class="reader-bar no-print">
-        <div class="pager-nav">
-          <button id="prevPage" class="btn btn-icon btn-ghost" title="Page précédente" aria-label="Page précédente">
-            <span data-icon="chevron-left"></span>
-          </button>
-          <span id="pageIndicator">1 / 1</span>
-          <button id="nextPage" class="btn btn-icon btn-ghost" title="Page suivante" aria-label="Page suivante">
-            <span data-icon="chevron-right"></span>
-          </button>
-        </div>
-        <div class="reader-tools">
-          <button id="overviewBtn" class="btn btn-ghost">
-            <span data-icon="grid"></span><span class="btn-label">Vue d'ensemble</span>
-          </button>
-          <div class="zoom-ctrl">
-            <span data-icon="zoom-out" data-icon-size="16"></span>
-            <input type="range" id="zoom" min="0.3" max="1" step="0.01" value="0.92" aria-label="Zoom" />
-            <span data-icon="zoom-in" data-icon-size="16"></span>
-          </div>
+        <div class="view-tools">
+          <button id="zoomOut" class="ibtn" title="Dézoomer" aria-label="Dézoomer"><span data-icon="minus"></span></button>
+          <button id="zoomFit" class="zoom-val" title="Ajuster à l'écran">100 %</button>
+          <button id="zoomIn" class="ibtn" title="Zoomer" aria-label="Zoomer"><span data-icon="plus"></span></button>
+          <button id="overviewBtn" class="ibtn" title="Vue d'ensemble" aria-label="Vue d'ensemble" aria-pressed="false"><span data-icon="grid"></span></button>
         </div>
       </div>
 
@@ -117,36 +174,51 @@
         <div id="book" class="book"></div>
       </div>
 
-      <div class="empty-hint no-print" id="emptyHint" hidden>
-        <span class="empty-mark" data-icon="book" data-icon-size="32"></span>
-        <p>Choisissez une composition de départ, ou ajoutez des chansons depuis la bibliothèque.</p>
-      </div>
-    </section>
-  </main>
+      <div class="filmstrip no-print" id="filmstrip" aria-label="Pages du livret"></div>
+    </main>
 
-  <!-- Modale d'édition de texte libre -->
+    <!-- ========================== INSPECTEUR =========================== -->
+    <aside class="inspector no-print" id="inspector" aria-labelledby="inspTitle" hidden>
+      <div class="sheet-grab" aria-hidden="true"></div>
+      <div class="panel-head">
+        <h2 id="inspTitle">Élément</h2>
+        <button class="ibtn ibtn-sm" id="inspClose" aria-label="Fermer" title="Désélectionner (Échap)"><span data-icon="x"></span></button>
+      </div>
+      <div class="panel-body" id="inspBody"></div>
+    </aside>
+  </div>
+
+  <!-- Modale de texte (paragraphe dans le fil) -->
   <div class="modal-backdrop no-print" id="textModal" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-label="Texte personnalisé">
-      <h3>Texte personnalisé</h3>
-      <input id="textModalTitle" placeholder="Titre (facultatif)" />
-      <textarea id="textModalBody" rows="6" placeholder="Votre texte…"></textarea>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="textModalHead">
+      <h3 id="textModalHead">Paragraphe</h3>
+      <label class="field"><span>Titre (facultatif)</span><input id="textModalTitle" /></label>
+      <label class="field"><span>Texte</span><textarea id="textModalBody" rows="6"></textarea></label>
       <div class="modal-actions">
-        <button class="btn btn-ghost" id="textModalCancel">Annuler</button>
-        <button class="btn btn-primary" id="textModalSave">Ajouter</button>
+        <button class="btn btn-quiet" id="textModalCancel">Annuler</button>
+        <button class="btn btn-primary" id="textModalSave">Insérer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation -->
+  <div class="modal-backdrop no-print" id="confirmModal" hidden>
+    <div class="modal modal-sm" role="alertdialog" aria-modal="true" aria-labelledby="confirmMsg">
+      <p id="confirmMsg"></p>
+      <div class="modal-actions">
+        <button class="btn btn-quiet" id="confirmNo">Annuler</button>
+        <button class="btn btn-primary" id="confirmYes">Confirmer</button>
       </div>
     </div>
   </div>
 
   <div class="toast no-print" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <footer class="footer no-print">
-    <span id="pageCount">0 page</span>
-    <span class="footer-note">Gratuit — export PDF à imprimer. Commande imprimée à partir de 100 exemplaires : bientôt.</span>
-  </footer>
-
-  <script src="js/icons.js?v=12"></script>
-  <script src="js/translit.js?v=12"></script>
-  <script src="js/songs.js?v=12"></script>
-  <script src="js/app.js?v=12"></script>
+  <script src="js/icons.js?v=13"></script>
+  <script src="js/translit.js?v=13"></script>
+  <script src="js/songs.js?v=13"></script>
+  <script src="js/design.js?v=13"></script>
+  <script src="js/ornaments.js?v=13"></script>
+  <script src="js/app.js?v=13"></script>
 </body>
 </html>
